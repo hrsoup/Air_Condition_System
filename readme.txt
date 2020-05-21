@@ -8,5 +8,5 @@
 可以先照着hw4的文档（东西有些多，但是理解起来应该很快），简单分工如下。
 ui:1个人
 controller:1个人
-application:3个人
-database:2-3个人
+application:2-3个人
+database:1个人
