@@ -12,7 +12,6 @@ class Register_admin:#控制器1的基类
     def print_hotel(self):#查看酒店空调运行状态
     def print_room(self):#查看房间空调运行状态
 
-
 class Register_cashier:#控制器2的基类
     def create_bill(self):#创建账单详单
     def print_bill(self):#查看账单详单

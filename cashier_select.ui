@@ -10,11 +10,6 @@
     <height>600</height>
    </rect>
   </property>
-  <property name="font">
-   <font>
-    <pointsize>11</pointsize>
-   </font>
-  </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
@@ -22,76 +17,59 @@
    <widget class="QLabel" name="label_1">
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>70</y>
-      <width>561</width>
-      <height>101</height>
+      <x>290</x>
+      <y>130</y>
+      <width>221</width>
+      <height>71</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>微软雅黑 Light</family>
-      <pointsize>30</pointsize>
+      <pointsize>18</pointsize>
      </font>
     </property>
     <property name="text">
-     <string>欢迎使用分布式温控系统</string>
+     <string>请选择服务类型</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="enter">
+   <widget class="QPushButton" name="check_bill">
     <property name="geometry">
      <rect>
-      <x>280</x>
-      <y>340</y>
-      <width>241</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>微软雅黑 Light</family>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>进入系统</string>
-    </property>
-   </widget>
-   <widget class="QComboBox" name="roleselect">
-    <property name="geometry">
-     <rect>
-      <x>280</x>
+      <x>270</x>
       <y>240</y>
-      <width>241</width>
-      <height>61</height>
+      <width>251</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>微软雅黑 Light</family>
-      <pointsize>12</pointsize>
+      <pointsize>14</pointsize>
      </font>
     </property>
-    <item>
-     <property name="text">
-      <string>客户</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>空调管理员</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>酒店前台</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>酒店经理</string>
-     </property>
-    </item>
+    <property name="text">
+     <string>查看并打印账单</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="exit">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>310</y>
+      <width>251</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑 Light</family>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>退出系统</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -107,22 +85,5 @@
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>enter</sender>
-   <signal>clicked()</signal>
-   <receiver>enter</receiver>
-   <slot>close()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>404</x>
-     <y>394</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>404</x>
-     <y>394</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

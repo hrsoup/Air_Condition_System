@@ -7,186 +7,155 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>600</height>
+    <height>589</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QSpinBox" name="change_tem">
-    <property name="geometry">
-     <rect>
-      <x>130</x>
-      <y>100</y>
-      <width>381</width>
-      <height>91</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>黑体</family>
-      <pointsize>32</pointsize>
-     </font>
-    </property>
-   </widget>
-   <widget class="QSpinBox" name="change_wind">
-    <property name="geometry">
-     <rect>
-      <x>130</x>
-      <y>220</y>
-      <width>381</width>
-      <height>91</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>黑体</family>
-      <pointsize>32</pointsize>
-     </font>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="air_on">
-    <property name="geometry">
-     <rect>
-      <x>580</x>
-      <y>110</y>
-      <width>151</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>微软雅黑 Light</family>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>开机</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_1">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>120</y>
-      <width>81</width>
-      <height>41</height>
+      <x>290</x>
+      <y>20</y>
+      <width>191</width>
+      <height>121</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>微软雅黑 Light</family>
-      <pointsize>15</pointsize>
+      <pointsize>18</pointsize>
      </font>
     </property>
     <property name="text">
-     <string>温度</string>
+     <string>酒店空调信息</string>
     </property>
    </widget>
-   <widget class="QTextBrowser" name="cost_now">
+   <widget class="QLCDNumber" name="lcd_aironnum">
     <property name="geometry">
      <rect>
-      <x>140</x>
+      <x>440</x>
+      <y>160</y>
+      <width>171</width>
+      <height>61</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLCDNumber" name="lcd_windonnum">
+    <property name="geometry">
+     <rect>
+      <x>440</x>
+      <y>260</y>
+      <width>171</width>
+      <height>61</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLCDNumber" name="lcd_waitnum">
+    <property name="geometry">
+     <rect>
+      <x>440</x>
       <y>360</y>
-      <width>371</width>
-      <height>91</height>
+      <width>171</width>
+      <height>61</height>
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="air_off">
+   <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>580</x>
-      <y>210</y>
-      <width>151</width>
-      <height>61</height>
+      <x>150</x>
+      <y>140</y>
+      <width>191</width>
+      <height>101</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>微软雅黑 Light</family>
-      <pointsize>12</pointsize>
+      <pointsize>18</pointsize>
      </font>
     </property>
     <property name="text">
-     <string>关机</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="back">
-    <property name="geometry">
-     <rect>
-      <x>580</x>
-      <y>390</y>
-      <width>151</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>微软雅黑 Light</family>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>返回</string>
+     <string>开启空调数</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>250</y>
-      <width>81</width>
-      <height>41</height>
+      <x>150</x>
+      <y>240</y>
+      <width>191</width>
+      <height>101</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>微软雅黑 Light</family>
-      <pointsize>15</pointsize>
+      <pointsize>18</pointsize>
      </font>
     </property>
     <property name="text">
-     <string>风速</string>
+     <string>送风空调数</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>390</y>
-      <width>81</width>
-      <height>41</height>
+      <x>150</x>
+      <y>340</y>
+      <width>191</width>
+      <height>101</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>微软雅黑 Light</family>
-      <pointsize>15</pointsize>
+      <pointsize>18</pointsize>
      </font>
     </property>
     <property name="text">
-     <string>消费</string>
+     <string>等待调度数</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="check_cost">
+   <widget class="QPushButton" name="check">
     <property name="geometry">
      <rect>
-      <x>580</x>
-      <y>300</y>
-      <width>151</width>
-      <height>61</height>
+      <x>190</x>
+      <y>470</y>
+      <width>171</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>微软雅黑 Light</family>
-      <pointsize>12</pointsize>
+      <pointsize>14</pointsize>
      </font>
     </property>
     <property name="text">
-     <string>查看当前消费</string>
+     <string>查询</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="back">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>470</y>
+      <width>171</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑 Light</family>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>返回</string>
     </property>
    </widget>
   </widget>

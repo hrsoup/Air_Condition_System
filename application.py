@@ -1,17 +1,15 @@
 class Hotel:  # 酒店的基类
     def __init__(self, livein_num):
         self.livein_num = livein_num  # 当前入住总房间数
-
     def change_livein(self):  #入住房间数变化
 
-
-class Room:  # 房间的基类
+class Room:#房间的基类
     def __init__(self, room_id, livein_times, tem):
         self.room_id = room_id
         self.livein_times = livein_times
         self.tem = tem
 
-    def Change_tem(self):  # 环境温度改变
+    def Change_tem(self):#环境温度改变
 
 
 class User:#客户的基类
