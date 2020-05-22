@@ -56,14 +56,21 @@ class Welcome(QMainWindow):#初始化界面
         self.roleselect.setItemText(3, _translate("MainWindow", "酒店经理"))
 
     def selectionchange(self):
-        if (welcome.roleselect.currentText() == '空调管理员'):
+        if (welcome.roleselect.currentText() == '客户'):
+            # 客户线路跳转逻辑
+            welcome.enter.clicked.connect(move_select.show)
+            welcome.enter.clicked.connect(welcome.closewin)
+            welcome.enter.clicked.connect(admin_select.closewin)
+            welcome.enter.clicked.connect(cashier_select.closewin)
+            welcome.enter.clicked.connect(manager_select.closewin)
+
+        elif (welcome.roleselect.currentText() == '空调管理员'):
             # 空调管理员线路跳转逻辑
             welcome.enter.clicked.connect(admin_select.show)
             welcome.enter.clicked.connect(welcome.closewin)
             welcome.enter.clicked.connect(cashier_select.closewin)
             welcome.enter.clicked.connect(manager_select.closewin)
             welcome.enter.clicked.connect(move_select.closewin)
-
 
         elif (welcome.roleselect.currentText() == '酒店前台'):
             # 酒店前台线路跳转逻辑
@@ -663,7 +670,7 @@ class Room_air_state(QMainWindow):#查询房间空调状态界面
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "查询房间空调状态"))
         self.label1.setText(_translate("MainWindow", "房间空调信息查询"))
         self.roomselect.setItemText(0, _translate("MainWindow", "1"))
         self.roomselect.setItemText(1, _translate("MainWindow", "2"))
