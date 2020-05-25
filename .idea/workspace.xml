@@ -13,10 +13,15 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="703">
-              <caret line="73" selection-start-line="73" selection-end-line="73" />
+            <state relative-caret-position="103">
+              <caret line="603" column="34" selection-start-line="603" selection-start-column="34" selection-end-line="603" selection-end-column="34" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
+                <element signature="e#24285#29952#0" />
+                <element signature="e#30002#31738#0" />
+                <element signature="e#31782#37925#0" />
+                <element signature="e#37973#39709#0" />
+                <element signature="e#39753#47226#0" />
               </folding>
             </state>
           </provider>
@@ -259,7 +264,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
       <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.22486773" />
@@ -341,10 +345,15 @@
     <entry file="file://$PROJECT_DIR$/test.py" />
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="703">
-          <caret line="73" selection-start-line="73" selection-end-line="73" />
+        <state relative-caret-position="103">
+          <caret line="603" column="34" selection-start-line="603" selection-start-column="34" selection-end-line="603" selection-end-column="34" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
+            <element signature="e#24285#29952#0" />
+            <element signature="e#30002#31738#0" />
+            <element signature="e#31782#37925#0" />
+            <element signature="e#37973#39709#0" />
+            <element signature="e#39753#47226#0" />
           </folding>
         </state>
       </provider>

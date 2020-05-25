@@ -10,6 +10,9 @@ class Welcome(QMainWindow):#初始化界面
     def initUI(self):
         self.setObjectName("MainWindow")
         self.resize(800, 600)
+        window_pale = QtGui.QPalette()
+        window_pale.setBrush(self.backgroundRole(), QtGui.QBrush(QtGui.QPixmap("./hall.jpg")))
+        self.setPalette(window_pale)
         font = QtGui.QFont()
         font.setPointSize(11)
         self.setFont(font)
@@ -17,6 +20,7 @@ class Welcome(QMainWindow):#初始化界面
         self.centralwidget.setObjectName("centralwidget")
         self.label_1 = QtWidgets.QLabel(self.centralwidget)
         self.label_1.setGeometry(QtCore.QRect(130, 70, 561, 101))
+        self.label_1.setStyleSheet("color:white");
         font = QtGui.QFont()
         font.setFamily("微软雅黑 Light")
         font.setPointSize(30)
@@ -99,10 +103,14 @@ class Move_select(QMainWindow):#用户选择界面
     def initUI(self):
         self.setObjectName("MainWindow")
         self.resize(800, 600)
+        window_pale = QtGui.QPalette()
+        window_pale.setBrush(self.backgroundRole(), QtGui.QBrush(QtGui.QPixmap("./hall.jpg")))
+        self.setPalette(window_pale)
         self.centralwidget = QtWidgets.QWidget(self)
         self.centralwidget.setObjectName("centralwidget")
         self.label_1 = QtWidgets.QLabel(self.centralwidget)
         self.label_1.setGeometry(QtCore.QRect(290, 90, 231, 91))
+        self.label_1.setStyleSheet("color:white");
         font = QtGui.QFont()
         font.setFamily("微软雅黑 Light")
         font.setPointSize(18)
@@ -160,10 +168,14 @@ class Move_in(QMainWindow):#确认入住界面
     def initUI(self):
         self.setObjectName("MainWindow")
         self.resize(800, 600)
+        window_pale = QtGui.QPalette()
+        window_pale.setBrush(self.backgroundRole(), QtGui.QBrush(QtGui.QPixmap("./hall.jpg")))
+        self.setPalette(window_pale)
         self.centralwidget = QtWidgets.QWidget(self)
         self.centralwidget.setObjectName("centralwidget")
         self.label_1 = QtWidgets.QLabel(self.centralwidget)
         self.label_1.setGeometry(QtCore.QRect(170, 50, 461, 111))
+        self.label_1.setStyleSheet("color:white");
         font = QtGui.QFont()
         font.setFamily("微软雅黑 Light")
         font.setPointSize(18)
@@ -222,10 +234,14 @@ class Move_out(QMainWindow):#确认退房界面
     def initUI(self):
         self.setObjectName("MainWindow")
         self.resize(800, 600)
+        window_pale = QtGui.QPalette()
+        window_pale.setBrush(self.backgroundRole(), QtGui.QBrush(QtGui.QPixmap("./hall.jpg")))
+        self.setPalette(window_pale)
         self.centralwidget = QtWidgets.QWidget(self)
         self.centralwidget.setObjectName("centralwidget")
         self.label_1 = QtWidgets.QLabel(self.centralwidget)
         self.label_1.setGeometry(QtCore.QRect(170, 50, 621, 141))
+        self.label_1.setStyleSheet("color:white");
         font = QtGui.QFont()
         font.setFamily("微软雅黑 Light")
         font.setPointSize(18)
@@ -284,11 +300,15 @@ class Enter_room(QMainWindow):#进入房间界面
     def initUI(self):
         self.setObjectName("MainWindow")
         self.setObjectName("MainWindow")
+        window_pale = QtGui.QPalette()
+        window_pale.setBrush(self.backgroundRole(), QtGui.QBrush(QtGui.QPixmap("./corridor.jpg")))
+        self.setPalette(window_pale)
         self.resize(800, 600)
         self.centralwidget = QtWidgets.QWidget(self)
         self.centralwidget.setObjectName("centralwidget")
         self.label_1 = QtWidgets.QLabel(self.centralwidget)
         self.label_1.setGeometry(QtCore.QRect(220, 70, 371, 91))
+        self.label_1.setStyleSheet("color:white");
         font = QtGui.QFont()
         font.setFamily("微软雅黑 Light")
         font.setPointSize(18)
@@ -347,6 +367,9 @@ class Air_monitor(QMainWindow):#空调控制面板界面
     def initUI(self):
         self.setObjectName("MainWindow")
         self.resize(800, 600)
+        window_pale = QtGui.QPalette()
+        window_pale.setBrush(self.backgroundRole(), QtGui.QBrush(QtGui.QPixmap("./room.jpg")))
+        self.setPalette(window_pale)
         self.centralwidget = QtWidgets.QWidget(self)
         self.centralwidget.setObjectName("centralwidget")
         self.change_tem = QtWidgets.QSpinBox(self.centralwidget)
@@ -377,6 +400,7 @@ class Air_monitor(QMainWindow):#空调控制面板界面
         font.setPointSize(15)
         self.label_1.setFont(font)
         self.label_1.setObjectName("label_1")
+        self.label_1.setStyleSheet("color:white");
         self.cost_now = QtWidgets.QTextBrowser(self.centralwidget)
         self.cost_now.setGeometry(QtCore.QRect(140, 360, 371, 91))
         self.cost_now.setObjectName("cost_now")
@@ -401,6 +425,7 @@ class Air_monitor(QMainWindow):#空调控制面板界面
         font.setPointSize(15)
         self.label_3.setFont(font)
         self.label_3.setObjectName("label_3")
+        self.label_3.setStyleSheet("color:white");
         self.label_4 = QtWidgets.QLabel(self.centralwidget)
         self.label_4.setGeometry(QtCore.QRect(30, 390, 81, 41))
         font = QtGui.QFont()
@@ -408,6 +433,7 @@ class Air_monitor(QMainWindow):#空调控制面板界面
         font.setPointSize(15)
         self.label_4.setFont(font)
         self.label_4.setObjectName("label_4")
+        self.label_4.setStyleSheet("color:white");
         self.check_cost = QtWidgets.QPushButton(self.centralwidget)
         self.check_cost.setGeometry(QtCore.QRect(580, 300, 151, 61))
         font = QtGui.QFont()
@@ -440,11 +466,15 @@ class Admin_select(QMainWindow):#管理员选择界面
 
     def initUI(self):
         self.setObjectName("MainWindow")
-        self.resize(800, 557)
+        self.resize(800, 600)
+        window_pale = QtGui.QPalette()
+        window_pale.setBrush(self.backgroundRole(), QtGui.QBrush(QtGui.QPixmap("./hall.jpg")))
+        self.setPalette(window_pale)
         self.centralwidget = QtWidgets.QWidget(self)
         self.centralwidget.setObjectName("centralwidget")
         self.welcome1 = QtWidgets.QLabel(self.centralwidget)
         self.welcome1.setGeometry(QtCore.QRect(280, 80, 241, 101))
+        self.welcome1.setStyleSheet("color:white");
         font = QtGui.QFont()
         font.setFamily("微软雅黑 Light")
         font.setPointSize(18)
@@ -493,11 +523,15 @@ class Hotel_air_state(QMainWindow):#查询酒店空调状态界面
 
     def initUI(self):
         self.setObjectName("MainWindow")
-        self.resize(800, 589)
+        self.resize(800, 600)
+        window_pale = QtGui.QPalette()
+        window_pale.setBrush(self.backgroundRole(), QtGui.QBrush(QtGui.QPixmap("./hall.jpg")))
+        self.setPalette(window_pale)
         self.centralwidget = QtWidgets.QWidget(self)
         self.centralwidget.setObjectName("centralwidget")
         self.label_1 = QtWidgets.QLabel(self.centralwidget)
         self.label_1.setGeometry(QtCore.QRect(290, 20, 191, 121))
+        self.label_1.setStyleSheet("color:red");
         font = QtGui.QFont()
         font.setFamily("微软雅黑 Light")
         font.setPointSize(18)
@@ -514,6 +548,7 @@ class Hotel_air_state(QMainWindow):#查询酒店空调状态界面
         self.lcd_waitnum.setObjectName("lcd_waitnum")
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
         self.label_2.setGeometry(QtCore.QRect(150, 140, 191, 101))
+        self.label_2.setStyleSheet("color:white");
         font = QtGui.QFont()
         font.setFamily("微软雅黑 Light")
         font.setPointSize(18)
@@ -521,6 +556,7 @@ class Hotel_air_state(QMainWindow):#查询酒店空调状态界面
         self.label_2.setObjectName("label_2")
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
         self.label_3.setGeometry(QtCore.QRect(150, 240, 191, 101))
+        self.label_3.setStyleSheet("color:white");
         font = QtGui.QFont()
         font.setFamily("微软雅黑 Light")
         font.setPointSize(18)
@@ -528,6 +564,7 @@ class Hotel_air_state(QMainWindow):#查询酒店空调状态界面
         self.label_3.setObjectName("label_3")
         self.label_4 = QtWidgets.QLabel(self.centralwidget)
         self.label_4.setGeometry(QtCore.QRect(150, 340, 191, 101))
+        self.label_4.setStyleSheet("color:white");
         font = QtGui.QFont()
         font.setFamily("微软雅黑 Light")
         font.setPointSize(18)
@@ -572,10 +609,14 @@ class Room_air_state(QMainWindow):#查询房间空调状态界面
     def initUI(self):
         self.setObjectName("MainWindow")
         self.resize(800, 600)
+        window_pale = QtGui.QPalette()
+        window_pale.setBrush(self.backgroundRole(), QtGui.QBrush(QtGui.QPixmap("./room.jpg")))
+        self.setPalette(window_pale)
         self.centralwidget = QtWidgets.QWidget(self)
         self.centralwidget.setObjectName("centralwidget")
         self.label1 = QtWidgets.QLabel(self.centralwidget)
         self.label1.setGeometry(QtCore.QRect(260, -10, 271, 131))
+        self.label1.setStyleSheet("color:red");
         font = QtGui.QFont()
         font.setFamily("微软雅黑 Light")
         font.setPointSize(18)
@@ -598,6 +639,7 @@ class Room_air_state(QMainWindow):#查询房间空调状态界面
         self.roomselect.addItem("")
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
         self.label_2.setGeometry(QtCore.QRect(130, 100, 101, 81))
+        self.label_2.setStyleSheet("color:white");
         font = QtGui.QFont()
         font.setFamily("微软雅黑 Light")
         font.setPointSize(18)
@@ -617,6 +659,7 @@ class Room_air_state(QMainWindow):#查询房间空调状态界面
         self.lcd_cost.setObjectName("lcd_cost")
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
         self.label_3.setGeometry(QtCore.QRect(390, 80, 191, 121))
+        self.label_3.setStyleSheet("color:white");
         font = QtGui.QFont()
         font.setFamily("微软雅黑 Light")
         font.setPointSize(18)
@@ -624,6 +667,7 @@ class Room_air_state(QMainWindow):#查询房间空调状态界面
         self.label_3.setObjectName("label_3")
         self.label_4 = QtWidgets.QLabel(self.centralwidget)
         self.label_4.setGeometry(QtCore.QRect(390, 150, 191, 121))
+        self.label_4.setStyleSheet("color:white");
         font = QtGui.QFont()
         font.setFamily("微软雅黑 Light")
         font.setPointSize(18)
@@ -631,6 +675,7 @@ class Room_air_state(QMainWindow):#查询房间空调状态界面
         self.label_4.setObjectName("label_4")
         self.label_5 = QtWidgets.QLabel(self.centralwidget)
         self.label_5.setGeometry(QtCore.QRect(390, 220, 191, 121))
+        self.label_5.setStyleSheet("color:white");
         font = QtGui.QFont()
         font.setFamily("微软雅黑 Light")
         font.setPointSize(18)
@@ -638,6 +683,7 @@ class Room_air_state(QMainWindow):#查询房间空调状态界面
         self.label_5.setObjectName("label_5")
         self.label_7 = QtWidgets.QLabel(self.centralwidget)
         self.label_7.setGeometry(QtCore.QRect(390, 360, 191, 121))
+        self.label_7.setStyleSheet("color:white");
         font = QtGui.QFont()
         font.setFamily("微软雅黑 Light")
         font.setPointSize(18)
@@ -645,6 +691,7 @@ class Room_air_state(QMainWindow):#查询房间空调状态界面
         self.label_7.setObjectName("label_7")
         self.label_6 = QtWidgets.QLabel(self.centralwidget)
         self.label_6.setGeometry(QtCore.QRect(390, 290, 191, 121))
+        self.label_6.setStyleSheet("color:white");
         font = QtGui.QFont()
         font.setFamily("微软雅黑 Light")
         font.setPointSize(18)
@@ -697,10 +744,14 @@ class Cashier_select(QMainWindow):#酒店前台选择界面
     def initUI(self):
         self.setObjectName("MainWindow")
         self.resize(800, 600)
+        window_pale = QtGui.QPalette()
+        window_pale.setBrush(self.backgroundRole(), QtGui.QBrush(QtGui.QPixmap("./hall.jpg")))
+        self.setPalette(window_pale)
         self.centralwidget = QtWidgets.QWidget(self)
         self.centralwidget.setObjectName("centralwidget")
         self.label_1 = QtWidgets.QLabel(self.centralwidget)
         self.label_1.setGeometry(QtCore.QRect(290, 130, 221, 71))
+        self.label_1.setStyleSheet("color:white");
         font = QtGui.QFont()
         font.setFamily("微软雅黑 Light")
         font.setPointSize(18)
@@ -742,10 +793,14 @@ class Check_bill(QMainWindow):#账单查询界面
     def initUI(self):
         self.setObjectName("MainWindow")
         self.resize(800, 600)
+        window_pale = QtGui.QPalette()
+        window_pale.setBrush(self.backgroundRole(), QtGui.QBrush(QtGui.QPixmap("./room.jpg")))
+        self.setPalette(window_pale)
         self.centralwidget = QtWidgets.QWidget(self)
         self.centralwidget.setObjectName("centralwidget")
         self.label_1 = QtWidgets.QLabel(self.centralwidget)
         self.label_1.setGeometry(QtCore.QRect(340, 10, 141, 111))
+        self.label_1.setStyleSheet("color:red");
         font = QtGui.QFont()
         font.setFamily("微软雅黑 Light")
         font.setPointSize(18)
@@ -768,6 +823,7 @@ class Check_bill(QMainWindow):#账单查询界面
         self.roomselect.addItem("")
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
         self.label_2.setGeometry(QtCore.QRect(20, 110, 101, 81))
+        self.label_2.setStyleSheet("color:white");
         font = QtGui.QFont()
         font.setFamily("微软雅黑 Light")
         font.setPointSize(18)
@@ -781,6 +837,7 @@ class Check_bill(QMainWindow):#账单查询界面
         self.lcd_cost_all.setObjectName("lcd_cost_all")
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
         self.label_3.setGeometry(QtCore.QRect(420, 110, 191, 121))
+        self.label_3.setStyleSheet("color:white");
         font = QtGui.QFont()
         font.setFamily("微软雅黑 Light")
         font.setPointSize(18)
@@ -788,6 +845,7 @@ class Check_bill(QMainWindow):#账单查询界面
         self.label_3.setObjectName("label_3")
         self.label_4 = QtWidgets.QLabel(self.centralwidget)
         self.label_4.setGeometry(QtCore.QRect(420, 210, 191, 121))
+        self.label_4.setStyleSheet("color:white");
         font = QtGui.QFont()
         font.setFamily("微软雅黑 Light")
         font.setPointSize(18)
@@ -795,6 +853,7 @@ class Check_bill(QMainWindow):#账单查询界面
         self.label_4.setObjectName("label_4")
         self.label_5 = QtWidgets.QLabel(self.centralwidget)
         self.label_5.setGeometry(QtCore.QRect(390, 320, 191, 121))
+        self.label_5.setStyleSheet("color:white");
         font = QtGui.QFont()
         font.setFamily("微软雅黑 Light")
         font.setPointSize(18)
@@ -816,6 +875,7 @@ class Check_bill(QMainWindow):#账单查询界面
         self.check.setObjectName("check")
         self.label_8 = QtWidgets.QLabel(self.centralwidget)
         self.label_8.setGeometry(QtCore.QRect(20, 180, 101, 81))
+        self.label_8.setStyleSheet("color:white");
         font = QtGui.QFont()
         font.setFamily("微软雅黑 Light")
         font.setPointSize(18)
@@ -878,10 +938,14 @@ class Manager_select(QMainWindow):#经理选择界面
     def initUI(self):
         self.setObjectName("MainWindow")
         self.resize(800, 600)
+        window_pale = QtGui.QPalette()
+        window_pale.setBrush(self.backgroundRole(), QtGui.QBrush(QtGui.QPixmap("./hall.jpg")))
+        self.setPalette(window_pale)
         self.centralwidget = QtWidgets.QWidget(self)
         self.centralwidget.setObjectName("centralwidget")
         self.label_1 = QtWidgets.QLabel(self.centralwidget)
         self.label_1.setGeometry(QtCore.QRect(290, 120, 231, 91))
+        self.label_1.setStyleSheet("color:white");
         font = QtGui.QFont()
         font.setFamily("微软雅黑 Light")
         font.setPointSize(18)
@@ -923,6 +987,9 @@ class Check_form(QMainWindow):#报表查询界面
     def initUI(self):
         self.setObjectName("MainWindow")
         self.resize(800, 600)
+        window_pale = QtGui.QPalette()
+        window_pale.setBrush(self.backgroundRole(), QtGui.QBrush(QtGui.QPixmap("./room.jpg")))
+        self.setPalette(window_pale)
         self.centralwidget = QtWidgets.QWidget(self)
         self.centralwidget.setObjectName("centralwidget")
         self.label_1 = QtWidgets.QLabel(self.centralwidget)
@@ -932,6 +999,7 @@ class Check_form(QMainWindow):#报表查询界面
         font.setPointSize(18)
         self.label_1.setFont(font)
         self.label_1.setObjectName("label_1")
+        self.label_1.setStyleSheet("color:red");
         self.lcd_airontimes = QtWidgets.QLCDNumber(self.centralwidget)
         self.lcd_airontimes.setGeometry(QtCore.QRect(560, 120, 171, 61))
         self.lcd_airontimes.setObjectName("lcd_airontimes")
@@ -949,11 +1017,13 @@ class Check_form(QMainWindow):#报表查询界面
         self.roomselect.addItem("")
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
         self.label_2.setGeometry(QtCore.QRect(50, 110, 101, 81))
+        self.label_2.setStyleSheet("color:white");
         font = QtGui.QFont()
         font.setFamily("微软雅黑 Light")
         font.setPointSize(14)
         self.label_2.setFont(font)
         self.label_2.setObjectName("label_2")
+        self.label_2.setStyleSheet("color:white");
         self.lcd_airofftimes = QtWidgets.QLCDNumber(self.centralwidget)
         self.lcd_airofftimes.setGeometry(QtCore.QRect(560, 200, 171, 61))
         self.lcd_airofftimes.setObjectName("lcd_airofftimes")
@@ -962,6 +1032,7 @@ class Check_form(QMainWindow):#报表查询界面
         self.lcd_tem_reach_times.setObjectName("lcd_tem_reach_times")
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
         self.label_3.setGeometry(QtCore.QRect(390, 90, 191, 121))
+        self.label_3.setStyleSheet("color:white");
         font = QtGui.QFont()
         font.setFamily("微软雅黑 Light")
         font.setPointSize(14)
@@ -969,6 +1040,7 @@ class Check_form(QMainWindow):#报表查询界面
         self.label_3.setObjectName("label_3")
         self.label_4 = QtWidgets.QLabel(self.centralwidget)
         self.label_4.setGeometry(QtCore.QRect(370, 250, 191, 121))
+        self.label_4.setStyleSheet("color:white");
         font = QtGui.QFont()
         font.setFamily("微软雅黑 Light")
         font.setPointSize(14)
@@ -976,6 +1048,7 @@ class Check_form(QMainWindow):#报表查询界面
         self.label_4.setObjectName("label_4")
         self.label_7 = QtWidgets.QLabel(self.centralwidget)
         self.label_7.setGeometry(QtCore.QRect(390, 170, 191, 121))
+        self.label_7.setStyleSheet("color:white");
         font = QtGui.QFont()
         font.setFamily("微软雅黑 Light")
         font.setPointSize(14)
@@ -997,6 +1070,7 @@ class Check_form(QMainWindow):#报表查询界面
         self.check.setObjectName("check")
         self.label_8 = QtWidgets.QLabel(self.centralwidget)
         self.label_8.setGeometry(QtCore.QRect(20, 180, 151, 71))
+        self.label_8.setStyleSheet("color:white");
         font = QtGui.QFont()
         font.setFamily("微软雅黑 Light")
         font.setPointSize(14)
@@ -1010,6 +1084,7 @@ class Check_form(QMainWindow):#报表查询界面
         self.btime_select.setObjectName("btime_select")
         self.label_9 = QtWidgets.QLabel(self.centralwidget)
         self.label_9.setGeometry(QtCore.QRect(20, 240, 151, 71))
+        self.label_9.setStyleSheet("color:white");
         font = QtGui.QFont()
         font.setFamily("微软雅黑 Light")
         font.setPointSize(14)
@@ -1029,6 +1104,7 @@ class Check_form(QMainWindow):#报表查询界面
         self.lcd_cost_all.setObjectName("lcd_cost_all")
         self.label_5 = QtWidgets.QLabel(self.centralwidget)
         self.label_5.setGeometry(QtCore.QRect(410, 330, 191, 121))
+        self.label_5.setStyleSheet("color:white");
         font = QtGui.QFont()
         font.setFamily("微软雅黑 Light")
         font.setPointSize(14)
@@ -1036,6 +1112,7 @@ class Check_form(QMainWindow):#报表查询界面
         self.label_5.setObjectName("label_5")
         self.label_6 = QtWidgets.QLabel(self.centralwidget)
         self.label_6.setGeometry(QtCore.QRect(410, 400, 191, 121))
+        self.label_6.setStyleSheet("color:white");
         font = QtGui.QFont()
         font.setFamily("微软雅黑 Light")
         font.setPointSize(14)
