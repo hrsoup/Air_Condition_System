@@ -1,6 +1,5 @@
 from database import DBMapper
 
-
 class Hotel:  # 酒店的基类
     def __init__(self, livein_num):
         self.livein_num = livein_num  # 当前入住总房间数
@@ -66,18 +65,22 @@ class Scheduler:  # 调度对象的基类
 
 class Bill:  # 账单的基类
     def __init__(self, bill_id, room_id, b_time, e_time, cost_all):
-        self.bill_id = bill_id  # 空调开启房间数
+        self.bill_id = bill_id  # 账单编号
         self.room_id = room_id  # 空调送风房间数
         self.b_time = b_time  # 开始时间
         self.e_time = e_time  # 结束时间
+        self.cost_all = cost_all
 
     def insert_data(self,):  # 向数据库中插入账单数据
-        values = self.bill_id+","+self.room_id+","+self.b_time+","+self.e_time+",0"
+        values = self.bill_id+","+self.room_id+","+self.b_time+","+self.e_time+","+self.cost_all
         DBMapper.insert("Bill_item",values)
 
     def check_bill_item(self,bill_id):  # 获得账单详单表项信息
         record = DBMapper.query("select * from Bill_item where bill_id = "+bill_id)
         return record
+
+    # insert(table_name,values)
+    # query(sql语句)
 
 
 class Form:  # 报表的基类

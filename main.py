@@ -1188,7 +1188,7 @@ class Air_admin:  #空调管理员的基类
     def print_room(self):  # 查看房间空调运行状态
     def logout(self):  # 退出系统
 
-class Cashier:  # 酒店前台的基类
+class Cashier:  # 酒店前台的基类——设计架构不变
      def __init__(self, cashier_id, if_login, status):
          self.cashier_id = cashier_id#酒店前台编号
          self.if_login = if_login#是否登录
@@ -1199,10 +1199,10 @@ class Cashier:  # 酒店前台的基类
              self.if_login = 1
              return 1
          else:
-             return 0           #error
+             return 0           #error，后续需要做一些异常处理——未登录而退出，已登录再登录
 
      def create_bill(self):  # 创建账单
-         user_id = 1                #从用户界面获取user_id
+         user_id = 1                #从用户界面获取user_id，room_id,这里暂时简写
          room_id = 1
          register = Register_cashier(user_id,room_id)
          register.create_bill()
@@ -1211,7 +1211,7 @@ class Cashier:  # 酒店前台的基类
          user_id = 1
          room_id = 0
          register = Register_cashier(user_id,room_id)
-         record = register.print_bill()                  #record是从数据库中查出的完整表项，按需要切分再显示到界面上
+         record = register.print_bill()                  #record是从数据库中查出的完整表项，后续要按需要切分再显示到界面上
 
 
      def logout(self):  # 退出系统
