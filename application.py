@@ -1,92 +1,103 @@
-class Hotel:  # é…’åº—çš„åŸºç±»
-    def __init__(self, livein_num):
-        self.livein_num = livein_num  # å½“å‰å…¥ä½æ€»æˆ¿é—´æ•°
-    def change_livein(self):  #å…¥ä½æˆ¿é—´æ•°å˜åŒ–
+from database import DBMapper
 
-class Room:#æˆ¿é—´çš„åŸºç±»
+class Hotel:  # ¾ÆµêµÄ»ùÀà
+    def __init__(self, livein_num):
+        self.livein_num = livein_num  # µ±Ç°Èë×¡×Ü·¿¼äÊı
+    def change_livein(self):  #Èë×¡·¿¼äÊı±ä»¯
+
+class Room:#·¿¼äµÄ»ùÀà
     def __init__(self, room_id, livein_times, tem):
         self.room_id = room_id
         self.livein_times = livein_times
         self.tem = tem
 
-    def Change_tem(self):#ç¯å¢ƒæ¸©åº¦æ”¹å˜
+    def Change_tem(self):#»·¾³ÎÂ¶È¸Ä±ä
 
-class Air_main:  # ç©ºè°ƒä¸»æœºçš„åŸºç±»
+class Air_main:  # ¿Õµ÷Ö÷»úµÄ»ùÀà
     def __init__(self, air_on_num, wind_on_num, login_mode):
-        self.air_on_num = air_on_num #å¼€å¯å­æœºæ•°
-        self.wind_on_num = wind_on_num #é€é£å­æœºæ•°
-        self.login_mode = login_mode #ç™»å½•æ¨¡å¼
+        self.air_on_num = air_on_num #¿ªÆô×Ó»úÊı
+        self.wind_on_num = wind_on_num #ËÍ·ç×Ó»úÊı
+        self.login_mode = login_mode #µÇÂ¼Ä£Ê½
 
-    def create_service(self):  # åˆ›å»ºæœåŠ¡å¯¹è±¡
-    def create_scheduler(self):  # åˆ›å»ºè°ƒåº¦å¯¹è±¡
-    def create_air_sub(self):  # åˆ›å»ºç©ºè°ƒå­æœºå¯¹è±¡
-    def check_has(self):  # æŸ¥çœ‹é…’åº—ç©ºè°ƒçŠ¶æ€
+    def create_service(self):  # ´´½¨·şÎñ¶ÔÏó
+    def create_scheduler(self):  # ´´½¨µ÷¶È¶ÔÏó
+    def create_air_sub(self):  # ´´½¨¿Õµ÷×Ó»ú¶ÔÏó
+    def check_has(self):  # ²é¿´¾Æµê¿Õµ÷×´Ì¬
 
-class Air_sub:  # ç©ºè°ƒå­æœºçš„åŸºç±»_
+class Air_sub:  # ¿Õµ÷×Ó»úµÄ»ùÀà_
     def __init__(self, room_id, tem, wind_mode, cost, if_wind, if_on):
-        self.room_id = room_id  # æˆ¿é—´å·
-        self.tem = tem  # è®¾å®šæ¸©åº¦
-        self.wind_mode = wind_mode  # è®¾å®šé£é€Ÿ
-        self.cost = cost  # å½“å‰è®¡è´¹
-        self.if_wind = if_wind  # æ˜¯å¦é€é£
-        self.if_on = if_on  # æ˜¯å¦å¼€å¯
+        self.room_id = room_id  # ·¿¼äºÅ
+        self.tem = tem  # Éè¶¨ÎÂ¶È
+        self.wind_mode = wind_mode  # Éè¶¨·çËÙ
+        self.cost = cost  # µ±Ç°¼Æ·Ñ
+        self.if_wind = if_wind  # ÊÇ·ñËÍ·ç
+        self.if_on = if_on  # ÊÇ·ñ¿ªÆô
 
-    def insert_data(self):  # å‘æ•°æ®åº“æ’å…¥æ•°æ®
-    def update_data(self):  # æ›´æ–°æ•°æ®åº“æ•°æ®
-    def check_ras(self):  # æŸ¥çœ‹é…’åº—ç©ºè°ƒçŠ¶æ€
+    def insert_data(self):  # ÏòÊı¾İ¿â²åÈëÊı¾İ
+    def update_data(self):  # ¸üĞÂÊı¾İ¿âÊı¾İ
+    def check_ras(self):  # ²é¿´¾Æµê¿Õµ÷×´Ì¬
 
 
-class Service:  # æœåŠ¡å¯¹è±¡çš„åŸºç±»
+class Service:  # ·şÎñ¶ÔÏóµÄ»ùÀà
     def __init__(self, room_id, tem_set, wind_set):
-        self.room_id = room_id  # æˆ¿é—´å·
-        self.tem_set = tem_set  # ç›®æ ‡æ¸©åº¦
-        self.wind_set = wind_set  # ç›®æ ‡é£é€Ÿ
+        self.room_id = room_id  # ·¿¼äºÅ
+        self.tem_set = tem_set  # Ä¿±êÎÂ¶È
+        self.wind_set = wind_set  # Ä¿±ê·çËÙ
 
-    def send_request(self):  # å‘é€é€é£è¯·æ±‚
-    def set_air_on(self):  # å¼€å¯ç©ºè°ƒ
-    def set_air_off(self):  # å…³é—­ç©ºè°ƒ
-    def set_wind_on(self):  # å¼€å¯é€é£
-    def set_wind_off(self):  # å…³é—­é€é£
-    def cost_on(self):  # å¼€å¯è®¡è´¹
-    def cost_off(self):  # å…³é—­è®¡è´¹
-    def set_tem(self):  # è®¾å®šæ¸©åº¦
-    def set_windmode(self):  # è®¾å®šé£é€Ÿ
+    def send_request(self):  # ·¢ËÍËÍ·çÇëÇó
+    def set_air_on(self):  # ¿ªÆô¿Õµ÷
+    def set_air_off(self):  # ¹Ø±Õ¿Õµ÷
+    def set_wind_on(self):  # ¿ªÆôËÍ·ç
+    def set_wind_off(self):  # ¹Ø±ÕËÍ·ç
+    def cost_on(self):  # ¿ªÆô¼Æ·Ñ
+    def cost_off(self):  # ¹Ø±Õ¼Æ·Ñ
+    def set_tem(self):  # Éè¶¨ÎÂ¶È
+    def set_windmode(self):  # Éè¶¨·çËÙ
 
 
-class Scheduler:  # è°ƒåº¦å¯¹è±¡çš„åŸºç±»
+class Scheduler:  # µ÷¶È¶ÔÏóµÄ»ùÀà
     def __init__(self, wait_num, success_num):
-        self.wait_num = wait_num  # é€é£ç­‰å¾…æ•°
-        self.success_num = success_num  # æˆåŠŸé€é£æ•°
+        self.wait_num = wait_num  # ËÍ·çµÈ´ıÊı
+        self.success_num = success_num  # ³É¹¦ËÍ·çÊı
 
-    def schedule_on(self):  # æ‰§è¡Œè°ƒåº¦ç®—æ³•
+    def schedule_on(self):  # Ö´ĞĞµ÷¶ÈËã·¨
 
 
-class Bill:  # è´¦å•çš„åŸºç±»
+class Bill:  # ÕËµ¥µÄ»ùÀà
     def __init__(self, bill_id, room_id, b_time, e_time, cost_all):
-        self.bill_id = bill_id  # ç©ºè°ƒå¼€å¯æˆ¿é—´æ•°
-        self.room_id = room_id  # ç©ºè°ƒé€é£æˆ¿é—´æ•°
-        self.b_time = b_time  # å¼€å§‹æ—¶é—´
-        self.e_time = e_time  # ç»“æŸæ—¶é—´
+        self.bill_id = bill_id  # ÕËµ¥±àºÅ
+        self.room_id = room_id  # ¿Õµ÷ËÍ·ç·¿¼äÊı
+        self.b_time = b_time  # ¿ªÊ¼Ê±¼ä
+        self.e_time = e_time  # ½áÊøÊ±¼ä
+        self.cost_all = cost_all
 
-    def insert_data(self):  # å‘æ•°æ®åº“ä¸­æ’å…¥è´¦å•æ•°æ®
-    def check_bill_item(self):  # è·å¾—è´¦å•è¯¦å•è¡¨é¡¹ä¿¡æ¯
+    def insert_data(self,):  # ÏòÊı¾İ¿âÖĞ²åÈëÕËµ¥Êı¾İ
+        values = self.bill_id+","+self.room_id+","+self.b_time+","+self.e_time+","+self.cost_all
+        DBMapper.insert("Bill_item",values)
+
+    def check_bill_item(self,bill_id):  # »ñµÃÕËµ¥Ïêµ¥±íÏîĞÅÏ¢
+        record = DBMapper.query("select * from Bill_item where bill_id = "+bill_id)
+        return record
+
+    # insert(table_name,values)
+    # query(sqlÓï¾ä)
 
 
-class Form:  # æŠ¥è¡¨çš„åŸºç±»
+class Form:  # ±¨±íµÄ»ùÀà
     def __init__(self, form_id, room_id, b_time, e_time, air_on_times, air_off_times, tem_reach_times,
                          schedule_times, cost_all):
-        self.form_id = form_id  # æŠ¥è¡¨å·
-        self.room_id = room_id  # æˆ¿é—´å·
-        self.b_time = b_time  # å¼€å§‹æ—¶é—´
-        self.e_time = e_time  # ç»“æŸæ—¶é—´
-        self.air_on_times = air_on_times  # å­æœºå¼€å¯æ¬¡æ•°
-        self.air_off_times = air_off_times  # å­æœºå…³é—­æ¬¡æ•°
-        self.tem_reach_times = tem_reach_times  # æ¸©åº¦åˆ°è¾¾æ¬¡æ•°
-        self.schedule_times = schedule_times  # è°ƒåº¦æ¬¡æ•°
-        self.cost_all = cost_all  # æ€»æ¶ˆè´¹é‡‘é¢
+        self.form_id = form_id  # ±¨±íºÅ
+        self.room_id = room_id  # ·¿¼äºÅ
+        self.b_time = b_time  # ¿ªÊ¼Ê±¼ä
+        self.e_time = e_time  # ½áÊøÊ±¼ä
+        self.air_on_times = air_on_times  # ×Ó»ú¿ªÆô´ÎÊı
+        self.air_off_times = air_off_times  # ×Ó»ú¹Ø±Õ´ÎÊı
+        self.tem_reach_times = tem_reach_times  # ÎÂ¶Èµ½´ï´ÎÊı
+        self.schedule_times = schedule_times  # µ÷¶È´ÎÊı
+        self.cost_all = cost_all  # ×ÜÏû·Ñ½ğ¶î
 
-    def insert_data(self):  # å‘æ•°æ®åº“ä¸­æ’å…¥è¡¨å•æ•°æ®
-    def check_form_item(self):  # è·å¾—æŠ¥è¡¨è¡¨é¡¹ä¿¡æ¯
+    def insert_data(self):  # ÏòÊı¾İ¿âÖĞ²åÈë±íµ¥Êı¾İ
+    def check_form_item(self):  # »ñµÃ±¨±í±íÏîĞÅÏ¢
 
 
 

@@ -1,24 +1,53 @@
-class Register_user:#æ§åˆ¶å™¨0çš„åŸºç±»
-    def air_on(self):#å¼€å¯ç©ºè°ƒ
-    def air_off(self):#å…³é—­ç©ºè°ƒ
-    def change_wind(self):#è°ƒèŠ‚é£é€Ÿ
-    def change_tem(self):#è°ƒèŠ‚æ¸©åº¦
+from database import DBMapper
+from application import Bill
+
+class Register_user:#¿ØÖÆÆ÷0µÄ»ùÀà
+    def air_on(self):#¿ªÆô¿Õµ÷
+    def air_off(self):#¹Ø±Õ¿Õµ÷
+    def change_wind(self):#µ÷½Ú·çËÙ
+    def change_tem(self):#µ÷½ÚÎÂ¶È
 
 
-class Register_admin:#æ§åˆ¶å™¨1çš„åŸºç±»
-    def create_air_main(self):#åˆ›å»ºç©ºè°ƒä¸»æœºå®ä¾‹
-    def power_on(self):#åˆå§‹åŒ–ç©ºè°ƒç³»ç»Ÿ
-    def init_air(self):#ç©ºè°ƒå­æœºå‚æ•°åˆå§‹åŒ–
-    def print_hotel(self):#æŸ¥çœ‹é…’åº—ç©ºè°ƒè¿è¡ŒçŠ¶æ€
-    def print_room(self):#æŸ¥çœ‹æˆ¿é—´ç©ºè°ƒè¿è¡ŒçŠ¶æ€
+class Register_admin:#¿ØÖÆÆ÷1µÄ»ùÀà
+    def create_air_main(self):#´´½¨¿Õµ÷Ö÷»úÊµÀı
+    def power_on(self):#³õÊ¼»¯¿Õµ÷ÏµÍ³
+    def init_air(self):#¿Õµ÷×Ó»ú²ÎÊı³õÊ¼»¯
+    def print_hotel(self):#²é¿´¾Æµê¿Õµ÷ÔËĞĞ×´Ì¬
+    def print_room(self):#²é¿´·¿¼ä¿Õµ÷ÔËĞĞ×´Ì¬
 
-class Register_cashier:#æ§åˆ¶å™¨2çš„åŸºç±»
-    def create_bill(self):#åˆ›å»ºè´¦å•è¯¦å•
-    def print_bill(self):#æŸ¥çœ‹è´¦å•è¯¦å•
-    def get_begin(self):#è·å–ç”¨æˆ·å…¥ä½æ—¶é—´
-    def get_end(self):#è·å–ç”¨æˆ·é€€æˆ¿æ—¶é—´
+class Register_cashier:#¿ØÖÆÆ÷2µÄ»ùÀà
+    def __init__(self, user_id, room_id):          #ÈÏÎªÖ»ĞèÒª´ÓÓÃ»§½çÃæ»ñÈ¡user_id,room_id¼´¿É¶¨Î»µ½¶©µ¥ĞÅÏ¢
+        self.user_id = user_id
+        self.room_id = room_id
+        self.bill_id = user_id+"-"+room_id         #×Ô¶¨ÒåÒ»ÖÖbill_idµÄÉú³É¹æÔò
+        self.bill = Bill(bill_id=self.bill_id, room_id=self.room_id, b_time=0, e_time=0,cost_all=0)
+        #Õâ±ßb_time,e_timeÎÒÀí½âÊÇÓÃ»§Ê¹ÓÃÁË¿Õµ÷²Å¿ªÊ¼¼Æ·Ñ£¬ËùÒÔÔÚ´´½¨¶©µ¥¶ÔÏóÊ±Ä¬ÈÏ·Ç¿Õ¼´¿É£¬µ±ÓÃ»§¿ª¹Ø¿Õµ÷Ê±ÔÙ¶Ôb_time,e_time½øĞĞ¸üĞÂ²Ù×÷
+
+    def create_bill(self):#´´½¨ÕËµ¥Ïêµ¥
+        self.bill.insert_data(self.bill_id)
+
+    def print_bill(self):#²é¿´ÕËµ¥Ïêµ¥
+        record = self.bill.check_bill_item(self.bill_id)
+        return record
+
+    def get_begin(self):#»ñÈ¡ÓÃ»§Èë×¡Ê±¼ä¡ª¡ªÖ±½Ó´ÓUser_item±íÖĞ²é
+        sql_b = "select b_time from User_item where user_id="+self.user_id
+        st = DBMapper.query(sql_b)
+        if st.count() != 0:
+            return st
+        else:
+            return -1                           #ÓÃ»§ÉĞÎ´Èë×¡µÄÇé¿ö
 
 
-class Register_manager:#æ§åˆ¶å™¨3çš„åŸºç±»
-    def create_form(self):#åˆ›å»ºæŠ¥è¡¨
-    def print_form(self):#æŸ¥çœ‹æŠ¥è¡¨
+    def get_end(self):#»ñÈ¡ÓÃ»§ÍË·¿Ê±¼ä
+        query_e ="select e_time from User_item where user_id="+self.user_id
+        et = DBMapper.query(query_e)
+        if et.count() != 0:
+            return et
+        else:
+            return -1                            #ÓÃ»§ÉĞÎ´Èë×¡
+
+
+class Register_manager:#¿ØÖÆÆ÷3µÄ»ùÀà
+    def create_form(self):#´´½¨±¨±í
+    def print_form(self):#²é¿´±¨±í
