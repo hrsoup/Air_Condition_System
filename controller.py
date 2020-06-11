@@ -16,17 +16,18 @@ class Register_admin:#控制器1的基类
     def print_room(self):#查看房间空调运行状态
 
 class Register_cashier:#控制器2的基类
+    #账单至少包含如下信息：房间号、总费用、入住时间、离店时间。
     def __init__(self, user_id, room_id):          #认为只需要从用户界面获取user_id,room_id即可定位到订单信息
         self.user_id = user_id
         self.room_id = room_id
         self.bill_id = user_id+"-"+room_id         #自定义一种bill_id的生成规则
-        self.bill = Bill(bill_id=self.bill_id, room_id=self.room_id, b_time=0, e_time=0,cost_all=0)
-        #这边b_time,e_time我理解是用户使用了空调才开始计费，所以在创建订单对象时默认非空即可，当用户开关空调时再对b_time,e_time进行更新操作
+        self.bill = Bill(bill_id=self.bill_id, room_id=self.room_id, b_time=self.get_begin(), e_time=self.get_end(),cost_all=0)
+        self.detail = Details(self.bill_id,self.room_id,self.user_id)         #详单，只有属性值供输出
 
     def create_bill(self):#创建账单详单
         self.bill.insert_data(self.bill_id)
 
-    def print_bill(self):#查看账单详单
+    def print_bill(self):#查看账单
         record = self.bill.check_bill_item(self.bill_id)
         return record
 

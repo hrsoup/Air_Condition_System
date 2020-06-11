@@ -67,13 +67,13 @@ class Bill:  # 账单的基类
     def __init__(self, bill_id, room_id, b_time, e_time, cost_all):
         self.bill_id = bill_id  # 账单编号
         self.room_id = room_id  # 空调送风房间数
-        self.b_time = b_time  # 开始时间
-        self.e_time = e_time  # 结束时间
+        self.b_time = b_time  # 入住时间
+        self.e_time = e_time  # 离店时间
         self.cost_all = cost_all
 
-    def insert_data(self,):  # 向数据库中插入账单数据
+    def insert_data(self):  # 向数据库中插入账单数据
         values = self.bill_id+","+self.room_id+","+self.b_time+","+self.e_time+","+self.cost_all
-        DBMapper.insert("Bill_item",values)
+        DBMapper.insert("Bill_item",values)            #cost_all需要Air_sub在空调关机时update
 
     def check_bill_item(self,bill_id):  # 获得账单详单表项信息
         record = DBMapper.query("select * from Bill_item where bill_id = "+bill_id)
@@ -81,6 +81,22 @@ class Bill:  # 账单的基类
 
     # insert(table_name,values)
     # query(sql语句)
+
+class Details:        #详单基类，只记录信息，考虑客户退房后才需要打印详单，所以默认查询表项都已插入到表中
+    #详单至少需要包含如下信息：房间号、开始送风时间、结束送风时间、送风时长、风速、费率、费用
+    def __init__(self,bill_id,room_id,user_id):
+        self.bill_id = bill_id
+        self.room_id = room_id
+        self.user_id = user_id
+        #其他所有信息直接从Air_sub里查        需要再将一些细节项加到Air_sub表中
+        self.on_time = DBMapper.query("select on_time from Air_sub where room_id = "+self.bill_id+" and id = "+self.user_id)   #id??
+        self.off_time = DBMapper.query("select off_time from Air_sub where room_id = "+self.bill_id+" and id = "+self.user_id)
+        self.total_time = self.off_time - self.on_time
+        self.wind_mode = DBMapper.query("select wind_mode from Air_sub where room_id = "+self.bill_id+" and id = "+self.user_id)
+        self.cost_interest = DBMapper.query("select cost_interest from Air_sub where room_id = "+self.bill_id+" and id = "+self.user_id)
+        #这个应该在Air_sub里根据温度和风速计算出了一个费率，但是表单里没这项,应该也要加入吧
+        self.total_cost = DBMapper.query("select coat from Air_sub where bill_id = "+self.bill_id+" and id = "+self.user_id)
+
 
 
 class Form:  # 报表的基类
