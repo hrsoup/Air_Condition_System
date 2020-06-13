@@ -1,15 +1,14 @@
-'''
+import time
 import controller as ctrl
 import application as app
-import database as db
+#import database as db
 
-'''
 
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMainWindow, QPushButton, QApplication
 
-class Welcome(QMainWindow):#³õÊ¼»¯½çÃæ
+class Welcome(QMainWindow):#åˆå§‹åŒ–ç•Œé¢
     def __init__(self):
         super().__init__()
         self.initUI()
@@ -29,21 +28,21 @@ class Welcome(QMainWindow):#³õÊ¼»¯½çÃæ
         self.label_1.setGeometry(QtCore.QRect(130, 70, 561, 101))
         self.label_1.setStyleSheet("color:white");
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(30)
         self.label_1.setFont(font)
         self.label_1.setObjectName("label_1")
         self.enter = QtWidgets.QPushButton(self.centralwidget)
         self.enter.setGeometry(QtCore.QRect(280, 340, 241, 61))
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(12)
         self.enter.setFont(font)
         self.enter.setObjectName("enter")
         self.roleselect = QtWidgets.QComboBox(self.centralwidget)
         self.roleselect.setGeometry(QtCore.QRect(280, 240, 241, 61))
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(12)
         self.roleselect.setFont(font)
         self.roleselect.setObjectName("roleselect")
@@ -51,48 +50,52 @@ class Welcome(QMainWindow):#³õÊ¼»¯½çÃæ
         self.roleselect.addItem("")
         self.roleselect.addItem("")
         self.roleselect.addItem("")
-        self.roleselect.currentIndexChanged.connect(self.selectionchange)
         self.setCentralWidget(self.centralwidget)
         self.retranslateUi(self)
         QtCore.QMetaObject.connectSlotsByName(self)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "·Ö²¼Ê½ÎÂ¿ØÏµÍ³"))
-        self.label_1.setText(_translate("MainWindow", "»¶Ó­Ê¹ÓÃ·Ö²¼Ê½ÎÂ¿ØÏµÍ³"))
-        self.enter.setText(_translate("MainWindow", "½øÈëÏµÍ³"))
-        self.roleselect.setItemText(0, _translate("MainWindow", "¿Í»§"))
-        self.roleselect.setItemText(1, _translate("MainWindow", "¿Õµ÷¹ÜÀíÔ±"))
-        self.roleselect.setItemText(2, _translate("MainWindow", "¾ÆµêÇ°Ì¨"))
-        self.roleselect.setItemText(3, _translate("MainWindow", "¾Æµê¾­Àí"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "åˆ†å¸ƒå¼æ¸©æ§ç³»ç»Ÿ"))
+        self.label_1.setText(_translate("MainWindow", "æ¬¢è¿ä½¿ç”¨åˆ†å¸ƒå¼æ¸©æ§ç³»ç»Ÿ"))
+        self.enter.setText(_translate("MainWindow", "è¿›å…¥ç³»ç»Ÿ"))
+        self.roleselect.setItemText(0, _translate("MainWindow", "å®¢æˆ·"))
+        self.roleselect.setItemText(1, _translate("MainWindow", "ç©ºè°ƒç®¡ç†å‘˜"))
+        self.roleselect.setItemText(2, _translate("MainWindow", "é…’åº—å‰å°"))
+        self.roleselect.setItemText(3, _translate("MainWindow", "é…’åº—ç»ç†"))
+        self.roleselect.currentIndexChanged.connect(self.selectionchange)
 
     def selectionchange(self):
-        if (welcome.roleselect.currentText() == '¿Í»§'):
-            # ¿Í»§ÏßÂ·Ìø×ªÂß¼­
-            welcome.enter.clicked.connect(move_select.show)
-            welcome.enter.clicked.connect(welcome.closewin)
-            welcome.enter.clicked.connect(admin_select.closewin)
-            welcome.enter.clicked.connect(cashier_select.closewin)
-            welcome.enter.clicked.connect(manager_select.closewin)
+        if (self.roleselect.currentText() == 'å®¢æˆ·'):
+            # å®¢æˆ·çº¿è·¯è·³è½¬é€»è¾‘
+            self.enter.clicked.connect(user.login)
+            self.enter.clicked.connect(move_select.show)
+            self.enter.clicked.connect(self.closewin)
+            self.enter.clicked.connect(admin_select.closewin)
+            self.enter.clicked.connect(cashier_select.closewin)
+            self.enter.clicked.connect(manager_select.closewin)
 
-        elif (welcome.roleselect.currentText() == '¿Õµ÷¹ÜÀíÔ±'):
-            # ¿Õµ÷¹ÜÀíÔ±ÏßÂ·Ìø×ªÂß¼­
-            welcome.enter.clicked.connect(admin_select.show)
-            welcome.enter.clicked.connect(welcome.closewin)
-            welcome.enter.clicked.connect(cashier_select.closewin)
-            welcome.enter.clicked.connect(manager_select.closewin)
-            welcome.enter.clicked.connect(move_select.closewin)
+        elif (welcome.roleselect.currentText() == 'ç©ºè°ƒç®¡ç†å‘˜'):
+            # ç©ºè°ƒç®¡ç†å‘˜çº¿è·¯è·³è½¬é€»è¾‘
+            self.enter.clicked.connect(admin.login)
+            self.enter.clicked.connect(admin_select.show)
+            self.enter.clicked.connect(self.closewin)
+            self.enter.clicked.connect(cashier_select.closewin)
+            self.enter.clicked.connect(manager_select.closewin)
+            self.enter.clicked.connect(move_select.closewin)
 
-        elif (welcome.roleselect.currentText() == '¾ÆµêÇ°Ì¨'):
-            # ¾ÆµêÇ°Ì¨ÏßÂ·Ìø×ªÂß¼­
-            welcome.enter.clicked.connect(cashier_select.show)
-            welcome.enter.clicked.connect(welcome.closewin)
-            welcome.enter.clicked.connect(admin_select.closewin)
-            welcome.enter.clicked.connect(manager_select.closewin)
-            welcome.enter.clicked.connect(move_select.closewin)
+        elif (welcome.roleselect.currentText() == 'é…’åº—å‰å°'):
+            # é…’åº—å‰å°çº¿è·¯è·³è½¬é€»è¾‘
+            # welcome.enter.clicked.connect(cashier.login())
+            self.enter.clicked.connect(cashier_select.show)
+            self.enter.clicked.connect(self.closewin)
+            self.enter.clicked.connect(admin_select.closewin)
+            self.enter.clicked.connect(manager_select.closewin)
+            self.enter.clicked.connect(move_select.closewin)
 
-        elif (welcome.roleselect.currentText() == '¾Æµê¾­Àí'):
-            # ¾Æµê¾­ÀíÌø×ªÂß¼­
+        elif (welcome.roleselect.currentText() == 'é…’åº—ç»ç†'):
+            # é…’åº—ç»ç†è·³è½¬é€»è¾‘
+            # welcome.enter.clicked.connect(manager.login())
             welcome.enter.clicked.connect(manager_select.show)
             welcome.enter.clicked.connect(welcome.closewin)
             welcome.enter.clicked.connect(cashier_select.closewin)
@@ -102,7 +105,7 @@ class Welcome(QMainWindow):#³õÊ¼»¯½çÃæ
     def closewin(self):
         self.close()
 
-class Move_select(QMainWindow):#ÓÃ»§Ñ¡Ôñ½çÃæ
+class Move_select(QMainWindow):#ç”¨æˆ·é€‰æ‹©ç•Œé¢
     def __init__(self):
         super().__init__()
         self.initUI()
@@ -110,64 +113,119 @@ class Move_select(QMainWindow):#ÓÃ»§Ñ¡Ôñ½çÃæ
     def initUI(self):
         self.setObjectName("MainWindow")
         self.resize(800, 600)
+        self.centralwidget = QtWidgets.QWidget(self)
+        self.centralwidget.setObjectName("centralwidget")
         window_pale = QtGui.QPalette()
         window_pale.setBrush(self.backgroundRole(), QtGui.QBrush(QtGui.QPixmap("./hall.jpg")))
         self.setPalette(window_pale)
-        self.centralwidget = QtWidgets.QWidget(self)
-        self.centralwidget.setObjectName("centralwidget")
         self.label_1 = QtWidgets.QLabel(self.centralwidget)
-        self.label_1.setGeometry(QtCore.QRect(290, 90, 231, 91))
-        self.label_1.setStyleSheet("color:white");
+        self.label_1.setGeometry(QtCore.QRect(290, 60, 231, 91))
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(18)
         self.label_1.setFont(font)
         self.label_1.setObjectName("label_1")
         self.movein = QtWidgets.QPushButton(self.centralwidget)
-        self.movein.setGeometry(QtCore.QRect(270, 200, 251, 41))
+        self.movein.setGeometry(QtCore.QRect(130, 250, 251, 41))
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(14)
         self.movein.setFont(font)
         self.movein.setObjectName("movein")
         self.moveout = QtWidgets.QPushButton(self.centralwidget)
-        self.moveout.setGeometry(QtCore.QRect(270, 250, 251, 41))
+        self.moveout.setGeometry(QtCore.QRect(130, 300, 251, 41))
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(14)
         self.moveout.setFont(font)
         self.moveout.setObjectName("moveout")
         self.enterroom = QtWidgets.QPushButton(self.centralwidget)
-        self.enterroom.setGeometry(QtCore.QRect(270, 300, 251, 41))
+        self.enterroom.setGeometry(QtCore.QRect(410, 250, 251, 41))
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(14)
         self.enterroom.setFont(font)
         self.enterroom.setObjectName("enterroom")
         self.exit = QtWidgets.QPushButton(self.centralwidget)
-        self.exit.setGeometry(QtCore.QRect(270, 350, 251, 41))
+        self.exit.setGeometry(QtCore.QRect(410, 300, 251, 41))
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(14)
         self.exit.setFont(font)
         self.exit.setObjectName("exit")
+        self.user_id = QtWidgets.QComboBox(self.centralwidget)
+        self.user_id.setGeometry(QtCore.QRect(280, 170, 251, 31))
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(12)
+        self.user_id.setFont(font)
+        self.user_id.setObjectName("user_id")
+        self.user_id.addItem("")
+        self.user_id.addItem("")
+        self.user_id.addItem("")
+        self.user_id.addItem("")
+        self.user_id.addItem("")
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        self.label.setGeometry(QtCore.QRect(170, 170, 111, 31))
+        font = QtGui.QFont()
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
+        font.setPointSize(16)
+        self.label.setFont(font)
+        self.label.setObjectName("label")
         self.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(self)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 26))
+        self.menubar.setObjectName("menubar")
+        self.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(self)
+        self.statusbar.setObjectName("statusbar")
+        self.setStatusBar(self.statusbar)
         self.retranslateUi(self)
         QtCore.QMetaObject.connectSlotsByName(self)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "»¶Ó­¹âÁÙ"))
-        self.label_1.setText(_translate("MainWindow", "ÇëÑ¡Ôñ·şÎñÀàĞÍ"))
-        self.movein.setText(_translate("MainWindow", "°ìÀíÈë×¡"))
-        self.moveout.setText(_translate("MainWindow", "°ìÀíÍË·¿"))
-        self.enterroom.setText(_translate("MainWindow", "½øÈë·¿¼ä"))
-        self.exit.setText(_translate("MainWindow", "ÍË³öÏµÍ³"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.label_1.setText(_translate("MainWindow", "è¯·é€‰æ‹©æœåŠ¡ç±»å‹"))
+        self.movein.setText(_translate("MainWindow", "åŠç†å…¥ä½"))
+        self.moveout.setText(_translate("MainWindow", "åŠç†é€€æˆ¿"))
+        self.enterroom.setText(_translate("MainWindow", "è¿›å…¥æˆ¿é—´"))
+        self.exit.setText(_translate("MainWindow", "é€€å‡ºç³»ç»Ÿ"))
+        self.user_id.setItemText(0, _translate("MainWindow", "1"))
+        self.user_id.setItemText(1, _translate("MainWindow", "2"))
+        self.user_id.setItemText(2, _translate("MainWindow", "3"))
+        self.user_id.setItemText(3, _translate("MainWindow", "4"))
+        self.user_id.setItemText(4, _translate("MainWindow", "5"))
+        self.label.setText(_translate("MainWindow", "å®¢æˆ·å·"))
+        self.movein.clicked.connect(self.f1)
+        self.moveout.clicked.connect(self.f2)
+        self.enterroom.clicked.connect(self.f3)
+        self.exit.clicked.connect(self.f4)
+
+    def f1(self):
+        air_monitor.lcd_if_on.display(0)
+        air_monitor.lcd_if_wind.display(0)
+        move_in.show()
+        self.closewin()
+
+    def f2(self):
+        move_out.show()
+        self.closewin()
+
+    def f3(self):
+        enter_room.show()
+        self.closewin()
+
+    def f4(self):
+        welcome.show()
+        self.closewin()
+
+
 
     def closewin(self):
         self.close()
 
-class Move_in(QMainWindow):#È·ÈÏÈë×¡½çÃæ
+class Move_in(QMainWindow):#ç¡®è®¤å…¥ä½ç•Œé¢
     def __init__(self):
         super().__init__()
         self.initUI()
@@ -184,14 +242,14 @@ class Move_in(QMainWindow):#È·ÈÏÈë×¡½çÃæ
         self.label_1.setGeometry(QtCore.QRect(170, 50, 461, 111))
         self.label_1.setStyleSheet("color:white");
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(18)
         self.label_1.setFont(font)
         self.label_1.setObjectName("label_1")
         self.roomselect = QtWidgets.QComboBox(self.centralwidget)
         self.roomselect.setGeometry(QtCore.QRect(280, 220, 251, 41))
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(16)
         self.roomselect.setFont(font)
         self.roomselect.setObjectName("roomselect")
@@ -203,14 +261,14 @@ class Move_in(QMainWindow):#È·ÈÏÈë×¡½çÃæ
         self.movein_confirm = QtWidgets.QPushButton(self.centralwidget)
         self.movein_confirm.setGeometry(QtCore.QRect(280, 300, 251, 41))
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(14)
         self.movein_confirm.setFont(font)
         self.movein_confirm.setObjectName("movein_confirm")
         self.back = QtWidgets.QPushButton(self.centralwidget)
         self.back.setGeometry(QtCore.QRect(280, 380, 251, 41))
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(14)
         self.back.setFont(font)
         self.back.setObjectName("back")
@@ -220,20 +278,39 @@ class Move_in(QMainWindow):#È·ÈÏÈë×¡½çÃæ
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "°ìÀíÈë×¡"))
-        self.label_1.setText(_translate("MainWindow", "ÄúºÃ£¬ÇëÑ¡Ôñ·¿¼äºÅ°ìÀíÈë×¡ÊÖĞø"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "åŠç†å…¥ä½"))
+        self.label_1.setText(_translate("MainWindow", "æ‚¨å¥½ï¼Œè¯·é€‰æ‹©æˆ¿é—´å·åŠç†å…¥ä½æ‰‹ç»­"))
         self.roomselect.setItemText(0, _translate("MainWindow", "1"))
         self.roomselect.setItemText(1, _translate("MainWindow", "2"))
         self.roomselect.setItemText(2, _translate("MainWindow", "3"))
         self.roomselect.setItemText(3, _translate("MainWindow", "4"))
         self.roomselect.setItemText(4, _translate("MainWindow", "5"))
-        self.movein_confirm.setText(_translate("MainWindow", "È·¶¨Èë×¡"))
-        self.back.setText(_translate("MainWindow", "·µ»Ø"))
+        self.movein_confirm.setText(_translate("MainWindow", "ç¡®å®šå…¥ä½"))
+        self.back.setText(_translate("MainWindow", "è¿”å›"))
+        self.movein_confirm.clicked.connect(self.room_choice)
+        self.back.clicked.connect(self.f1)
+
+    def room_choice(self):
+        room_id = int(self.roomselect.currentText())
+        if(rooms[room_id].live_in_cus==0):
+            print("å…¥ä½æˆåŠŸï¼šé¡¾å®¢:%d->æˆ¿é—´:%d"%(int(move_select.user_id.currentText()),room_id))
+            rooms[room_id].live_in_cus=int(move_select.user_id.currentText())#å¯¹åº”ç”¨æˆ·å…¥ä½
+            air_monitor.show()
+            move_in.closewin()
+            air_monitor.lcd_room_id.display(room_id)
+            air_monitor.show()
+        else:
+            print("å¯¹ä¸èµ·ï¼Œè¯¥æˆ¿é—´å·²ç»æœ‰å®¢æˆ·å…¥ä½ï¼Œè¯·é€‰æ‹©å…¶ä»–æˆ¿é—´")
+
+    def f1(self):
+        move_select.show()
+        move_in.closewin()
+
 
     def closewin(self):
         self.close()
 
-class Move_out(QMainWindow):#È·ÈÏÍË·¿½çÃæ
+class Move_out(QMainWindow):#ç¡®è®¤é€€æˆ¿ç•Œé¢
     def __init__(self):
         super().__init__()
         self.initUI()
@@ -250,14 +327,14 @@ class Move_out(QMainWindow):#È·ÈÏÍË·¿½çÃæ
         self.label_1.setGeometry(QtCore.QRect(170, 50, 621, 141))
         self.label_1.setStyleSheet("color:white");
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(18)
         self.label_1.setFont(font)
         self.label_1.setObjectName("label_1")
         self.roomselect = QtWidgets.QComboBox(self.centralwidget)
         self.roomselect.setGeometry(QtCore.QRect(280, 210, 251, 41))
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(16)
         self.roomselect.setFont(font)
         self.roomselect.setObjectName("roomselect")
@@ -269,14 +346,14 @@ class Move_out(QMainWindow):#È·ÈÏÍË·¿½çÃæ
         self.moveout_confirm = QtWidgets.QPushButton(self.centralwidget)
         self.moveout_confirm.setGeometry(QtCore.QRect(280, 300, 251, 41))
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(14)
         self.moveout_confirm.setFont(font)
         self.moveout_confirm.setObjectName("moveout_confirm")
         self.back = QtWidgets.QPushButton(self.centralwidget)
         self.back.setGeometry(QtCore.QRect(280, 390, 251, 41))
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(14)
         self.back.setFont(font)
         self.back.setObjectName("back")
@@ -286,26 +363,41 @@ class Move_out(QMainWindow):#È·ÈÏÍË·¿½çÃæ
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "°ìÀíÍË·¿"))
-        self.label_1.setText(_translate("MainWindow", "ÄúºÃ£¬ÇëÑ¡Ôñ·¿¼äºÅ°ìÀíÍË·¿ÊÖĞø"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "åŠç†é€€æˆ¿"))
+        self.label_1.setText(_translate("MainWindow", "æ‚¨å¥½ï¼Œè¯·é€‰æ‹©æˆ¿é—´å·åŠç†é€€æˆ¿æ‰‹ç»­"))
         self.roomselect.setItemText(0, _translate("MainWindow", "1"))
         self.roomselect.setItemText(1, _translate("MainWindow", "2"))
         self.roomselect.setItemText(2, _translate("MainWindow", "3"))
         self.roomselect.setItemText(3, _translate("MainWindow", "4"))
         self.roomselect.setItemText(4, _translate("MainWindow", "5"))
-        self.moveout_confirm.setText(_translate("MainWindow", "È·¶¨ÍË·¿"))
-        self.back.setText(_translate("MainWindow", "·µ»Ø"))
+        self.moveout_confirm.setText(_translate("MainWindow", "ç¡®å®šé€€æˆ¿"))
+        self.back.setText(_translate("MainWindow", "è¿”å›"))
+        self.moveout_confirm.clicked.connect(self.f1)
+        self.back.clicked.connect(self.f2)
+
+    def f1(self):
+        room_id = int(self.roomselect.currentText())
+        if (rooms[room_id].live_in_cus != int(move_select.user_id.currentText())):
+            print("å¯¹ä¸èµ·ï¼Œè¯¥æˆ¿é—´æ‚¨æ²¡æœ‰åŠç†å…¥ä½ï¼Œæ‚¨é‡æ–°ç¡®è®¤")
+        else:
+            print("é€€æˆ¿æˆåŠŸ:é¡¾å®¢:%d->æˆ¿é—´:%d" % (int(move_select.user_id.currentText()), room_id))
+        welcome.show()
+        move_out.closewin()
+
+    def f2(self):
+
+        move_select.show()
+        move_out.closewin()
 
     def closewin(self):
         self.close()
 
-class Enter_room(QMainWindow):#½øÈë·¿¼ä½çÃæ
+class Enter_room(QMainWindow):#è¿›å…¥æˆ¿é—´ç•Œé¢
     def __init__(self):
         super().__init__()
         self.initUI()
 
     def initUI(self):
-        self.setObjectName("MainWindow")
         self.setObjectName("MainWindow")
         window_pale = QtGui.QPalette()
         window_pale.setBrush(self.backgroundRole(), QtGui.QBrush(QtGui.QPixmap("./corridor.jpg")))
@@ -317,14 +409,14 @@ class Enter_room(QMainWindow):#½øÈë·¿¼ä½çÃæ
         self.label_1.setGeometry(QtCore.QRect(220, 70, 371, 91))
         self.label_1.setStyleSheet("color:white");
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(18)
         self.label_1.setFont(font)
         self.label_1.setObjectName("label_1")
         self.roomselect = QtWidgets.QComboBox(self.centralwidget)
         self.roomselect.setGeometry(QtCore.QRect(280, 220, 251, 41))
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(16)
         self.roomselect.setFont(font)
         self.roomselect.setObjectName("roomselect")
@@ -336,14 +428,14 @@ class Enter_room(QMainWindow):#½øÈë·¿¼ä½çÃæ
         self.movein_confirm = QtWidgets.QPushButton(self.centralwidget)
         self.movein_confirm.setGeometry(QtCore.QRect(280, 300, 251, 41))
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(14)
         self.movein_confirm.setFont(font)
         self.movein_confirm.setObjectName("movein_confirm")
         self.back = QtWidgets.QPushButton(self.centralwidget)
         self.back.setGeometry(QtCore.QRect(280, 380, 251, 41))
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(14)
         self.back.setFont(font)
         self.back.setObjectName("back")
@@ -353,20 +445,41 @@ class Enter_room(QMainWindow):#½øÈë·¿¼ä½çÃæ
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "½øÈë·¿¼ä"))
-        self.label_1.setText(_translate("MainWindow", "ÄúºÃ£¬ÇëÑ¡ÔñÄúËùÔÚµÄ·¿¼ä"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "è¿›å…¥æˆ¿é—´"))
+        self.label_1.setText(_translate("MainWindow", "æ‚¨å¥½ï¼Œè¯·é€‰æ‹©æ‚¨æ‰€åœ¨çš„æˆ¿é—´"))
         self.roomselect.setItemText(0, _translate("MainWindow", "1"))
         self.roomselect.setItemText(1, _translate("MainWindow", "2"))
         self.roomselect.setItemText(2, _translate("MainWindow", "3"))
         self.roomselect.setItemText(3, _translate("MainWindow", "4"))
         self.roomselect.setItemText(4, _translate("MainWindow", "5"))
-        self.movein_confirm.setText(_translate("MainWindow", "½øÈë·¿¼ä"))
-        self.back.setText(_translate("MainWindow", "·µ»Ø"))
+        self.movein_confirm.setText(_translate("MainWindow", "è¿›å…¥æˆ¿é—´"))
+        self.back.setText(_translate("MainWindow", "è¿”å›"))
+        self.movein_confirm.clicked.connect(self.room_choice)
+        self.back.clicked.connect(self.f1)
+
+    def room_choice(self):#é€‰æ‹©ä¸åŒçš„æˆ¿é—´æ¥åšçŠ¶æ€çš„æŸ¥è¯¢
+          room_id=int(self.roomselect.currentText())
+          if(rooms[room_id].live_in_cus!=int(move_select.user_id.currentText())):
+              print("å¯¹ä¸èµ·ï¼Œè¯¥æˆ¿é—´æ‚¨æ²¡æœ‰åŠç†å…¥ä½ï¼Œæ‚¨é‡æ–°ç¡®è®¤")
+          else:
+              print("è¿›å…¥æˆ¿é—´ï¼šé¡¾å®¢:%d->æˆ¿é—´:%d" % (int(move_select.user_id.currentText()), room_id))
+              air_monitor.lcd_room_id.display(air_subs[int(room_id) - 1].room_id)
+              air_monitor.lcd_if_on.display(air_subs[int(room_id) - 1].if_on)
+              air_monitor.lcd_if_wind.display(air_subs[int(room_id) - 1].if_wind)
+              air_monitor.change_tem.setValue(air_subs[int(room_id) - 1].tem)
+              air_monitor.change_wind.setValue(air_subs[int(room_id) - 1].windmode)
+              air_monitor.cost_now.setText(str(air_subs[int(room_id) - 1].cost))
+              air_monitor.show()
+              enter_room.closewin()
+
+    def f1(self):
+        move_select.show()
+        enter_room.closewin()
 
     def closewin(self):
         self.close()
 
-class Air_monitor(QMainWindow):#¿Õµ÷¿ØÖÆÃæ°å½çÃæ
+class Air_monitor(QMainWindow):
     def __init__(self):
         super().__init__()
         self.initUI()
@@ -374,156 +487,305 @@ class Air_monitor(QMainWindow):#¿Õµ÷¿ØÖÆÃæ°å½çÃæ
     def initUI(self):
         self.setObjectName("MainWindow")
         self.resize(800, 600)
+        self.centralwidget = QtWidgets.QWidget(self)
+        self.centralwidget.setObjectName("centralwidget")
         window_pale = QtGui.QPalette()
         window_pale.setBrush(self.backgroundRole(), QtGui.QBrush(QtGui.QPixmap("./room.jpg")))
         self.setPalette(window_pale)
-        self.centralwidget = QtWidgets.QWidget(self)
-        self.centralwidget.setObjectName("centralwidget")
         self.change_tem = QtWidgets.QSpinBox(self.centralwidget)
-        self.change_tem.setGeometry(QtCore.QRect(130, 100, 381, 91))
+        self.change_tem.setGeometry(QtCore.QRect(130, 130, 381, 91))
         font = QtGui.QFont()
-        font.setFamily("ºÚÌå")
+        font.setFamily("é»‘ä½“")
         font.setPointSize(32)
         self.change_tem.setFont(font)
         self.change_tem.setObjectName("change_tem")
         self.change_wind = QtWidgets.QSpinBox(self.centralwidget)
-        self.change_wind.setGeometry(QtCore.QRect(130, 220, 381, 91))
+        self.change_wind.setGeometry(QtCore.QRect(130, 270, 381, 91))
         font = QtGui.QFont()
-        font.setFamily("ºÚÌå")
+        font.setFamily("é»‘ä½“")
         font.setPointSize(32)
         self.change_wind.setFont(font)
         self.change_wind.setObjectName("change_wind")
         self.air_on = QtWidgets.QPushButton(self.centralwidget)
-        self.air_on.setGeometry(QtCore.QRect(580, 110, 151, 61))
+        self.air_on.setGeometry(QtCore.QRect(580, 130, 151, 61))
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(12)
         self.air_on.setFont(font)
         self.air_on.setObjectName("air_on")
         self.label_1 = QtWidgets.QLabel(self.centralwidget)
-        self.label_1.setGeometry(QtCore.QRect(30, 120, 81, 41))
+        self.label_1.setGeometry(QtCore.QRect(20, 150, 81, 41))
+        self.label_1.setStyleSheet("color:white");
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(15)
         self.label_1.setFont(font)
         self.label_1.setObjectName("label_1")
-        self.label_1.setStyleSheet("color:white");
         self.cost_now = QtWidgets.QTextBrowser(self.centralwidget)
-        self.cost_now.setGeometry(QtCore.QRect(140, 360, 371, 91))
+        self.cost_now.setGeometry(QtCore.QRect(130, 400, 371, 91))
         self.cost_now.setObjectName("cost_now")
         self.air_off = QtWidgets.QPushButton(self.centralwidget)
-        self.air_off.setGeometry(QtCore.QRect(580, 210, 151, 61))
+        self.air_off.setGeometry(QtCore.QRect(580, 230, 151, 61))
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(12)
         self.air_off.setFont(font)
         self.air_off.setObjectName("air_off")
         self.back = QtWidgets.QPushButton(self.centralwidget)
-        self.back.setGeometry(QtCore.QRect(580, 390, 151, 61))
+        self.back.setGeometry(QtCore.QRect(580, 430, 151, 61))
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(12)
         self.back.setFont(font)
         self.back.setObjectName("back")
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
-        self.label_3.setGeometry(QtCore.QRect(30, 250, 81, 41))
+        self.label_3.setGeometry(QtCore.QRect(20, 290, 81, 41))
+        self.label_3.setStyleSheet("color:white");
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(15)
         self.label_3.setFont(font)
         self.label_3.setObjectName("label_3")
-        self.label_3.setStyleSheet("color:white");
         self.label_4 = QtWidgets.QLabel(self.centralwidget)
-        self.label_4.setGeometry(QtCore.QRect(30, 390, 81, 41))
+        self.label_4.setGeometry(QtCore.QRect(20, 420, 81, 41))
+        self.label_4.setStyleSheet("color:white");
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(15)
         self.label_4.setFont(font)
         self.label_4.setObjectName("label_4")
-        self.label_4.setStyleSheet("color:white");
         self.check_cost = QtWidgets.QPushButton(self.centralwidget)
-        self.check_cost.setGeometry(QtCore.QRect(580, 300, 151, 61))
+        self.check_cost.setGeometry(QtCore.QRect(580, 330, 151, 61))
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(12)
         self.check_cost.setFont(font)
         self.check_cost.setObjectName("check_cost")
+        self.label_5 = QtWidgets.QLabel(self.centralwidget)
+        self.label_5.setGeometry(QtCore.QRect(400, 20, 111, 41))
+        font = QtGui.QFont()
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
+        font.setPointSize(15)
+        self.label_5.setFont(font)
+        self.label_5.setObjectName("label_5")
+        self.label_6 = QtWidgets.QLabel(self.centralwidget)
+        self.label_6.setGeometry(QtCore.QRect(400, 70, 111, 41))
+        font = QtGui.QFont()
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
+        font.setPointSize(15)
+        self.label_6.setFont(font)
+        self.label_6.setObjectName("label_6")
+        self.lcd_if_wind = QtWidgets.QLCDNumber(self.centralwidget)
+        self.lcd_if_wind.setGeometry(QtCore.QRect(520, 70, 101, 41))
+        self.lcd_if_wind.setObjectName("lcd_ifwind")
+        self.lcd_if_on = QtWidgets.QLCDNumber(self.centralwidget)
+        self.lcd_if_on.setGeometry(QtCore.QRect(520, 20, 101, 41))
+        self.lcd_if_on.setObjectName("lcd_ifon")
+        self.lcd_room_id = QtWidgets.QLCDNumber(self.centralwidget)
+        self.lcd_room_id.setGeometry(QtCore.QRect(220, 20, 101, 41))
+        self.lcd_room_id.setObjectName("lcd_roomid")
+        self.label_7 = QtWidgets.QLabel(self.centralwidget)
+        self.label_7.setGeometry(QtCore.QRect(130, 20, 111, 41))
+        font = QtGui.QFont()
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
+        font.setPointSize(15)
+        self.label_7.setFont(font)
+        self.label_7.setObjectName("label_7")
+        self.label_8 = QtWidgets.QLabel(self.centralwidget)
+        self.label_8.setGeometry(QtCore.QRect(110, 70, 111, 41))
+        font = QtGui.QFont()
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
+        font.setPointSize(15)
+        self.label_8.setFont(font)
+        self.label_8.setObjectName("label_8")
+        self.lcd_roomtem = QtWidgets.QLCDNumber(self.centralwidget)
+        self.lcd_roomtem.setGeometry(QtCore.QRect(220, 70, 101, 41))
+        self.lcd_roomtem.setObjectName("lcd_roomtem")
         self.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(self)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 26))
+        self.menubar.setObjectName("menubar")
+        self.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(self)
+        self.statusbar.setObjectName("statusbar")
+        self.setStatusBar(self.statusbar)
+
         self.retranslateUi(self)
         QtCore.QMetaObject.connectSlotsByName(self)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "¿Õµ÷×Ó»ú¿ØÖÆÃæ°å"))
-        self.air_on.setText(_translate("MainWindow", "¿ª»ú"))
-        self.label_1.setText(_translate("MainWindow", "ÎÂ¶È"))
-        self.air_off.setText(_translate("MainWindow", "¹Ø»ú"))
-        self.back.setText(_translate("MainWindow", "·µ»Ø"))
-        self.label_3.setText(_translate("MainWindow", "·çËÙ"))
-        self.label_4.setText(_translate("MainWindow", "Ïû·Ñ"))
-        self.check_cost.setText(_translate("MainWindow", "²é¿´µ±Ç°Ïû·Ñ"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "ç©ºè°ƒé¢æ¿"))
+        self.air_on.setText(_translate("MainWindow", "å¼€æœº"))
+        self.label_1.setText(_translate("MainWindow", "æ¸©åº¦"))
+        self.air_off.setText(_translate("MainWindow", "å…³æœº"))
+        self.back.setText(_translate("MainWindow", "è¿”å›"))
+        self.label_3.setText(_translate("MainWindow", "é£é€Ÿ"))
+        self.label_4.setText(_translate("MainWindow", "æ¶ˆè´¹"))
+        self.check_cost.setText(_translate("MainWindow", "æŸ¥çœ‹å½“å‰æ¶ˆè´¹"))
+        self.label_5.setText(_translate("MainWindow", "å¼€å…³çŠ¶æ€"))
+        self.label_6.setText(_translate("MainWindow", "é€é£çŠ¶æ€"))
+        self.label_7.setText(_translate("MainWindow", "æˆ¿é—´å·"))
+        self.label_8.setText(_translate("MainWindow", "æˆ¿é—´æ¸©åº¦"))
+        #self.room_id.setDigitCount(1)
+        self.lcd_room_id.display(1)
+        self.air_on.clicked.connect(self.f1)
+        self.air_off.clicked.connect(self.f2)
+        self.change_tem.setRange(18,30)
+        self.change_tem.setValue(26)
+        self.change_wind.setRange(0,2)
+        self.change_wind.setValue(0)
+        self.change_tem.valueChanged.connect(self.f3)
+        self.change_wind.valueChanged.connect(self.f4)
+        self.back.clicked.connect(self.f5)
+
+    def f1(self):#ç©ºè°ƒå¼€å¯
+        user.air_on(services,air_subs,scheduler,int(self.lcd_room_id.value()))
+        print("æˆ¿é—´%dç©ºè°ƒå¼€å¯"%int(self.lcd_room_id.value()))
+        self.lcd_if_on.display(1)
+        self.lcd_if_wind.display(1)
+        air_main.air_on_num+=1
+        air_main.wind_on_num+=1
+
+    def f2(self):#ç©ºè°ƒå…³é—­
+        user.air_off(services,air_subs,int(self.lcd_room_id.value()))
+        print("æˆ¿é—´%dç©ºè°ƒå…³é—­" % int(self.lcd_room_id.value()))
+        self.lcd_if_on.display(0)
+        self.lcd_if_wind.display(0)
+        air_main.air_on_num -= 1
+        air_main.wind_on_num -= 1
+
+    def f3(self):#è°ƒæ¸©åº¦
+        if(self.lcd_if_on.value()==1):
+            user.change_tem(self.change_tem.value(),air_subs,services,int(self.lcd_room_id.value()))
+            print("æˆ¿é—´%dç©ºè°ƒæ¸©åº¦è°ƒèŠ‚æˆåŠŸ" % int(self.lcd_room_id.value()))
+            print(air_subs[int(self.lcd_room_id.value())-1].tem)
+
+    def f4(self):#è°ƒé£é€Ÿ
+        if(self.lcd_if_on.value()==1):
+            user.change_wind(self.change_wind.value(),air_subs,services,scheduler,int(self.lcd_room_id.value()))
+            print("æˆ¿é—´%dç©ºè°ƒé£é€Ÿè°ƒèŠ‚æˆåŠŸ" % int(self.lcd_room_id.value()))
+            print(air_subs[int(self.lcd_room_id.value())-1].windmode)
+
+    def f5(self):
+        move_select.show()
+        air_monitor.close()
 
     def closewin(self):
         self.close()
 
-class Admin_select(QMainWindow):#¹ÜÀíÔ±Ñ¡Ôñ½çÃæ
+
+class Admin_select(QMainWindow):#ç®¡ç†å‘˜é€‰æ‹©ç•Œé¢
     def __init__(self):
         super().__init__()
         self.initUI()
 
     def initUI(self):
         self.setObjectName("MainWindow")
-        self.resize(800, 600)
+        self.resize(800, 557)
+        self.centralwidget = QtWidgets.QWidget(self)
+        self.centralwidget.setObjectName("centralwidget")
         window_pale = QtGui.QPalette()
         window_pale.setBrush(self.backgroundRole(), QtGui.QBrush(QtGui.QPixmap("./hall.jpg")))
         self.setPalette(window_pale)
-        self.centralwidget = QtWidgets.QWidget(self)
-        self.centralwidget.setObjectName("centralwidget")
         self.welcome1 = QtWidgets.QLabel(self.centralwidget)
         self.welcome1.setGeometry(QtCore.QRect(280, 80, 241, 101))
-        self.welcome1.setStyleSheet("color:white");
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(18)
         self.welcome1.setFont(font)
         self.welcome1.setObjectName("welcome1")
         self.check_has = QtWidgets.QPushButton(self.centralwidget)
-        self.check_has.setGeometry(QtCore.QRect(270, 210, 251, 41))
+        self.check_has.setGeometry(QtCore.QRect(270, 250, 251, 41))
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(14)
         self.check_has.setFont(font)
         self.check_has.setObjectName("check_has")
         self.check_ras = QtWidgets.QPushButton(self.centralwidget)
-        self.check_ras.setGeometry(QtCore.QRect(270, 280, 251, 41))
+        self.check_ras.setGeometry(QtCore.QRect(270, 300, 251, 41))
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(14)
         self.check_ras.setFont(font)
         self.check_ras.setObjectName("check_ras")
         self.exit = QtWidgets.QPushButton(self.centralwidget)
         self.exit.setGeometry(QtCore.QRect(270, 350, 251, 41))
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(14)
         self.exit.setFont(font)
         self.exit.setObjectName("exit")
+        self.initair = QtWidgets.QPushButton(self.centralwidget)
+        self.initair.setGeometry(QtCore.QRect(270, 200, 251, 41))
+        font = QtGui.QFont()
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
+        font.setPointSize(14)
+        self.initair.setFont(font)
+        self.initair.setObjectName("initair")
         self.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(self)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 26))
+        self.menubar.setObjectName("menubar")
+        self.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(self)
+        self.statusbar.setObjectName("statusbar")
+        self.setStatusBar(self.statusbar)
         self.retranslateUi(self)
         QtCore.QMetaObject.connectSlotsByName(self)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "ÄúºÃ£¬¹ÜÀíÔ±"))
-        self.welcome1.setText(_translate("MainWindow", "ÇëÑ¡Ôñ·şÎñÀàĞÍ"))
-        self.check_has.setText(_translate("MainWindow", "²é¿´¾Æµê¿Õµ÷×´Ì¬"))
-        self.check_ras.setText(_translate("MainWindow", "²é¿´·¿¼ä¿Õµ÷×´Ì¬"))
-        self.exit.setText(_translate("MainWindow", "ÍË³öÏµÍ³"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.welcome1.setText(_translate("MainWindow", "è¯·é€‰æ‹©æœåŠ¡ç±»å‹"))
+        self.check_has.setText(_translate("MainWindow", "æŸ¥çœ‹é…’åº—ç©ºè°ƒçŠ¶æ€"))
+        self.check_ras.setText(_translate("MainWindow", "æŸ¥çœ‹æˆ¿é—´ç©ºè°ƒçŠ¶æ€"))
+        self.exit.setText(_translate("MainWindow", "é€€å‡ºç³»ç»Ÿ"))
+        self.initair.setText(_translate("MainWindow", "åˆå§‹åŒ–ç©ºè°ƒ"))
+        self.initair.clicked.connect(self.f1)
+        self.check_has.clicked.connect(self.f2)
+        self.check_ras.clicked.connect(self.f3)
+        self.exit.clicked.connect(self.f4)
+
+    def f1(self):
+        for i in range(0,5):
+            admin.init_air(air_main, 0, 0, 0, air_subs, 26, 1, 0, 0, 0)
+
+        print("init...")
+        print("ç©ºè°ƒä¸»æœºåˆå§‹åŒ–æˆåŠŸ")
+        print("å½“å‰å­æœºå¼€å¯æ•°:%d" % air_main.air_on_num)
+        print("å½“å‰å­æœºé€é£æ•°:%d" % air_main.wind_on_num)
+        print("å½“å‰å­æœºç­‰å¾…æ•°:%d" % air_main.wait_on_num)
+        print()
+
+        for i in range(0,5):
+            print("ç©ºè°ƒå­æœºåˆå§‹åŒ–æˆåŠŸ")
+            print("å­æœºå¯¹åº”æˆ¿é—´å·:%d" % air_subs[i].room_id)
+            print("å­æœºæ˜¯å¦å¼€å¯:%d" % air_subs[i].if_on)
+            print("å­æœºæ˜¯å¦é€é£:%d" % air_subs[i].if_wind)
+            print("å­æœºè®¾å®šæ¸©åº¦:%d" % air_subs[i].tem)
+            print("å­æœºè®¾å®šé£é€Ÿ:%d" % air_subs[i].windmode)
+            print("å­æœºå½“å‰è®¡è´¹:%d" % air_subs[i].cost)
+            print()
+
+        return air_main,air_subs
+
+    def f2(self):
+        hotel_air_state.show()
+        admin_select.closewin()
+
+    def f3(self):
+        room_air_state.show()
+        admin_select.closewin()
+
+    def f4(self):
+        welcome.show()
+        admin_select.closewin()
 
     def closewin(self):
         self.close()
 
-class Hotel_air_state(QMainWindow):#²éÑ¯¾Æµê¿Õµ÷×´Ì¬½çÃæ
+class Hotel_air_state(QMainWindow):#æŸ¥è¯¢é…’åº—ç©ºè°ƒçŠ¶æ€ç•Œé¢
     def __init__(self):
         super().__init__()
         self.initUI()
@@ -540,7 +802,7 @@ class Hotel_air_state(QMainWindow):#²éÑ¯¾Æµê¿Õµ÷×´Ì¬½çÃæ
         self.label_1.setGeometry(QtCore.QRect(290, 20, 191, 121))
         self.label_1.setStyleSheet("color:red");
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(18)
         self.label_1.setFont(font)
         self.label_1.setObjectName("label_1")
@@ -557,7 +819,7 @@ class Hotel_air_state(QMainWindow):#²éÑ¯¾Æµê¿Õµ÷×´Ì¬½çÃæ
         self.label_2.setGeometry(QtCore.QRect(150, 140, 191, 101))
         self.label_2.setStyleSheet("color:white");
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(18)
         self.label_2.setFont(font)
         self.label_2.setObjectName("label_2")
@@ -565,7 +827,7 @@ class Hotel_air_state(QMainWindow):#²éÑ¯¾Æµê¿Õµ÷×´Ì¬½çÃæ
         self.label_3.setGeometry(QtCore.QRect(150, 240, 191, 101))
         self.label_3.setStyleSheet("color:white");
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(18)
         self.label_3.setFont(font)
         self.label_3.setObjectName("label_3")
@@ -573,21 +835,21 @@ class Hotel_air_state(QMainWindow):#²éÑ¯¾Æµê¿Õµ÷×´Ì¬½çÃæ
         self.label_4.setGeometry(QtCore.QRect(150, 340, 191, 101))
         self.label_4.setStyleSheet("color:white");
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(18)
         self.label_4.setFont(font)
         self.label_4.setObjectName("label_4")
         self.check = QtWidgets.QPushButton(self.centralwidget)
         self.check.setGeometry(QtCore.QRect(190, 470, 171, 51))
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(14)
         self.check.setFont(font)
         self.check.setObjectName("check")
         self.back = QtWidgets.QPushButton(self.centralwidget)
         self.back.setGeometry(QtCore.QRect(400, 470, 171, 51))
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(14)
         self.back.setFont(font)
         self.back.setObjectName("back")
@@ -597,18 +859,33 @@ class Hotel_air_state(QMainWindow):#²éÑ¯¾Æµê¿Õµ÷×´Ì¬½çÃæ
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "²éÑ¯¾Æµê¿Õµ÷×´Ì¬"))
-        self.label_1.setText(_translate("MainWindow", "¾Æµê¿Õµ÷ĞÅÏ¢"))
-        self.label_2.setText(_translate("MainWindow", "¿ªÆô¿Õµ÷Êı"))
-        self.label_3.setText(_translate("MainWindow", "ËÍ·ç¿Õµ÷Êı"))
-        self.label_4.setText(_translate("MainWindow", "µÈ´ıµ÷¶ÈÊı"))
-        self.check.setText(_translate("MainWindow", "²éÑ¯"))
-        self.back.setText(_translate("MainWindow", "·µ»Ø"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "æŸ¥è¯¢é…’åº—ç©ºè°ƒçŠ¶æ€"))
+        self.label_1.setText(_translate("MainWindow", "é…’åº—ç©ºè°ƒä¿¡æ¯"))
+        self.label_2.setText(_translate("MainWindow", "å¼€å¯ç©ºè°ƒæ•°"))
+        self.label_3.setText(_translate("MainWindow", "é€é£ç©ºè°ƒæ•°"))
+        self.label_4.setText(_translate("MainWindow", "ç­‰å¾…è°ƒåº¦æ•°"))
+        self.check.setText(_translate("MainWindow", "æŸ¥è¯¢"))
+        self.back.setText(_translate("MainWindow", "è¿”å›"))
+        self.check.clicked.connect(self.print_hotel_air)
+        self.back.clicked.connect(self.f1)
+
+    def print_hotel_air(self):
+        self.lcd_windonnum.display(air_main.wind_on_num)
+        self.lcd_aironnum.display(air_main.air_on_num)
+        self.lcd_waitnum.display(air_main.wait_on_num)
+        print("é…’åº—ç©ºè°ƒä¿¡æ¯æŸ¥è¯¢æˆåŠŸ")
+        print("å­æœºå¼€å¯æ•°:%d"%air_main.air_on_num)
+        print("å­æœºé€é£æ•°:%d"%air_main.wind_on_num)
+        print("å­æœºç­‰å¾…æ•°:%d"%air_main.wait_on_num)
+
+    def f1(self):
+        admin_select.show()
+        hotel_air_state.closewin()
 
     def closewin(self):
         self.close()
 
-class Room_air_state(QMainWindow):#²éÑ¯·¿¼ä¿Õµ÷×´Ì¬½çÃæ
+class Room_air_state(QMainWindow):#æŸ¥è¯¢æˆ¿é—´ç©ºè°ƒçŠ¶æ€ç•Œé¢
     def __init__(self):
         super().__init__()
         self.initUI()
@@ -625,7 +902,7 @@ class Room_air_state(QMainWindow):#²éÑ¯·¿¼ä¿Õµ÷×´Ì¬½çÃæ
         self.label1.setGeometry(QtCore.QRect(260, -10, 271, 131))
         self.label1.setStyleSheet("color:red");
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(18)
         self.label1.setFont(font)
         self.label1.setObjectName("label1")
@@ -635,7 +912,7 @@ class Room_air_state(QMainWindow):#²éÑ¯·¿¼ä¿Õµ÷×´Ì¬½çÃæ
         self.roomselect = QtWidgets.QComboBox(self.centralwidget)
         self.roomselect.setGeometry(QtCore.QRect(70, 190, 211, 41))
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(14)
         self.roomselect.setFont(font)
         self.roomselect.setObjectName("roomselect")
@@ -648,7 +925,7 @@ class Room_air_state(QMainWindow):#²éÑ¯·¿¼ä¿Õµ÷×´Ì¬½çÃæ
         self.label_2.setGeometry(QtCore.QRect(130, 100, 101, 81))
         self.label_2.setStyleSheet("color:white");
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(18)
         self.label_2.setFont(font)
         self.label_2.setObjectName("label_2")
@@ -668,7 +945,7 @@ class Room_air_state(QMainWindow):#²éÑ¯·¿¼ä¿Õµ÷×´Ì¬½çÃæ
         self.label_3.setGeometry(QtCore.QRect(390, 80, 191, 121))
         self.label_3.setStyleSheet("color:white");
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(18)
         self.label_3.setFont(font)
         self.label_3.setObjectName("label_3")
@@ -676,7 +953,7 @@ class Room_air_state(QMainWindow):#²éÑ¯·¿¼ä¿Õµ÷×´Ì¬½çÃæ
         self.label_4.setGeometry(QtCore.QRect(390, 150, 191, 121))
         self.label_4.setStyleSheet("color:white");
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(18)
         self.label_4.setFont(font)
         self.label_4.setObjectName("label_4")
@@ -684,7 +961,7 @@ class Room_air_state(QMainWindow):#²éÑ¯·¿¼ä¿Õµ÷×´Ì¬½çÃæ
         self.label_5.setGeometry(QtCore.QRect(390, 220, 191, 121))
         self.label_5.setStyleSheet("color:white");
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(18)
         self.label_5.setFont(font)
         self.label_5.setObjectName("label_5")
@@ -692,7 +969,7 @@ class Room_air_state(QMainWindow):#²éÑ¯·¿¼ä¿Õµ÷×´Ì¬½çÃæ
         self.label_7.setGeometry(QtCore.QRect(390, 360, 191, 121))
         self.label_7.setStyleSheet("color:white");
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(18)
         self.label_7.setFont(font)
         self.label_7.setObjectName("label_7")
@@ -700,21 +977,21 @@ class Room_air_state(QMainWindow):#²éÑ¯·¿¼ä¿Õµ÷×´Ì¬½çÃæ
         self.label_6.setGeometry(QtCore.QRect(390, 290, 191, 121))
         self.label_6.setStyleSheet("color:white");
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(18)
         self.label_6.setFont(font)
         self.label_6.setObjectName("label_6")
         self.back = QtWidgets.QPushButton(self.centralwidget)
         self.back.setGeometry(QtCore.QRect(90, 380, 171, 51))
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(14)
         self.back.setFont(font)
         self.back.setObjectName("back")
         self.check = QtWidgets.QPushButton(self.centralwidget)
         self.check.setGeometry(QtCore.QRect(90, 300, 171, 51))
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(14)
         self.check.setFont(font)
         self.check.setObjectName("check")
@@ -724,26 +1001,49 @@ class Room_air_state(QMainWindow):#²éÑ¯·¿¼ä¿Õµ÷×´Ì¬½çÃæ
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "²éÑ¯·¿¼ä¿Õµ÷×´Ì¬"))
-        self.label1.setText(_translate("MainWindow", "·¿¼ä¿Õµ÷ĞÅÏ¢²éÑ¯"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "æŸ¥è¯¢æˆ¿é—´ç©ºè°ƒçŠ¶æ€"))
+        self.label1.setText(_translate("MainWindow", "æˆ¿é—´ç©ºè°ƒä¿¡æ¯æŸ¥è¯¢"))
         self.roomselect.setItemText(0, _translate("MainWindow", "1"))
         self.roomselect.setItemText(1, _translate("MainWindow", "2"))
         self.roomselect.setItemText(2, _translate("MainWindow", "3"))
         self.roomselect.setItemText(3, _translate("MainWindow", "4"))
         self.roomselect.setItemText(4, _translate("MainWindow", "5"))
-        self.label_2.setText(_translate("MainWindow", "·¿¼äºÅ"))
-        self.label_3.setText(_translate("MainWindow", "ÊÇ·ñ¿ªÆô"))
-        self.label_4.setText(_translate("MainWindow", "ÊÇ·ñËÍ·ç"))
-        self.label_5.setText(_translate("MainWindow", "Éè¶¨ÎÂ¶È"))
-        self.label_7.setText(_translate("MainWindow", "µ±Ç°Ïû·Ñ"))
-        self.label_6.setText(_translate("MainWindow", "Éè¶¨·çËÙ"))
-        self.back.setText(_translate("MainWindow", "·µ»Ø"))
-        self.check.setText(_translate("MainWindow", "²éÑ¯"))
+        self.label_2.setText(_translate("MainWindow", "æˆ¿é—´å·"))
+        self.label_3.setText(_translate("MainWindow", "æ˜¯å¦å¼€å¯"))
+        self.label_4.setText(_translate("MainWindow", "æ˜¯å¦é€é£"))
+        self.label_5.setText(_translate("MainWindow", "è®¾å®šæ¸©åº¦"))
+        self.label_7.setText(_translate("MainWindow", "å½“å‰æ¶ˆè´¹"))
+        self.label_6.setText(_translate("MainWindow", "è®¾å®šé£é€Ÿ"))
+        self.back.setText(_translate("MainWindow", "è¿”å›"))
+        self.check.setText(_translate("MainWindow", "æŸ¥è¯¢"))
+        self.check.clicked.connect(self.room_choice)
+        self.back.clicked.connect(self.f1)
+
+    def room_choice(self):#é€‰æ‹©ä¸åŒçš„æˆ¿é—´æ¥åšçŠ¶æ€çš„æŸ¥è¯¢
+        room_id=self.roomselect.currentText()
+        self.lcd_ifair.display(air_subs[int(room_id)-1].if_on)
+        self.lcd_ifwind.display(air_subs[int(room_id)-1].if_wind)
+        self.lcd_tem.display(air_subs[int(room_id)-1].tem)
+        self.lcd_windmode.display(air_subs[int(room_id)-1].windmode)
+        self.lcd_cost.display(air_subs[int(room_id)-1].cost)
+        print("æˆ¿é—´%dç©ºè°ƒä¿¡æ¯æŸ¥è¯¢æˆåŠŸ" %int(room_id))
+        print("å­æœºå¯¹åº”æˆ¿é—´å·:%d" % air_subs[int(room_id)-1].room_id)
+        print("å­æœºæ˜¯å¦å¼€å¯:%d" % air_subs[int(room_id)-1].if_on)
+        print("å­æœºæ˜¯å¦é€é£:%d" % air_subs[int(room_id)-1].if_wind)
+        print("å­æœºè®¾å®šæ¸©åº¦:%d" % air_subs[int(room_id)-1].tem)
+        print("å­æœºè®¾å®šé£é€Ÿ:%d" % air_subs[int(room_id)-1].windmode)
+        print("å­æœºå½“å‰è®¡è´¹:%d" % air_subs[int(room_id)-1].cost)
+        print()
+
+    def f1(self):
+        admin_select.show()
+        room_air_state.closewin()
+
 
     def closewin(self):
         self.close()
 
-class Cashier_select(QMainWindow):#¾ÆµêÇ°Ì¨Ñ¡Ôñ½çÃæ
+class Cashier_select(QMainWindow):#é…’åº—å‰å°é€‰æ‹©ç•Œé¢
     def __init__(self):
         super().__init__()
         self.initUI()
@@ -760,39 +1060,62 @@ class Cashier_select(QMainWindow):#¾ÆµêÇ°Ì¨Ñ¡Ôñ½çÃæ
         self.label_1.setGeometry(QtCore.QRect(290, 130, 221, 71))
         self.label_1.setStyleSheet("color:white");
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(18)
         self.label_1.setFont(font)
         self.label_1.setObjectName("label_1")
         self.check_bill = QtWidgets.QPushButton(self.centralwidget)
         self.check_bill.setGeometry(QtCore.QRect(270, 240, 251, 41))
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(14)
         self.check_bill.setFont(font)
         self.check_bill.setObjectName("check_bill")
         self.exit = QtWidgets.QPushButton(self.centralwidget)
-        self.exit.setGeometry(QtCore.QRect(270, 310, 251, 41))
+        self.exit.setGeometry(QtCore.QRect(270, 340, 251, 41))
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(14)
         self.exit.setFont(font)
         self.exit.setObjectName("exit")
+        self.check_detail = QtWidgets.QPushButton(self.centralwidget)
+        self.check_detail.setGeometry(QtCore.QRect(270, 290, 251, 41))
+        font = QtGui.QFont()
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
+        font.setPointSize(14)
+        self.check_detail.setFont(font)
+        self.check_detail.setObjectName("check_detail")
         self.setCentralWidget(self.centralwidget)
         self.retranslateUi(self)
         QtCore.QMetaObject.connectSlotsByName(self)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "ÄúºÃ£¬¾ÆµêÇ°Ì¨"))
-        self.label_1.setText(_translate("MainWindow", "ÇëÑ¡Ôñ·şÎñÀàĞÍ"))
-        self.check_bill.setText(_translate("MainWindow", "²é¿´²¢´òÓ¡ÕËµ¥"))
-        self.exit.setText(_translate("MainWindow", "ÍË³öÏµÍ³"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "æ‚¨å¥½ï¼Œé…’åº—å‰å°"))
+        self.label_1.setText(_translate("MainWindow", "è¯·é€‰æ‹©æœåŠ¡ç±»å‹"))
+        self.check_bill.setText(_translate("MainWindow", "æŸ¥çœ‹å¹¶æ‰“å°è´¦å•"))
+        self.check_detail.setText(_translate("MainWindow", "æŸ¥çœ‹å¹¶æ‰“å°è¯¦å•"))
+        self.exit.setText(_translate("MainWindow", "é€€å‡ºç³»ç»Ÿ"))
+        self.check_bill.clicked.connect(self.f1)
+        self.check_detail.clicked.connect(self.f2)
+        self.exit.clicked.connect(self.f3)
+
+    def f1(self):
+        check_bill.show()
+        cashier_select.closewin()
+
+    def f2(self):
+        check_detail.show()
+        cashier_select.closewin()
+
+    def f3(self):
+        welcome.show()
+        cashier_select.closewin()
 
     def closewin(self):
         self.close()
 
-class Check_bill(QMainWindow):#ÕËµ¥²éÑ¯½çÃæ
+class Check_bill(QMainWindow):#è´¦å•æŸ¥è¯¢ç•Œé¢
     def __init__(self):
         super().__init__()
         self.initUI()
@@ -809,7 +1132,7 @@ class Check_bill(QMainWindow):#ÕËµ¥²éÑ¯½çÃæ
         self.label_1.setGeometry(QtCore.QRect(340, 10, 141, 111))
         self.label_1.setStyleSheet("color:red");
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(18)
         self.label_1.setFont(font)
         self.label_1.setObjectName("label_1")
@@ -819,7 +1142,7 @@ class Check_bill(QMainWindow):#ÕËµ¥²éÑ¯½çÃæ
         self.roomselect = QtWidgets.QComboBox(self.centralwidget)
         self.roomselect.setGeometry(QtCore.QRect(130, 130, 211, 41))
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(14)
         self.roomselect.setFont(font)
         self.roomselect.setObjectName("roomselect")
@@ -832,7 +1155,7 @@ class Check_bill(QMainWindow):#ÕËµ¥²éÑ¯½çÃæ
         self.label_2.setGeometry(QtCore.QRect(20, 110, 101, 81))
         self.label_2.setStyleSheet("color:white");
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(18)
         self.label_2.setFont(font)
         self.label_2.setObjectName("label_2")
@@ -846,7 +1169,7 @@ class Check_bill(QMainWindow):#ÕËµ¥²éÑ¯½çÃæ
         self.label_3.setGeometry(QtCore.QRect(420, 110, 191, 121))
         self.label_3.setStyleSheet("color:white");
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(18)
         self.label_3.setFont(font)
         self.label_3.setObjectName("label_3")
@@ -854,7 +1177,7 @@ class Check_bill(QMainWindow):#ÕËµ¥²éÑ¯½çÃæ
         self.label_4.setGeometry(QtCore.QRect(420, 210, 191, 121))
         self.label_4.setStyleSheet("color:white");
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(18)
         self.label_4.setFont(font)
         self.label_4.setObjectName("label_4")
@@ -862,21 +1185,21 @@ class Check_bill(QMainWindow):#ÕËµ¥²éÑ¯½çÃæ
         self.label_5.setGeometry(QtCore.QRect(390, 320, 191, 121))
         self.label_5.setStyleSheet("color:white");
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(18)
         self.label_5.setFont(font)
         self.label_5.setObjectName("label_5")
         self.back = QtWidgets.QPushButton(self.centralwidget)
         self.back.setGeometry(QtCore.QRect(90, 420, 171, 51))
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(14)
         self.back.setFont(font)
         self.back.setObjectName("back")
         self.check = QtWidgets.QPushButton(self.centralwidget)
         self.check.setGeometry(QtCore.QRect(90, 300, 171, 51))
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(14)
         self.check.setFont(font)
         self.check.setObjectName("check")
@@ -884,14 +1207,14 @@ class Check_bill(QMainWindow):#ÕËµ¥²éÑ¯½çÃæ
         self.label_8.setGeometry(QtCore.QRect(20, 180, 101, 81))
         self.label_8.setStyleSheet("color:white");
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(18)
         self.label_8.setFont(font)
         self.label_8.setObjectName("label_8")
         self.userselect = QtWidgets.QComboBox(self.centralwidget)
         self.userselect.setGeometry(QtCore.QRect(130, 200, 211, 41))
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(14)
         self.userselect.setFont(font)
         self.userselect.setObjectName("userselect")
@@ -903,7 +1226,7 @@ class Check_bill(QMainWindow):#ÕËµ¥²éÑ¯½çÃæ
         self.print = QtWidgets.QPushButton(self.centralwidget)
         self.print.setGeometry(QtCore.QRect(90, 360, 171, 51))
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(14)
         self.print.setFont(font)
         self.print.setObjectName("print")
@@ -913,31 +1236,228 @@ class Check_bill(QMainWindow):#ÕËµ¥²éÑ¯½çÃæ
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "ÕËµ¥²éÑ¯"))
-        self.label_1.setText(_translate("MainWindow", "ÕËµ¥²éÑ¯"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "è´¦å•æŸ¥è¯¢"))
+        self.label_1.setText(_translate("MainWindow", "è´¦å•æŸ¥è¯¢"))
         self.roomselect.setItemText(0, _translate("MainWindow", "1"))
         self.roomselect.setItemText(1, _translate("MainWindow", "2"))
         self.roomselect.setItemText(2, _translate("MainWindow", "3"))
         self.roomselect.setItemText(3, _translate("MainWindow", "4"))
         self.roomselect.setItemText(4, _translate("MainWindow", "5"))
-        self.label_2.setText(_translate("MainWindow", "·¿¼äºÅ"))
-        self.label_3.setText(_translate("MainWindow", "Èë×¡Ê±¼ä"))
-        self.label_4.setText(_translate("MainWindow", "ÍË·¿Ê±¼ä"))
-        self.label_5.setText(_translate("MainWindow", "×ÜÏû·Ñ½ğ¶î"))
-        self.back.setText(_translate("MainWindow", "·µ»Ø"))
-        self.check.setText(_translate("MainWindow", "²éÑ¯"))
-        self.label_8.setText(_translate("MainWindow", "¿Í»§ºÅ"))
+        self.label_2.setText(_translate("MainWindow", "æˆ¿é—´å·"))
+        self.label_3.setText(_translate("MainWindow", "å…¥ä½æ—¶é—´"))
+        self.label_4.setText(_translate("MainWindow", "é€€æˆ¿æ—¶é—´"))
+        self.label_5.setText(_translate("MainWindow", "æ€»æ¶ˆè´¹é‡‘é¢"))
+        self.back.setText(_translate("MainWindow", "è¿”å›"))
+        self.check.setText(_translate("MainWindow", "æŸ¥è¯¢"))
+        self.label_8.setText(_translate("MainWindow", "å®¢æˆ·å·"))
         self.userselect.setItemText(0, _translate("MainWindow", "1"))
         self.userselect.setItemText(1, _translate("MainWindow", "2"))
         self.userselect.setItemText(2, _translate("MainWindow", "3"))
         self.userselect.setItemText(3, _translate("MainWindow", "4"))
         self.userselect.setItemText(4, _translate("MainWindow", "5"))
-        self.print.setText(_translate("MainWindow", "´òÓ¡"))
+        self.print.setText(_translate("MainWindow", "æ‰“å°"))
+        self.print.clicked.connect(self.print_bill)
+        self.back.clicked.connect(self.f1)
+
+    def print_bill(self):
+        print()
+        print("****è´¦å•ä¿¡æ¯****")
+        print("æˆ¿é—´å·:%d" %int(self.roomselect.currentText()))
+        print("å®¢æˆ·å·:%d" % int(self.userselect.currentText()))
+        print("å…¥ä½æ—¶é—´:%d"%int(self.lcd_btime.value()))
+        print("é€€æˆ¿æ—¶é—´:%d"%int(self.lcd_etime.value()))
+        print("æ€»æ¶ˆè´¹é‡‘é¢:%d"%int(self.lcd_cost_all.value()))
+        print("****************")
+
+    def f1(self):
+        cashier_select.show()
+        check_bill.closewin()
 
     def closewin(self):
         self.close()
 
-class Manager_select(QMainWindow):#¾­ÀíÑ¡Ôñ½çÃæ
+class Check_detail(QMainWindow):#è¯¦å•æŸ¥è¯¢ç•Œé¢
+    def __init__(self):
+        super().__init__()
+        self.initUI()
+
+    def initUI(self):
+        self.setObjectName("MainWindow")
+        self.resize(800, 600)
+        window_pale = QtGui.QPalette()
+        window_pale.setBrush(self.backgroundRole(), QtGui.QBrush(QtGui.QPixmap("./room.jpg")))
+        self.setPalette(window_pale)
+        self.centralwidget = QtWidgets.QWidget(self)
+        self.centralwidget.setObjectName("centralwidget")
+        self.label_1 = QtWidgets.QLabel(self.centralwidget)
+        self.label_1.setGeometry(QtCore.QRect(310, 0, 141, 111))
+        font = QtGui.QFont()
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
+        font.setPointSize(18)
+        self.label_1.setFont(font)
+        self.label_1.setObjectName("label_1")
+        self.label_1.setStyleSheet("color:red");
+        self.lcd_beginwind = QtWidgets.QLCDNumber(self.centralwidget)
+        self.lcd_beginwind.setGeometry(QtCore.QRect(570, 90, 171, 61))
+        self.lcd_beginwind.setObjectName("lcd_beginwind")
+        self.roomselect = QtWidgets.QComboBox(self.centralwidget)
+        self.roomselect.setGeometry(QtCore.QRect(130, 170, 211, 41))
+        font = QtGui.QFont()
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
+        font.setPointSize(14)
+        self.roomselect.setFont(font)
+        self.roomselect.setObjectName("roomselect")
+        self.roomselect.addItem("")
+        self.roomselect.addItem("")
+        self.roomselect.addItem("")
+        self.roomselect.addItem("")
+        self.roomselect.addItem("")
+        self.label_2 = QtWidgets.QLabel(self.centralwidget)
+        self.label_2.setGeometry(QtCore.QRect(20, 150, 101, 81))
+        self.label_2.setStyleSheet("color:white");
+        font = QtGui.QFont()
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
+        font.setPointSize(18)
+        self.label_2.setFont(font)
+        self.label_2.setObjectName("label_2")
+        self.lcd_endwind = QtWidgets.QLCDNumber(self.centralwidget)
+        self.lcd_endwind.setGeometry(QtCore.QRect(570, 170, 171, 61))
+        self.lcd_endwind.setObjectName("lcd_endwind")
+        self.lcd_windtime = QtWidgets.QLCDNumber(self.centralwidget)
+        self.lcd_windtime.setGeometry(QtCore.QRect(570, 240, 171, 61))
+        self.lcd_windtime.setObjectName("lcd_windtime")
+        self.label_3 = QtWidgets.QLabel(self.centralwidget)
+        self.label_3.setGeometry(QtCore.QRect(380, 60, 191, 121))
+        self.label_3.setStyleSheet("color:white");
+        font = QtGui.QFont()
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
+        font.setPointSize(18)
+        self.label_3.setFont(font)
+        self.label_3.setObjectName("label_3")
+        self.label_4 = QtWidgets.QLabel(self.centralwidget)
+        self.label_4.setGeometry(QtCore.QRect(380, 140, 191, 121))
+        self.label_4.setStyleSheet("color:white");
+        font = QtGui.QFont()
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
+        font.setPointSize(18)
+        self.label_4.setFont(font)
+        self.label_4.setObjectName("label_4")
+        self.label_5 = QtWidgets.QLabel(self.centralwidget)
+        self.label_5.setGeometry(QtCore.QRect(440, 280, 191, 121))
+        self.label_5.setStyleSheet("color:white");
+        font = QtGui.QFont()
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
+        font.setPointSize(18)
+        self.label_5.setFont(font)
+        self.label_5.setObjectName("label_5")
+        self.back = QtWidgets.QPushButton(self.centralwidget)
+        self.back.setGeometry(QtCore.QRect(90, 420, 171, 51))
+        font = QtGui.QFont()
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
+        font.setPointSize(14)
+        self.back.setFont(font)
+        self.back.setObjectName("back")
+        self.check = QtWidgets.QPushButton(self.centralwidget)
+        self.check.setGeometry(QtCore.QRect(90, 300, 171, 51))
+        font = QtGui.QFont()
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
+        font.setPointSize(14)
+        self.check.setFont(font)
+        self.check.setObjectName("check")
+        self.print = QtWidgets.QPushButton(self.centralwidget)
+        self.print.setGeometry(QtCore.QRect(90, 360, 171, 51))
+        font = QtGui.QFont()
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
+        font.setPointSize(14)
+        self.print.setFont(font)
+        self.print.setObjectName("print")
+        self.label_6 = QtWidgets.QLabel(self.centralwidget)
+        self.label_6.setGeometry(QtCore.QRect(410, 210, 191, 121))
+        self.label_6.setStyleSheet("color:white");
+        font = QtGui.QFont()
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
+        font.setPointSize(18)
+        self.label_6.setFont(font)
+        self.label_6.setObjectName("label_6")
+        self.label_7 = QtWidgets.QLabel(self.centralwidget)
+        self.label_7.setGeometry(QtCore.QRect(440, 350, 191, 121))
+        self.label_7.setStyleSheet("color:white");
+        font = QtGui.QFont()
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
+        font.setPointSize(18)
+        self.label_7.setFont(font)
+        self.label_7.setObjectName("label_7")
+        self.label_8 = QtWidgets.QLabel(self.centralwidget)
+        self.label_8.setGeometry(QtCore.QRect(440, 420, 191, 121))
+        self.label_8.setStyleSheet("color:white");
+        font = QtGui.QFont()
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
+        font.setPointSize(18)
+        self.label_8.setFont(font)
+        self.label_8.setObjectName("label_8")
+        self.lcd_windmode = QtWidgets.QLCDNumber(self.centralwidget)
+        self.lcd_windmode.setGeometry(QtCore.QRect(570, 310, 171, 61))
+        self.lcd_windmode.setObjectName("lcd_windmode")
+        self.lcd_costrate = QtWidgets.QLCDNumber(self.centralwidget)
+        self.lcd_costrate.setGeometry(QtCore.QRect(570, 380, 171, 61))
+        self.lcd_costrate.setObjectName("lcd_costrate")
+        self.lcd_cost = QtWidgets.QLCDNumber(self.centralwidget)
+        self.lcd_cost.setGeometry(QtCore.QRect(570, 450, 171, 61))
+        self.lcd_cost.setObjectName("lcd_cost")
+        self.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(self)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 26))
+        self.menubar.setObjectName("menubar")
+        self.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(self)
+        self.statusbar.setObjectName("statusbar")
+        self.setStatusBar(self.statusbar)
+        self.retranslateUi(self)
+        QtCore.QMetaObject.connectSlotsByName(self)
+
+    def retranslateUi(self, MainWindow):
+        _translate = QtCore.QCoreApplication.translate
+        MainWindow.setWindowTitle(_translate("MainWindow", "è¯¦å•æŸ¥è¯¢"))
+        self.label_1.setText(_translate("MainWindow", "è¯¦å•æŸ¥è¯¢"))
+        self.roomselect.setItemText(0, _translate("MainWindow", "1"))
+        self.roomselect.setItemText(1, _translate("MainWindow", "2"))
+        self.roomselect.setItemText(2, _translate("MainWindow", "3"))
+        self.roomselect.setItemText(3, _translate("MainWindow", "4"))
+        self.roomselect.setItemText(4, _translate("MainWindow", "5"))
+        self.label_2.setText(_translate("MainWindow", "æˆ¿é—´å·"))
+        self.label_3.setText(_translate("MainWindow", "å¼€å§‹é€é£æ—¶é—´"))
+        self.label_4.setText(_translate("MainWindow", "ç»“æŸé€é£æ—¶é—´"))
+        self.label_5.setText(_translate("MainWindow", "é£é€Ÿ"))
+        self.back.setText(_translate("MainWindow", "è¿”å›"))
+        self.check.setText(_translate("MainWindow", "æŸ¥è¯¢"))
+        self.print.setText(_translate("MainWindow", "æ‰“å°"))
+        self.label_6.setText(_translate("MainWindow", "é€é£æ—¶é•¿"))
+        self.label_7.setText(_translate("MainWindow", "è´¹ç‡"))
+        self.label_8.setText(_translate("MainWindow", "è´¹ç”¨"))
+        self.print.clicked.connect(self.print_detail)
+        self.back.clicked.connect(self.f1)
+
+    def print_detail(self):
+        print()
+        print("****è¯¦å•ä¿¡æ¯****")
+        print("æˆ¿é—´å·:%d" %int(self.roomselect.currentText()))
+        print("å¼€å§‹é€é£æ—¶é—´:%d" %int(self.lcd_beginwind.value()))
+        print("ç»“æŸé€é£æ—¶é—´:%d"%int(self.lcd_endwind.value()))
+        print("é€é£æ—¶é•¿:%d"%int(self.lcd_windtime.value()))
+        print("é£é€Ÿ:%d"%int(self.lcd_windmode.value()))
+        print("è´¹ç‡:%d"%int(self.lcd_costrate.value()))
+        print("è´¹ç”¨:%d"%int(self.lcd_cost.value()))
+        print("****************")
+
+    def f1(self):
+        cashier_select.show()
+        check_detail.closewin()
+
+
+    def closewin(self):
+        self.close()
+
+class Manager_select(QMainWindow):#ç»ç†é€‰æ‹©ç•Œé¢
     def __init__(self):
         super().__init__()
         self.initUI()
@@ -954,21 +1474,21 @@ class Manager_select(QMainWindow):#¾­ÀíÑ¡Ôñ½çÃæ
         self.label_1.setGeometry(QtCore.QRect(290, 120, 231, 91))
         self.label_1.setStyleSheet("color:white");
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(18)
         self.label_1.setFont(font)
         self.label_1.setObjectName("label_1")
         self.check_form = QtWidgets.QPushButton(self.centralwidget)
         self.check_form.setGeometry(QtCore.QRect(270, 250, 251, 41))
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(14)
         self.check_form.setFont(font)
         self.check_form.setObjectName("check_form")
         self.exit = QtWidgets.QPushButton(self.centralwidget)
         self.exit.setGeometry(QtCore.QRect(270, 320, 251, 41))
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(14)
         self.exit.setFont(font)
         self.exit.setObjectName("exit")
@@ -978,15 +1498,26 @@ class Manager_select(QMainWindow):#¾­ÀíÑ¡Ôñ½çÃæ
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "ÄúºÃ£¬¾Æµê¾­Àí"))
-        self.label_1.setText(_translate("MainWindow", "ÇëÑ¡Ôñ·şÎñÀàĞÍ"))
-        self.check_form.setText(_translate("MainWindow", "²é¿´²¢´òÓ¡±¨±í"))
-        self.exit.setText(_translate("MainWindow", "ÍË³öÏµÍ³"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "æ‚¨å¥½ï¼Œé…’åº—ç»ç†"))
+        self.label_1.setText(_translate("MainWindow", "è¯·é€‰æ‹©æœåŠ¡ç±»å‹"))
+        self.check_form.setText(_translate("MainWindow", "æŸ¥çœ‹å¹¶æ‰“å°æŠ¥è¡¨"))
+        self.exit.setText(_translate("MainWindow", "é€€å‡ºç³»ç»Ÿ"))
+
+        self.check_form.clicked.connect(self.f1)
+        self.exit.clicked.connect(self.f2)
+
+    def f1(self):
+        check_form.show()
+        manager_select.closewin()
+
+    def f2(self):
+        welcome.show()
+        manager_select.closewin()
 
     def closewin(self):
         self.close()
 
-class Check_form(QMainWindow):#±¨±í²éÑ¯½çÃæ
+class Check_form(QMainWindow):#æŠ¥è¡¨æŸ¥è¯¢ç•Œé¢
     def __init__(self):
         super().__init__()
         self.initUI()
@@ -1000,20 +1531,20 @@ class Check_form(QMainWindow):#±¨±í²éÑ¯½çÃæ
         self.centralwidget = QtWidgets.QWidget(self)
         self.centralwidget.setObjectName("centralwidget")
         self.label_1 = QtWidgets.QLabel(self.centralwidget)
-        self.label_1.setGeometry(QtCore.QRect(310, 10, 271, 131))
+        self.label_1.setGeometry(QtCore.QRect(310, -30, 271, 131))
+        self.label_1.setStyleSheet("color:red");
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(18)
         self.label_1.setFont(font)
         self.label_1.setObjectName("label_1")
-        self.label_1.setStyleSheet("color:red");
-        self.lcd_airontimes = QtWidgets.QLCDNumber(self.centralwidget)
-        self.lcd_airontimes.setGeometry(QtCore.QRect(560, 120, 171, 61))
-        self.lcd_airontimes.setObjectName("lcd_airontimes")
+        self.lcd_airon_times = QtWidgets.QLCDNumber(self.centralwidget)
+        self.lcd_airon_times.setGeometry(QtCore.QRect(560, 60, 171, 61))
+        self.lcd_airon_times.setObjectName("lcd_airon_times")
         self.roomselect = QtWidgets.QComboBox(self.centralwidget)
         self.roomselect.setGeometry(QtCore.QRect(160, 130, 121, 41))
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(14)
         self.roomselect.setFont(font)
         self.roomselect.setObjectName("roomselect")
@@ -1026,63 +1557,62 @@ class Check_form(QMainWindow):#±¨±í²éÑ¯½çÃæ
         self.label_2.setGeometry(QtCore.QRect(50, 110, 101, 81))
         self.label_2.setStyleSheet("color:white");
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(14)
         self.label_2.setFont(font)
         self.label_2.setObjectName("label_2")
-        self.label_2.setStyleSheet("color:white");
-        self.lcd_airofftimes = QtWidgets.QLCDNumber(self.centralwidget)
-        self.lcd_airofftimes.setGeometry(QtCore.QRect(560, 200, 171, 61))
-        self.lcd_airofftimes.setObjectName("lcd_airofftimes")
-        self.lcd_tem_reach_times = QtWidgets.QLCDNumber(self.centralwidget)
-        self.lcd_tem_reach_times.setGeometry(QtCore.QRect(560, 280, 171, 61))
-        self.lcd_tem_reach_times.setObjectName("lcd_tem_reach_times")
+        self.lcd_airoff_times = QtWidgets.QLCDNumber(self.centralwidget)
+        self.lcd_airoff_times.setGeometry(QtCore.QRect(560, 120, 171, 61))
+        self.lcd_airoff_times.setObjectName("lcd_airoff_times")
+        self.lcd_temreach_times = QtWidgets.QLCDNumber(self.centralwidget)
+        self.lcd_temreach_times.setGeometry(QtCore.QRect(560, 180, 171, 61))
+        self.lcd_temreach_times.setObjectName("lcd_temreach_times")
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
-        self.label_3.setGeometry(QtCore.QRect(390, 90, 191, 121))
+        self.label_3.setGeometry(QtCore.QRect(400, 50, 141, 71))
         self.label_3.setStyleSheet("color:white");
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(14)
         self.label_3.setFont(font)
         self.label_3.setObjectName("label_3")
         self.label_4 = QtWidgets.QLabel(self.centralwidget)
-        self.label_4.setGeometry(QtCore.QRect(370, 250, 191, 121))
+        self.label_4.setGeometry(QtCore.QRect(370, 170, 171, 71))
         self.label_4.setStyleSheet("color:white");
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(14)
         self.label_4.setFont(font)
         self.label_4.setObjectName("label_4")
         self.label_7 = QtWidgets.QLabel(self.centralwidget)
-        self.label_7.setGeometry(QtCore.QRect(390, 170, 191, 121))
+        self.label_7.setGeometry(QtCore.QRect(400, 110, 151, 81))
         self.label_7.setStyleSheet("color:white");
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(14)
         self.label_7.setFont(font)
         self.label_7.setObjectName("label_7")
         self.back = QtWidgets.QPushButton(self.centralwidget)
         self.back.setGeometry(QtCore.QRect(70, 460, 171, 51))
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(14)
         self.back.setFont(font)
         self.back.setObjectName("back")
         self.check = QtWidgets.QPushButton(self.centralwidget)
         self.check.setGeometry(QtCore.QRect(70, 340, 171, 51))
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(14)
         self.check.setFont(font)
         self.check.setObjectName("check")
         self.label_8 = QtWidgets.QLabel(self.centralwidget)
         self.label_8.setGeometry(QtCore.QRect(20, 180, 151, 71))
-        self.label_8.setStyleSheet("color:white");
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(14)
         self.label_8.setFont(font)
         self.label_8.setObjectName("label_8")
+        self.label_8.setStyleSheet("color:white");
         self.btime_select = QtWidgets.QSpinBox(self.centralwidget)
         self.btime_select.setGeometry(QtCore.QRect(160, 190, 151, 51))
         font = QtGui.QFont()
@@ -1093,7 +1623,7 @@ class Check_form(QMainWindow):#±¨±í²éÑ¯½çÃæ
         self.label_9.setGeometry(QtCore.QRect(20, 240, 151, 71))
         self.label_9.setStyleSheet("color:white");
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(14)
         self.label_9.setFont(font)
         self.label_9.setObjectName("label_9")
@@ -1104,138 +1634,327 @@ class Check_form(QMainWindow):#±¨±í²éÑ¯½çÃæ
         self.etime_select.setFont(font)
         self.etime_select.setObjectName("etime_select")
         self.lcd_schedule_times = QtWidgets.QLCDNumber(self.centralwidget)
-        self.lcd_schedule_times.setGeometry(QtCore.QRect(560, 360, 171, 61))
+        self.lcd_schedule_times.setGeometry(QtCore.QRect(560, 240, 171, 61))
         self.lcd_schedule_times.setObjectName("lcd_schedule_times")
         self.lcd_cost_all = QtWidgets.QLCDNumber(self.centralwidget)
-        self.lcd_cost_all.setGeometry(QtCore.QRect(560, 430, 171, 61))
+        self.lcd_cost_all.setGeometry(QtCore.QRect(560, 480, 171, 61))
         self.lcd_cost_all.setObjectName("lcd_cost_all")
         self.label_5 = QtWidgets.QLabel(self.centralwidget)
-        self.label_5.setGeometry(QtCore.QRect(410, 330, 191, 121))
+        self.label_5.setGeometry(QtCore.QRect(420, 230, 131, 81))
         self.label_5.setStyleSheet("color:white");
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(14)
         self.label_5.setFont(font)
         self.label_5.setObjectName("label_5")
         self.label_6 = QtWidgets.QLabel(self.centralwidget)
-        self.label_6.setGeometry(QtCore.QRect(410, 400, 191, 121))
+        self.label_6.setGeometry(QtCore.QRect(430, 470, 121, 71))
         self.label_6.setStyleSheet("color:white");
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(14)
         self.label_6.setFont(font)
         self.label_6.setObjectName("label_6")
         self.print = QtWidgets.QPushButton(self.centralwidget)
         self.print.setGeometry(QtCore.QRect(70, 400, 171, 51))
         font = QtGui.QFont()
-        font.setFamily("Î¢ÈíÑÅºÚ Light")
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
         font.setPointSize(14)
         self.print.setFont(font)
         self.print.setObjectName("print")
+        self.lcd_changetem_times = QtWidgets.QLCDNumber(self.centralwidget)
+        self.lcd_changetem_times.setGeometry(QtCore.QRect(560, 300, 171, 61))
+        self.lcd_changetem_times.setObjectName("lcd_changetem_times_2")
+        self.lcd_changewind_times = QtWidgets.QLCDNumber(self.centralwidget)
+        self.lcd_changewind_times.setGeometry(QtCore.QRect(560, 360, 171, 61))
+        self.lcd_changewind_times.setObjectName("lcd_changewind_times_3")
+        self.lcd_detail_times = QtWidgets.QLCDNumber(self.centralwidget)
+        self.lcd_detail_times.setGeometry(QtCore.QRect(560, 420, 171, 61))
+        self.lcd_detail_times.setObjectName("lcd_detail_times")
+        self.label_10 = QtWidgets.QLabel(self.centralwidget)
+        self.label_10.setGeometry(QtCore.QRect(440, 290, 101, 71))
+        self.label_10.setStyleSheet("color:white");
+        font = QtGui.QFont()
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
+        font.setPointSize(14)
+        self.label_10.setFont(font)
+        self.label_10.setObjectName("label_10")
+        self.label_11 = QtWidgets.QLabel(self.centralwidget)
+        self.label_11.setGeometry(QtCore.QRect(440, 350, 111, 71))
+        self.label_11.setStyleSheet("color:white");
+        font = QtGui.QFont()
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
+        font.setPointSize(14)
+        self.label_11.setFont(font)
+        self.label_11.setObjectName("label_11")
+        self.label_12 = QtWidgets.QLabel(self.centralwidget)
+        self.label_12.setGeometry(QtCore.QRect(450, 410, 111, 71))
+        self.label_12.setStyleSheet("color:white");
+        font = QtGui.QFont()
+        font.setFamily("å¾®è½¯é›…é»‘ Light")
+        font.setPointSize(14)
+        self.label_12.setFont(font)
+        self.label_12.setObjectName("label_12")
         self.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(self)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 26))
+        self.menubar.setObjectName("menubar")
+        self.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(self)
+        self.statusbar.setObjectName("statusbar")
+        self.setStatusBar(self.statusbar)
         self.retranslateUi(self)
         QtCore.QMetaObject.connectSlotsByName(self)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "±¨±í²éÑ¯"))
-        self.label_1.setText(_translate("MainWindow", "±¨±í²éÑ¯"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "æŠ¥è¡¨æŸ¥è¯¢"))
+        self.label_1.setText(_translate("MainWindow", "æŠ¥è¡¨æŸ¥è¯¢"))
         self.roomselect.setItemText(0, _translate("MainWindow", "1"))
         self.roomselect.setItemText(1, _translate("MainWindow", "2"))
         self.roomselect.setItemText(2, _translate("MainWindow", "3"))
         self.roomselect.setItemText(3, _translate("MainWindow", "4"))
         self.roomselect.setItemText(4, _translate("MainWindow", "5"))
-        self.label_2.setText(_translate("MainWindow", "·¿¼äºÅ"))
-        self.label_3.setText(_translate("MainWindow", "¿Õµ÷¿ªÆô´ÎÊı"))
-        self.label_4.setText(_translate("MainWindow", "´ïÄ¿±êÎÂ¶È´ÎÊı"))
-        self.label_7.setText(_translate("MainWindow", "¿Õµ÷¹Ø±Õ´ÎÊı"))
-        self.back.setText(_translate("MainWindow", "·µ»Ø"))
-        self.check.setText(_translate("MainWindow", "²éÑ¯"))
-        self.label_8.setText(_translate("MainWindow", "ÆğÊ¼Ê±¼ä"))
-        self.label_9.setText(_translate("MainWindow", "½áÊøÊ±¼ä"))
-        self.label_5.setText(_translate("MainWindow", "±»µ÷¶È´ÎÊı"))
-        self.label_6.setText(_translate("MainWindow", "×ÜÏû·Ñ½ğ¶î"))
-        self.print.setText(_translate("MainWindow", "´òÓ¡"))
+        self.label_2.setText(_translate("MainWindow", "æˆ¿é—´å·"))
+        self.label_3.setText(_translate("MainWindow", "ç©ºè°ƒå¼€å¯æ¬¡æ•°"))
+        self.label_4.setText(_translate("MainWindow", "è¾¾ç›®æ ‡æ¸©åº¦æ¬¡æ•°"))
+        self.label_7.setText(_translate("MainWindow", "ç©ºè°ƒå…³é—­æ¬¡æ•°"))
+        self.back.setText(_translate("MainWindow", "è¿”å›"))
+        self.check.setText(_translate("MainWindow", "æŸ¥è¯¢"))
+        self.label_8.setText(_translate("MainWindow", "èµ·å§‹æ—¶é—´"))
+        self.label_9.setText(_translate("MainWindow", "ç»“æŸæ—¶é—´"))
+        self.label_5.setText(_translate("MainWindow", "è¢«è°ƒåº¦æ¬¡æ•°"))
+        self.label_6.setText(_translate("MainWindow", "æ€»æ¶ˆè´¹é‡‘é¢"))
+        self.print.setText(_translate("MainWindow", "æ‰“å°"))
+        self.label_10.setText(_translate("MainWindow", "è°ƒæ¸©æ¬¡æ•°"))
+        self.label_11.setText(_translate("MainWindow", "è°ƒé£æ¬¡æ•°"))
+        self.label_12.setText(_translate("MainWindow", "è¯¦å•æ•°"))
+        self.print.clicked.connect(self.print_form)
+        self.back.clicked.connect(self.f1)
+
+    def print_form(self):
+        print()
+        print("******æŠ¥è¡¨ä¿¡æ¯*******")
+        print("æˆ¿é—´å·:%d" %int(self.roomselect.currentText()))
+        print("èµ·å§‹æ—¶é—´:%d" % int(self.btime_select.value()))
+        print("ç»“æŸæ—¶é—´:%d" % int(self.etime_select.value()))
+        print("ç©ºè°ƒå¼€å¯æ¬¡æ•°:%d" % int(self.lcd_airon_times.value()))
+        print("ç©ºè°ƒå…³é—­æ¬¡æ•°:%d" % int(self.lcd_airoff_times.value()))
+        print("è¾¾ç›®æ ‡æ¸©åº¦æ¬¡æ•°:%d" % int(self.lcd_temreach_times.value()))
+        print("è¢«è°ƒåº¦æ¬¡æ•°:%d" % int(self.lcd_schedule_times.value()))
+        print("è°ƒæ¸©æ¬¡æ•°:%d" % int(self.lcd_changetem_times.value()))
+        print("è°ƒé£æ¬¡æ•°:%d" % int(self.lcd_changewind_times.value()))
+        print("è¯¦å•æ•°:%d" % int(self.lcd_detail_times.value()))
+        print("æ€»æ¶ˆè´¹é‡‘é¢:%d" % int(self.lcd_cost_all.value()))
+        print("*********************")
+
+    def f1(self):
+        manager_select.show()
+        check_form.closewin()
 
     def closewin(self):
         self.close()
 
 '''
-class User:#¿Í»§µÄ»ùÀà
-    def __init__(self,user_id,room_id,b_time,e_time ):
-        self.user_id =user_id#¿Í»§ºÅ
-        self.room_id = room_id#Èë×¡·¿¼äºÅ
-        self.b_time=b_time#Èë×¡Ê±¼ä
-        self.e_time=e_time#ÍË·¿Ê±¼ä
 
-    def login(self):#Èë×¡£¬µÇÂ¼ÏµÍ³
-    def air_on(self):#Æô¶¯¿Õµ÷
-    def air_off(self):#¹Ø±Õ¿Õµ÷
-    def change_wind(self):#µ÷½Ú·çËÙ
-    def change_tem(self):#µ÷½ÚÎÂ¶È
-    def logout(self):#ÍË·¿,ÍË³öÏµÍ³
 
-class Air_admin:  #¿Õµ÷¹ÜÀíÔ±µÄ»ùÀà
+class Air_admin:  #ç©ºè°ƒç®¡ç†å‘˜çš„åŸºç±»
     def __init__(self, admin_id, if_login, status):
-        self.admin_id = admin_id#¹ÜÀíÔ±±àºÅ
-        self.if_login = if_login#ÊÇ·ñµÇÂ¼
-        self.status = status#Éí·İ±êÊ¶
+        self.admin_id = admin_id#ç®¡ç†å‘˜ç¼–å·
+        self.if_login = if_login#æ˜¯å¦ç™»å½•
+        self.status = status#èº«ä»½æ ‡è¯†
 
-    def login(self):  # µÇÂ¼ÏµÍ³
-    def power_on(self):  #³õÊ¼»¯¿Õµ÷ÏµÍ³
-    def init_air(self):  # ³õÊ¼»¯¿Õµ÷²ÎÊı
-    def print_hotel(self):  # ²é¿´¾Æµê¿Õµ÷ÔËĞĞ×´Ì¬
-    def print_room(self):  # ²é¿´·¿¼ä¿Õµ÷ÔËĞĞ×´Ì¬
-    def logout(self):  # ÍË³öÏµÍ³
+    def login(self):  # ç™»å½•ç³»ç»Ÿ
+    def power_on(self):  #åˆå§‹åŒ–ç©ºè°ƒç³»ç»Ÿ
+        r = Register_admin()
+        air_main,scheduler = r.power_on()
+    def init_air(self):  # åˆå§‹åŒ–ç©ºè°ƒå‚æ•°
 
-class Cashier:  # ¾ÆµêÇ°Ì¨µÄ»ùÀà¡ª¡ªÉè¼Æ¼Ü¹¹²»±ä
+    def print_hotel(self):  # æŸ¥çœ‹é…’åº—ç©ºè°ƒè¿è¡ŒçŠ¶æ€
+    def print_room(self):  # æŸ¥çœ‹æˆ¿é—´ç©ºè°ƒè¿è¡ŒçŠ¶æ€
+    def logout(self):  # é€€å‡ºç³»ç»Ÿ
+
+class Cashier:  # é…’åº—å‰å°çš„åŸºç±»â€”â€”è®¾è®¡æ¶æ„ä¸å˜
      def __init__(self, cashier_id, if_login, status):
-         self.cashier_id = cashier_id#¾ÆµêÇ°Ì¨±àºÅ
-         self.if_login = if_login#ÊÇ·ñµÇÂ¼
-         self.status = status#Éí·İ±êÊ¶
+         self.cashier_id = cashier_id#é…’åº—å‰å°ç¼–å·
+         self.if_login = if_login#æ˜¯å¦ç™»å½•
+         self.status = status#èº«ä»½æ ‡è¯†
 
-     def login(self):  # µÇÂ¼ÏµÍ³
+     def login(self):#ç™»å½•ç³»ç»Ÿ
          if self.if_login != 0:
              self.if_login = 1
              return 1
          else:
-             return 0           #error£¬ºóĞøĞèÒª×öÒ»Ğ©Òì³£´¦Àí¡ª¡ªÎ´µÇÂ¼¶øÍË³ö£¬ÒÑµÇÂ¼ÔÙµÇÂ¼
+             return 0#errorï¼Œåç»­éœ€è¦åšä¸€äº›å¼‚å¸¸å¤„ç†â€”â€”æœªç™»å½•è€Œé€€å‡ºï¼Œå·²ç™»å½•å†ç™»å½•
 
-     def create_bill(self):  # ´´½¨ÕËµ¥
-         user_id = 1                #´ÓÓÃ»§½çÃæ»ñÈ¡user_id£¬room_id,ÕâÀïÔİÊ±¼òĞ´
+     def create_bill(self):  # åˆ›å»ºè´¦å•
+         user_id = 1                #ä»ç”¨æˆ·ç•Œé¢è·å–user_idï¼Œroom_id,è¿™é‡Œæš‚æ—¶ç®€å†™
          room_id = 1
          register = Register_cashier(user_id,room_id)
          register.create_bill()
 
-     def print_bill(self):  # ²é¿´ÕËµ¥
+     def print_bill(self):  # æŸ¥çœ‹è´¦å•
          user_id = 1
          room_id = 0
          register = Register_cashier(user_id,room_id)
-         record = register.print_bill()                  #recordÊÇ´ÓÊı¾İ¿âÖĞ²é³öµÄÍêÕû±íÏî£¬ºóĞøÒª°´ĞèÒªÇĞ·ÖÔÙÏÔÊ¾µ½½çÃæÉÏ
+         record = register.print_bill()#recordæ˜¯ä»æ•°æ®åº“ä¸­æŸ¥å‡ºçš„å®Œæ•´è¡¨é¡¹ï¼Œåç»­è¦æŒ‰éœ€è¦åˆ‡åˆ†å†æ˜¾ç¤ºåˆ°ç•Œé¢ä¸Š
 
 
-     def logout(self):  # ÍË³öÏµÍ³
+     def logout(self):  # é€€å‡ºç³»ç»Ÿ
          if self.if_login == 1:
              self.if_login = 0;
              return 1
          else:
-             return 0           #error
+             return 0#error
 
 
-class Manager:  # ¾Æµê¾­ÀíµÄ»ùÀà
+class Manager:  # é…’åº—ç»ç†çš„åŸºç±»
     def __init__(self, manager_id, if_login, status):
-        self.manager_id = manager_id#¾­Àí±àºÅ
-        self.if_login = if_login#ÊÇ·ñµÇÂ¼
-        self.status = status#Éí·İ±êÊ¶
+        self.manager_id = manager_id#ç»ç†ç¼–å·
+        self.if_login = if_login#æ˜¯å¦ç™»å½•
+        self.status = status#èº«ä»½æ ‡è¯†
 
-    def login(self):  #µÇÂ¼ÏµÍ³
-    def create_form(self): #´´½¨±¨±í
-    def print_form(self):  #²é¿´±¨±í
-    def logout(self):  #ÍË³öÏµÍ³
+    def login(self):  #ç™»å½•ç³»ç»Ÿ
+        #åç«¯å†™å¥½å†å†™
+
+    def create_form(self): #åˆ›å»ºæŠ¥è¡¨
+        room_id = 0 #è·å–è‡ªå‰ç«¯çš„å‚æ•°
+        b_time = 0 #è·å–è‡ªå‰ç«¯çš„å‚æ•°
+        e_time = 0 #è·å–è‡ªå‰ç«¯çš„å‚æ•°
+        r3 = Register_manager(room_id, b_time, e_time)
+        r3.create_form()
+
+    def print_form(self):  #æŸ¥çœ‹æŠ¥è¡¨
+        room_id = 0 #è·å–è‡ªå‰ç«¯çš„å‚æ•°
+        b_time = 0 #è·å–è‡ªå‰ç«¯çš„å‚æ•°
+        e_time = 0 #è·å–è‡ªå‰ç«¯çš„å‚æ•°
+        r3 = Register_manager(room_id, b_time, e_time)
+        form_items = r3.print_form()
+
+    def logout(self):  #é€€å‡ºç³»ç»Ÿã€
+        #åç«¯å†™å¥½å†å†™
+
 '''
+class User:  # å®¢æˆ·çš„åŸºç±»
+    def __init__(self, user_id):
+        self.user_id = user_id  # å®¢æˆ·å·
+        self.room_id = 0  # å…¥ä½æˆ¿é—´å·
+        self.b_time = 0  # å…¥ä½æ—¶é—´
+        self.e_time = 0  # é€€æˆ¿æ—¶é—´
 
-if __name__ == '__main__':#¼òµ¥²âÊÔÒ»ÏÂÒ³ÃæÌø×ª
-    #¹¹ÔìÒ³Ãæ¶ÔÏóÀàµÄÊµÀı
+    def login(self):  # å…¥ä½ï¼Œç™»å½•ç³»ç»Ÿ
+        self.if_login=1
+
+    def air_on(self,services, air_subs, scheduler,room_id):#å¯åŠ¨ç©ºè°ƒ
+        register_user.air_on(air_subs, services,scheduler,room_id)#r0å¯åŠ¨ç©ºè°ƒ
+
+    def air_off(self, services, air_subs,room_id):#å…³é—­ç©ºè°ƒ
+        register_user.air_off(air_subs, services,room_id)
+
+    def change_wind(self,windmode,air_subs,services,scheduler,room_id):#è°ƒèŠ‚é£é€Ÿ
+        register_user.change_wind(windmode,air_subs,services,scheduler,room_id)
+
+    def change_tem(self,tem_set,air_subs,services,room_id):  #è°ƒèŠ‚æ¸©åº¦
+        register_user.change_tem(tem_set,air_subs,services,room_id)
+
+    def logout(self):  # é€€æˆ¿,é€€å‡ºç³»ç»Ÿ
+        self.if_login=0
+
+class Air_admin:  #ç©ºè°ƒç®¡ç†å‘˜çš„åŸºç±»
+    def __init__(self):
+        self.if_login = 0#åˆå§‹ç™»å½•çŠ¶æ€ä¸º0
+        self.status = 1#1è¡¨ç¤ºç®¡ç†å‘˜èº«ä»½
+
+    def login(self):  #ç™»å½•ç³»ç»Ÿ
+        self.if_login=1
+
+    def power_on(self):  #åˆå§‹åŒ–ç©ºè°ƒç³»ç»Ÿ
+        air_main,air_sub,service,scheduler=register_admin.power_on()
+        return air_main,air_sub,service,scheduler#è¿”å›åˆ›å»ºçš„ç©ºè°ƒä¸»æœºï¼Œç©ºè°ƒå­æœºï¼ŒæœåŠ¡å¯¹è±¡ï¼Œè°ƒåº¦å¯¹è±¡
+
+    def init_air(self,air_main,air_on_num,wind_on_num,wait_on_num,air_subs,tem, windmode, cost, if_wind, if_on):  #åˆå§‹åŒ–ç©ºè°ƒå‚æ•°
+        register_admin.init_air(air_main,air_on_num,wind_on_num,wait_on_num,air_subs,tem, windmode, cost, if_wind, if_on)
+
+    def logout(self):  #é€€å‡ºç³»ç»Ÿ
+        self.if_login=0
+
+class Room:  # æˆ¿é—´çš„åŸºç±»
+    def __init__(self, room_id):
+        self.room_id = room_id
+        self.tem = 30
+        self.live_in_cus=0#å…¥ä½çš„æˆ¿å®¢ï¼Œä¸º0è¡¨ç¤ºé—²ç½®
+        self.rate_of_tem_change = -0.5  # æ¸©åº¦å˜åŒ–ç‡
+
+    def Change_tem(self, air_sub, outside_tem=40):  # ç¯å¢ƒæ¸©åº¦æ”¹å˜
+        if(air_sub.if_wind is True):#ç©ºè°ƒæ­£åœ¨é€é£
+            if(self.tem > air_sub.tem):#è®¾å®šæ¸©åº¦å°äºç¯å¢ƒæ¸©åº¦ï¼Œéœ€è¦é™æ¸©
+                self.tem -= 1
+            elif(self.tem < air_sub.tem):#è®¾å®šæ¸©åº¦å¤§äºç¯å¢ƒæ¸©åº¦ï¼Œéœ€è¦å‡æ¸©
+                self.tem += 1
+        else:  # ç©ºè°ƒæ²¡æœ‰é€é£,
+            if(self.tem < outside_tem):
+                self.tem += 1  # ç¯å¢ƒæ¸©åº¦å¢åŠ 
+            elif(self.tem > outside_tem):
+                self.tem -= 1  # ç¯å¢ƒæ¸©åº¦å‡å°‘
+
+    def sche_change_wind(self, air_sub):
+        change_frequency = 2  # æ¯åˆ†é’Ÿå˜åŒ–0.5åº¦ï¼Œä¹Ÿå°±æ˜¯å˜åŒ–ä¸€åº¦éœ€è¦2min
+        while(True):
+            if(air_sub.if_wind is True):  # æ­£åœ¨é€é£
+                if(air_sub.wind_mode == 0):
+                    change_frequency /= 0.8  # ä½é£æ¨¡å¼ä¸‹ï¼Œæ¯åˆ†é’Ÿå˜åŒ–ç‡å‡å°‘0.2
+                elif(air_sub.wind_mode == 1):
+                    change_frequency = 2  # ä¸­é£æ¨¡å¼ä¸‹ï¼Œæ¯åˆ†é’Ÿå˜åŒ–0.5åº¦
+                elif(air_sub.wind_mode == 2):
+                    change_frequency /= 1.2  # é«˜é£æ¨¡å¼ä¸‹ï¼Œæ¯åˆ†é’Ÿå˜åŒ–ç‡å¢åŠ 0.2
+                else:
+                    return False
+            else:  # æ²¡æœ‰é€é£
+                change_frequency = 2  # å…³æœºçŠ¶æ€ä¸‹ï¼Œæ¯åˆ†é’Ÿå˜åŒ–0.5åº¦ï¼Œç›´åˆ°å˜åŒ–åˆ°åˆå§‹æ¸©åº¦ä¸ºæ­¢
+
+#è®¾ç½®ä¸€äº›å…¨å±€å˜é‡å¹¶å°†ç³»ç»Ÿåˆå§‹åŒ–
+b_time=0
+e_time=0
+users=[]
+rooms=[]
+
+for i in range(1,6):
+    room=Room(i)
+    rooms.append(room)
+print("æˆ¿é—´å®ä¾‹åˆ›å»ºæˆåŠŸ...")
+
+for i in range(1,6):
+    user =User(i)
+    users.append(user)
+print("ç”¨æˆ·å®ä¾‹åˆ›å»ºæˆåŠŸ...")
+
+admin = Air_admin()
+register_user=ctrl.Register_user()
+register_admin = ctrl.Register_admin()
+print("ç©ºè°ƒç®¡ç†å‘˜åˆ›å»ºæˆåŠŸ...")
+print("ç©ºè°ƒç®¡ç†å‘˜ç”¨ä¾‹æ§åˆ¶å™¨åˆ›å»ºæˆåŠŸ...")
+air_main, air_subs, services, scheduler = admin.power_on()
+print("power_on...")
+print("ç©ºè°ƒä¸»æœºåˆ›å»ºæˆåŠŸ...")
+print("å½“å‰å­æœºå¼€å¯æ•°:%d"%air_main.air_on_num)
+print("å½“å‰å­æœºé€é£æ•°:%d"%air_main.wind_on_num)
+print()
+print("ç©ºè°ƒå­æœºåˆ›å»ºæˆåŠŸ")
+for i in range(0,5):
+    print("æˆ¿é—´å·:%d" % air_subs[i].room_id)
+    print("æˆ¿é—´æ¸©åº¦:%d" %rooms[i].tem)
+    print("å­æœºæ˜¯å¦å¼€å¯:%d" % air_subs[i].if_on)
+    print("å­æœºæ˜¯å¦é€é£:%d" % air_subs[i].if_wind)
+    print("å­æœºè®¾å®šæ¸©åº¦:%d" % air_subs[i].tem)
+    print("å­æœºè®¾å®šé£é€Ÿ:%d" % air_subs[i].windmode)
+    print("å­æœºå½“å‰è®¡è´¹:%d" % air_subs[i].cost)
+    print()
+print("æœåŠ¡å¯¹è±¡åˆ›å»ºæˆåŠŸ...")
+print("è°ƒåº¦å¯¹è±¡åˆ›å»ºæˆåŠŸ...")
+
+
+if __name__ == '__main__':#ä¸»å‡½æ•°ï¼Œç”¨æ¥ç”Ÿæˆå¹¶ä¸”åˆå§‹åŒ–å„ä¸ªç•Œé¢
+    #æ„é€ é¡µé¢å¯¹è±¡ç±»çš„å®ä¾‹
     app = QApplication(sys.argv)
     welcome = Welcome()
     move_select = Move_select()
@@ -1248,72 +1967,14 @@ if __name__ == '__main__':#¼òµ¥²âÊÔÒ»ÏÂÒ³ÃæÌø×ª
     room_air_state=Room_air_state()
     cashier_select=Cashier_select()
     check_bill=Check_bill()
+    check_detail=Check_detail()
     manager_select=Manager_select()
     check_form=Check_form()
 
-    #Ò³Ãæµã»÷Ìø×ªÊÂ¼ş
+    #æ˜¾ç¤ºåˆå§‹åŒ–ç™»å½•ç•Œé¢
     welcome.show()
-    #ÓÃ»§ÏßÂ·Ìø×ªÂß¼­
     welcome.enter.clicked.connect(move_select.show)
     welcome.enter.clicked.connect(welcome.closewin)
-
-    # ÓÃ»§ÏßÂ·ºóĞøÌø×ª
-    move_select.movein.clicked.connect(move_in.show)
-    move_select.movein.clicked.connect(move_select.closewin)
-    move_select.moveout.clicked.connect(move_out.show)
-    move_select.moveout.clicked.connect(move_select.closewin)
-    move_select.enterroom.clicked.connect(enter_room.show)
-    move_select.enterroom.clicked.connect(move_select.closewin)
-    move_select.exit.clicked.connect(welcome.show)
-    move_select.exit.clicked.connect(move_select.closewin)
-
-    move_in.movein_confirm.clicked.connect(air_monitor.show)
-    move_in.movein_confirm.clicked.connect(move_in.closewin)
-    move_in.back.clicked.connect(move_select.show)
-    move_in.back.clicked.connect(move_in.closewin)
-
-    move_out.moveout_confirm.clicked.connect(welcome.show)
-    move_out.moveout_confirm.clicked.connect(move_out.closewin)
-    move_out.back.clicked.connect(move_select.show)
-    move_out.back.clicked.connect(move_out.closewin)
-
-    enter_room.movein_confirm.clicked.connect(air_monitor.show)
-    enter_room.movein_confirm.clicked.connect(enter_room.closewin)
-    enter_room.back.clicked.connect(move_select.show)
-    enter_room.back.clicked.connect(enter_room.closewin)
-
-    air_monitor.back.clicked.connect(move_select.show)
-    air_monitor.back.clicked.connect(air_monitor.close)
-
-    #¿Õµ÷¹ÜÀíÔ±ÏßÂ·ºóĞøÌø×ª
-    admin_select.check_has.clicked.connect(hotel_air_state.show)
-    admin_select.check_has.clicked.connect(admin_select.closewin)
-    admin_select.check_ras.clicked.connect(room_air_state.show)
-    admin_select.check_ras.clicked.connect(admin_select.closewin)
-    admin_select.exit.clicked.connect(welcome.show)
-    admin_select.exit.clicked.connect(admin_select.closewin)
-
-    hotel_air_state.back.clicked.connect(admin_select.show)
-    hotel_air_state.back.clicked.connect(hotel_air_state.closewin)
-    room_air_state.back.clicked.connect(admin_select.show)
-    room_air_state.back.clicked.connect(room_air_state.closewin)
-
-
-    #¾ÆµêÇ°Ì¨ÏßÂ·ºóĞøÌø×ª
-    cashier_select.check_bill.clicked.connect(check_bill.show)
-    cashier_select.check_bill.clicked.connect(cashier_select.closewin)
-    cashier_select.exit.clicked.connect(welcome.show)
-    cashier_select.exit.clicked.connect(cashier_select.closewin)
-
-    check_bill.back.clicked.connect(cashier_select.show)
-    check_bill.back.clicked.connect(check_bill.closewin)
-
-    #¾Æµê¾­ÀíÏßÂ·ºóĞøÌø×ª
-    manager_select.check_form.clicked.connect(check_form.show)
-    manager_select.check_form.clicked.connect(manager_select.closewin)
-    manager_select.exit.clicked.connect(welcome.show)
-    manager_select.exit.clicked.connect(manager_select.closewin)
-
-    check_form.back.clicked.connect(manager_select.show)
-    check_form.back.clicked.connect(check_form.closewin)
     sys.exit(app.exec_())
+
+

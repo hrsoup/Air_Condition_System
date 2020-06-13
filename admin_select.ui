@@ -37,7 +37,7 @@
     <property name="geometry">
      <rect>
       <x>270</x>
-      <y>210</y>
+      <y>250</y>
       <width>251</width>
       <height>41</height>
      </rect>
@@ -56,7 +56,7 @@
     <property name="geometry">
      <rect>
       <x>270</x>
-      <y>280</y>
+      <y>300</y>
       <width>251</width>
       <height>41</height>
      </rect>
@@ -88,6 +88,25 @@
     </property>
     <property name="text">
      <string>退出系统</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="initair">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>200</y>
+      <width>251</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑 Light</family>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>初始化空调</string>
     </property>
    </widget>
   </widget>
