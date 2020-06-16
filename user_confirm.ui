@@ -17,9 +17,9 @@
    <widget class="QLabel" name="label_1">
     <property name="geometry">
      <rect>
-      <x>300</x>
-      <y>80</y>
-      <width>231</width>
+      <x>310</x>
+      <y>100</y>
+      <width>251</width>
       <height>91</height>
      </rect>
     </property>
@@ -77,7 +77,7 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>170</x>
+      <x>190</x>
       <y>220</y>
       <width>111</width>
       <height>31</height>
@@ -96,7 +96,7 @@
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>200</x>
+      <x>210</x>
       <y>290</y>
       <width>111</width>
       <height>31</height>
@@ -112,7 +112,7 @@
      <string>密码</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QLineEdit" name="pwd">
     <property name="geometry">
      <rect>
       <x>290</x>
@@ -120,6 +120,44 @@
       <width>251</width>
       <height>41</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="enter">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>380</y>
+      <width>131</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑 Light</family>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>登录</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="back">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>380</y>
+      <width>131</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑 Light</family>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>返回</string>
     </property>
    </widget>
   </widget>

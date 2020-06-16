@@ -1,16 +1,13 @@
-
-
-
 class Air_main:  # 空调主机的基类
     def __init__(self, air_on_num, wind_on_num,wait_on_num):
         self.air_on_num = air_on_num  #当前开启子机数
         self.wind_on_num = wind_on_num #当前送风子机数
         self.wait_on_num =wait_on_num  #当前等待送风调度子机数
 
-    def create_service(self):  #创建服务对象
+    def create_service(self):#创建服务对象
         services=[]
         for i in range(1,6):
-            service=Service(i,0,0)
+            service=Service(i,18,0)
             services.append(service)
         return services
 
@@ -21,12 +18,12 @@ class Air_main:  # 空调主机的基类
     def create_air_sub(self):  # 创建空调子机对象
         air_subs=[]
         for i in range(1,6):
-            air_sub = Air_sub(i, 0, 0, 0, 0, 0)
+            air_sub = Air_sub(i, 0, 0, 18, 0, 0)
             air_subs.append(air_sub)
         return air_subs
 
 class Air_sub:  # 空调子机的基类_
-    def __init__(self, room_id, tem, windmode, cost, if_wind, if_on):
+    def __init__(self, room_id, if_wind, if_on,tem, windmode, cost):
         self.room_id = room_id  # 房间号
         self.tem = tem  # 设定温度
         self.windmode = windmode  # 设定风速
@@ -74,7 +71,7 @@ class Service:  # 服务对象的基类
     def set_windmode(self, air_sub):  # 设定风速
         if (self.wind_set == 0 or self.wind_set == 1 or self.wind_set == 2):#合理的风速区间
             air_sub.windmode = self.wind_set
-            print("温度调节失败..")
+            print("风速调节成功..")
 
     # def cost_on(self):  # 开启计费
     # def cost_off(self):  # 关闭计费
@@ -85,7 +82,7 @@ class Scheduler:  # 调度对象的基类
         self.wait_num = wait_num  # 送风等待数
         self.success_num = success_num  # 成功送风数
 
-    def schedule_on(self, air_subs,services,room_id):  # 执行调度算法,满足调度条件则让服务器直接修改对应空调子机的参数,这里的air_sub是一个对象列表
+    def schedule_on(self, air_subs,services,room_id):#执行调度算法,满足调度条件则让服务器直接修改对应空调子机的参数,这里的air_sub是一个对象列表
         room_id, tem_set, wind_set = services[room_id-1].send_request()
         if((tem_set>=18 and tem_set<=30) and (wind_set==0 or wind_set==1 or wind_set==2)):
             '''
@@ -95,8 +92,7 @@ class Scheduler:  # 调度对象的基类
             services[room_id-1].set_wind_on(air_subs[room_id-1])
             services[room_id-1].set_windmode(air_subs[room_id-1])
 
-
-
+'''
 class Bill:  # 账单的基类
     def __init__(self, bill_id, room_id, b_time, e_time, cost_all):
         self.bill_id = bill_id  # 账单编号
@@ -148,7 +144,7 @@ class Form:  # 报表的基类
 
     def insert_data(self):  # 向数据库中插入表单数据
     def check_form_item(self):  # 获得报表表项信息
-
+'''
 
 
 

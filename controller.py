@@ -1,17 +1,16 @@
 import application as app
 #import database as db
 
-class Register_user:  # 控制器0的基类
-    def air_on(self, air_subs, services,scheduler,room_id):#开启空调,需要送风调度
+class Register_user:#控制器0的基类
+    def air_on(self,air_subs, services,scheduler,room_id):#开启空调,需要送风调度
         services[room_id-1].set_air_on(air_subs[room_id-1])
         scheduler.schedule_on(air_subs,services,room_id)
 
     def air_off(self,air_subs,services,room_id):#关闭空调,无需送风调度
         services[room_id-1].set_air_off(air_subs[room_id-1])
-        services[room_id].set_wind_off(air_subs[room_id-1])
+        services[room_id-1].set_wind_off(air_subs[room_id-1])
 
     def change_wind(self,windmode,air_subs,services,scheduler,room_id):#调节风速，需要送风调度
-        services[room_id-1].tem_set=air_subs[room_id-1].tem
         services[room_id-1].wind_set=windmode
         scheduler.schedule_on(air_subs,services,room_id)
 
@@ -27,19 +26,21 @@ class Register_admin:#控制器1的基类
         services=air_main.create_service()#创建服务器实例
         return air_main,air_subs,services,scheduler
 
-    def init_air(self,air_main,air_on_num,wind_on_num,wait_on_num,air_sub,tem, wind_mode, cost, if_wind, if_on):#空调子机参数初始化
+    def init_air(self,services,air_main,air_on_num,wind_on_num,wait_on_num,air_sub,tem, wind_mode, cost, if_wind, if_on):#空调子机参数初始化
         air_main.air_on_num = air_on_num
         air_main.wind_on_num=wind_on_num
         air_main.wait_on_num=wait_on_num
+
         for i in range(0,5):
             air_sub[i].tem = tem
             air_sub[i].wind_mode = wind_mode
+            services[i].tem_set = tem
+            services[i].wind_set = wind_mode
             air_sub[i].if_wind = if_wind
             air_sub[i].if_on = if_on
             air_sub[i].cost = cost
 
-
-
+'''
 class Register_cashier:#控制器2的基类
     #账单至少包含如下信息：房间号、总费用、入住时间、离店时间。
     def __init__(self, user_id, room_id):          #认为只需要从用户界面获取user_id,room_id即可定位到订单信息
@@ -88,5 +89,5 @@ class Register_manager:#控制器3的基类
         form_items = self.form.check_form_item(self.form_id)
         return form_items
 
-
+'''
 

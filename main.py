@@ -3,11 +3,12 @@ import controller as ctrl
 import application as app
 #import database as db
 
-
 import sys
-from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QMainWindow, QPushButton, QApplication
-
+import time
+from PyQt5 import QtGui, QtCore, QtWidgets
+from PyQt5.QtWidgets import *
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
 class Welcome(QMainWindow):#初始化界面
     def __init__(self):
         super().__init__()
@@ -16,22 +17,22 @@ class Welcome(QMainWindow):#初始化界面
     def initUI(self):
         self.setObjectName("MainWindow")
         self.resize(800, 600)
-        window_pale = QtGui.QPalette()
-        window_pale.setBrush(self.backgroundRole(), QtGui.QBrush(QtGui.QPixmap("./hall.jpg")))
-        self.setPalette(window_pale)
         font = QtGui.QFont()
         font.setPointSize(11)
         self.setFont(font)
         self.centralwidget = QtWidgets.QWidget(self)
         self.centralwidget.setObjectName("centralwidget")
+        window_pale = QtGui.QPalette()
+        window_pale.setBrush(self.backgroundRole(), QtGui.QBrush(QtGui.QPixmap("./hall.jpg")))
+        self.setPalette(window_pale)
         self.label_1 = QtWidgets.QLabel(self.centralwidget)
         self.label_1.setGeometry(QtCore.QRect(130, 70, 561, 101))
-        self.label_1.setStyleSheet("color:white");
         font = QtGui.QFont()
         font.setFamily("微软雅黑 Light")
         font.setPointSize(30)
         self.label_1.setFont(font)
         self.label_1.setObjectName("label_1")
+        self.label_1.setStyleSheet("color:white");
         self.enter = QtWidgets.QPushButton(self.centralwidget)
         self.enter.setGeometry(QtCore.QRect(280, 340, 241, 61))
         font = QtGui.QFont()
@@ -48,9 +49,14 @@ class Welcome(QMainWindow):#初始化界面
         self.roleselect.setObjectName("roleselect")
         self.roleselect.addItem("")
         self.roleselect.addItem("")
-        self.roleselect.addItem("")
-        self.roleselect.addItem("")
         self.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(self)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 26))
+        self.menubar.setObjectName("menubar")
+        self.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(self)
+        self.statusbar.setObjectName("statusbar")
+        self.setStatusBar(self.statusbar)
         self.retranslateUi(self)
         QtCore.QMetaObject.connectSlotsByName(self)
 
@@ -59,48 +65,255 @@ class Welcome(QMainWindow):#初始化界面
         MainWindow.setWindowTitle(_translate("MainWindow", "分布式温控系统"))
         self.label_1.setText(_translate("MainWindow", "欢迎使用分布式温控系统"))
         self.enter.setText(_translate("MainWindow", "进入系统"))
-        self.roleselect.setItemText(0, _translate("MainWindow", "客户"))
-        self.roleselect.setItemText(1, _translate("MainWindow", "空调管理员"))
-        self.roleselect.setItemText(2, _translate("MainWindow", "酒店前台"))
-        self.roleselect.setItemText(3, _translate("MainWindow", "酒店经理"))
+        self.roleselect.setItemText(0, _translate("MainWindow", "酒店客户"))
+        self.roleselect.setItemText(1, _translate("MainWindow", "酒店员工"))
         self.roleselect.currentIndexChanged.connect(self.selectionchange)
 
     def selectionchange(self):
-        if (self.roleselect.currentText() == '客户'):
-            # 客户线路跳转逻辑
-            self.enter.clicked.connect(user.login)
-            self.enter.clicked.connect(move_select.show)
+        if (self.roleselect.currentText() == '酒店客户'):
+            self.enter.clicked.connect(user_confirm.show)
             self.enter.clicked.connect(self.closewin)
-            self.enter.clicked.connect(admin_select.closewin)
-            self.enter.clicked.connect(cashier_select.closewin)
-            self.enter.clicked.connect(manager_select.closewin)
+            self.enter.clicked.connect(staff_confirm.closewin)
 
-        elif (welcome.roleselect.currentText() == '空调管理员'):
-            # 空调管理员线路跳转逻辑
-            self.enter.clicked.connect(admin.login)
-            self.enter.clicked.connect(admin_select.show)
+        elif (self.roleselect.currentText() == '酒店员工'):
+            self.enter.clicked.connect(staff_confirm.show)
             self.enter.clicked.connect(self.closewin)
-            self.enter.clicked.connect(cashier_select.closewin)
-            self.enter.clicked.connect(manager_select.closewin)
-            self.enter.clicked.connect(move_select.closewin)
+            self.enter.clicked.connect(user_confirm.closewin)
 
-        elif (welcome.roleselect.currentText() == '酒店前台'):
-            # 酒店前台线路跳转逻辑
-            # welcome.enter.clicked.connect(cashier.login())
-            self.enter.clicked.connect(cashier_select.show)
-            self.enter.clicked.connect(self.closewin)
-            self.enter.clicked.connect(admin_select.closewin)
-            self.enter.clicked.connect(manager_select.closewin)
-            self.enter.clicked.connect(move_select.closewin)
+    def closewin(self):
+        self.close()
 
-        elif (welcome.roleselect.currentText() == '酒店经理'):
-            # 酒店经理跳转逻辑
-            # welcome.enter.clicked.connect(manager.login())
-            welcome.enter.clicked.connect(manager_select.show)
-            welcome.enter.clicked.connect(welcome.closewin)
-            welcome.enter.clicked.connect(cashier_select.closewin)
-            welcome.enter.clicked.connect(admin_select.closewin)
-            welcome.enter.clicked.connect(move_select.closewin)
+class User_confirm(QMainWindow):#用户身份核验界面
+    def __init__(self):
+        super().__init__()
+        self.initUI()
+
+    def initUI(self):
+        self.setObjectName("MainWindow")
+        self.resize(800, 600)
+        self.centralwidget = QtWidgets.QWidget(self)
+        self.centralwidget.setObjectName("centralwidget")
+        self.label_1 = QtWidgets.QLabel(self.centralwidget)
+        self.label_1.setGeometry(QtCore.QRect(310, 100, 251, 91))
+        window_pale = QtGui.QPalette()
+        window_pale.setBrush(self.backgroundRole(), QtGui.QBrush(QtGui.QPixmap("./hall.jpg")))
+        self.setPalette(window_pale)
+        font = QtGui.QFont()
+        font.setFamily("微软雅黑 Light")
+        font.setPointSize(18)
+        self.label_1.setFont(font)
+        self.label_1.setObjectName("label_1")
+        self.label_1.setStyleSheet("color:red");
+        self.user_id = QtWidgets.QComboBox(self.centralwidget)
+        self.user_id.setGeometry(QtCore.QRect(290, 220, 251, 41))
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(12)
+        self.user_id.setFont(font)
+        self.user_id.setObjectName("user_id")
+        self.user_id.addItem("")
+        self.user_id.addItem("")
+        self.user_id.addItem("")
+        self.user_id.addItem("")
+        self.user_id.addItem("")
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        self.label.setGeometry(QtCore.QRect(190, 220, 111, 31))
+        font = QtGui.QFont()
+        font.setFamily("微软雅黑 Light")
+        font.setPointSize(16)
+        self.label.setFont(font)
+        self.label.setObjectName("label")
+        self.label_2 = QtWidgets.QLabel(self.centralwidget)
+        self.label_2.setGeometry(QtCore.QRect(210, 290, 111, 31))
+        font = QtGui.QFont()
+        font.setFamily("微软雅黑 Light")
+        font.setPointSize(16)
+        self.label_2.setFont(font)
+        self.label_2.setObjectName("label_2")
+        self.pwd = QtWidgets.QLineEdit(self.centralwidget)
+        self.pwd.setGeometry(QtCore.QRect(290, 290, 251, 41))
+        self.pwd.setObjectName("pwd")
+        self.enter = QtWidgets.QPushButton(self.centralwidget)
+        self.enter.setGeometry(QtCore.QRect(270, 380, 131, 51))
+        font = QtGui.QFont()
+        font.setFamily("微软雅黑 Light")
+        font.setPointSize(14)
+        self.enter.setFont(font)
+        self.enter.setObjectName("enter")
+        self.back = QtWidgets.QPushButton(self.centralwidget)
+        self.back.setGeometry(QtCore.QRect(420, 380, 131, 51))
+        font = QtGui.QFont()
+        font.setFamily("微软雅黑 Light")
+        font.setPointSize(14)
+        self.back.setFont(font)
+        self.back.setObjectName("back")
+        self.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(self)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 26))
+        self.menubar.setObjectName("menubar")
+        self.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(self)
+        self.statusbar.setObjectName("statusbar")
+        self.setStatusBar(self.statusbar)
+        self.retranslateUi(self)
+        QtCore.QMetaObject.connectSlotsByName(self)
+
+    def retranslateUi(self, MainWindow):
+        _translate = QtCore.QCoreApplication.translate
+        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.label_1.setText(_translate("MainWindow", "客户身份核验"))
+        self.user_id.setItemText(0, _translate("MainWindow", "1"))
+        self.user_id.setItemText(1, _translate("MainWindow", "2"))
+        self.user_id.setItemText(2, _translate("MainWindow", "3"))
+        self.user_id.setItemText(3, _translate("MainWindow", "4"))
+        self.user_id.setItemText(4, _translate("MainWindow", "5"))
+        self.label.setText(_translate("MainWindow", "客户号"))
+        self.label_2.setText(_translate("MainWindow", "密码"))
+        self.enter.setText(_translate("MainWindow", "登录"))
+        self.enter.clicked.connect(self.f1)
+        self.back.setText(_translate("MainWindow", "返回"))
+        self.back.clicked.connect(self.f2)
+
+    def f1(self):
+        user_id=int(self.user_id.currentText())
+        pwd_true=users[user_id-1].pwd
+        pwd_input=int(self.pwd.text())
+        if(pwd_true==pwd_input):
+            print("客户登录成功")
+            move_select.show()
+            self.closewin()
+        else:
+            print("客户号与密码不一致，登录失败！")
+
+    def f2(self):
+        welcome.show()
+        self.closewin()
+
+    def closewin(self):
+        self.close()
+
+class Staff_confirm(QMainWindow):#员工身份核验界面
+    def __init__(self):
+        super().__init__()
+        self.initUI()
+
+    def initUI(self):
+        self.setObjectName("MainWindow")
+        self.resize(800, 600)
+        self.centralwidget = QtWidgets.QWidget(self)
+        self.centralwidget.setObjectName("centralwidget")
+        window_pale = QtGui.QPalette()
+        window_pale.setBrush(self.backgroundRole(), QtGui.QBrush(QtGui.QPixmap("./hall.jpg")))
+        self.setPalette(window_pale)
+        self.label_1 = QtWidgets.QLabel(self.centralwidget)
+        self.label_1.setGeometry(QtCore.QRect(290, 90, 251, 91))
+        self.label_1.setStyleSheet("color:red");
+        font = QtGui.QFont()
+        font.setFamily("微软雅黑 Light")
+        font.setPointSize(18)
+        self.label_1.setFont(font)
+        self.label_1.setObjectName("label_1")
+        self.staff_role = QtWidgets.QComboBox(self.centralwidget)
+        self.staff_role.setGeometry(QtCore.QRect(290, 220, 251, 41))
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(12)
+        self.staff_role.setFont(font)
+        self.staff_role.setObjectName("staff_role")
+        self.staff_role.addItem("")
+        self.staff_role.addItem("")
+        self.staff_role.addItem("")
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        self.label.setGeometry(QtCore.QRect(210, 220, 111, 31))
+        font = QtGui.QFont()
+        font.setFamily("微软雅黑 Light")
+        font.setPointSize(16)
+        self.label.setFont(font)
+        self.label.setObjectName("label")
+        self.label_2 = QtWidgets.QLabel(self.centralwidget)
+        self.label_2.setGeometry(QtCore.QRect(210, 290, 111, 31))
+        font = QtGui.QFont()
+        font.setFamily("微软雅黑 Light")
+        font.setPointSize(16)
+        self.label_2.setFont(font)
+        self.label_2.setObjectName("label_2")
+        self.pwd = QtWidgets.QLineEdit(self.centralwidget)
+        self.pwd.setGeometry(QtCore.QRect(290, 290, 251, 41))
+        self.pwd.setObjectName("pwd")
+        self.enter = QtWidgets.QPushButton(self.centralwidget)
+        self.enter.setGeometry(QtCore.QRect(270, 370, 131, 51))
+        font = QtGui.QFont()
+        font.setFamily("微软雅黑 Light")
+        font.setPointSize(14)
+        self.enter.setFont(font)
+        self.enter.setObjectName("enter")
+        self.back = QtWidgets.QPushButton(self.centralwidget)
+        self.back.setGeometry(QtCore.QRect(420, 370, 131, 51))
+        font = QtGui.QFont()
+        font.setFamily("微软雅黑 Light")
+        font.setPointSize(14)
+        self.back.setFont(font)
+        self.back.setObjectName("back")
+        self.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(self)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 26))
+        self.menubar.setObjectName("menubar")
+        self.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(self)
+        self.statusbar.setObjectName("statusbar")
+        self.setStatusBar(self.statusbar)
+
+        self.retranslateUi(self)
+        QtCore.QMetaObject.connectSlotsByName(self)
+
+    def retranslateUi(self, MainWindow):
+        _translate = QtCore.QCoreApplication.translate
+        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.label_1.setText(_translate("MainWindow", "酒店人员身份核验"))
+        self.staff_role.setItemText(0, _translate("MainWindow", "空调管理员"))
+        self.staff_role.setItemText(1, _translate("MainWindow", "酒店前台"))
+        self.staff_role.setItemText(2, _translate("MainWindow", "酒店经理"))
+        self.label.setText(_translate("MainWindow", "身份"))
+        self.label_2.setText(_translate("MainWindow", "密码"))
+        self.enter.setText(_translate("MainWindow", "登录"))
+        self.enter.clicked.connect(self.f1)
+        self.back.setText(_translate("MainWindow", "返回"))
+        self.back.clicked.connect(self.f2)
+
+    def f1(self):
+        if (self.staff_role.currentText() == '空调管理员'):
+            pwd_true = admin.pwd
+            pwd_input = int(self.pwd.text())
+            if (pwd_true == pwd_input):
+                print("酒店人员登录成功——身份:空调管理员")
+                admin_select.show()
+                self.closewin()
+            else:
+                print("酒店人员身份与密码不一致，登录失败！")
+
+        elif (self.staff_role.currentText() == '酒店前台'):
+            pwd_true = cashier.pwd
+            pwd_input = int(self.pwd.text())
+            if (pwd_true == pwd_input):
+                print("酒店人员登录成功——身份:酒店前台")
+                cashier_select.show()
+                self.closewin()
+            else:
+                print("酒店人员身份与密码不一致，登录失败！")
+
+        elif (self.staff_role.currentText() == '酒店经理'):
+            pwd_true = manager.pwd
+            pwd_input = int(self.pwd.text())
+            if (pwd_true == pwd_input):
+                print("酒店人员登录成功——身份:酒店经理")
+                manager_select.show()
+                self.closewin()
+            else:
+                print("酒店人员身份与密码不一致，登录失败！")
+
+    def f2(self):
+        welcome.show()
+        self.closewin()
 
     def closewin(self):
         self.close()
@@ -219,9 +432,6 @@ class Move_select(QMainWindow):#用户选择界面
     def f4(self):
         welcome.show()
         self.closewin()
-
-
-
     def closewin(self):
         self.close()
 
@@ -291,21 +501,33 @@ class Move_in(QMainWindow):#确认入住界面
         self.back.clicked.connect(self.f1)
 
     def room_choice(self):
-        room_id = int(self.roomselect.currentText())
-        if(rooms[room_id].live_in_cus==0):
-            print("入住成功：顾客:%d->房间:%d"%(int(move_select.user_id.currentText()),room_id))
-            rooms[room_id].live_in_cus=int(move_select.user_id.currentText())#对应用户入住
+        room_id=int(self.roomselect.currentText())
+        user_id=int(move_select.user_id.currentText())
+        if(rooms[room_id-1].user_id==0 and users[user_id-1].room_id==0):
+            rooms[room_id - 1].user_id = room_id
+            users[user_id - 1].room_id = user_id
+            users[user_id - 1].b_time=air_monitor.systime#获取入住时间
+            print("入住成功：顾客%d->房间%d 时间:%d"%(user_id,room_id,air_monitor.systime))
             air_monitor.show()
             move_in.closewin()
-            air_monitor.lcd_room_id.display(room_id)
+            air_monitor.lcd_roomtem.display(rooms[int(room_id) - 1].tem)
+            air_monitor.lcd_room_id.display(air_subs[int(room_id) - 1].room_id)
+            air_monitor.lcd_if_on.display(air_subs[int(room_id) - 1].if_on)
+            air_monitor.lcd_if_wind.display(air_subs[int(room_id) - 1].if_wind)
+            air_monitor.change_tem.setValue(air_subs[int(room_id) - 1].tem)
+            air_monitor.change_wind.setValue(air_subs[int(room_id) - 1].windmode)
+            air_monitor.cost_now.setText(str(air_subs[int(room_id) - 1].cost))
             air_monitor.show()
+            enter_room.closewin()
+            air_monitor.show()
+        elif(users[user_id-1].room_id!=0):
+            print("对不起，客户不可以重复定两个房间，请先退房")
         else:
-            print("对不起，该房间已经有客户入住，请选择其他房间")
+            print("对不起，该房间已经有用户入住，请选择其他房间")
 
     def f1(self):
         move_select.show()
         move_in.closewin()
-
 
     def closewin(self):
         self.close()
@@ -377,15 +599,16 @@ class Move_out(QMainWindow):#确认退房界面
 
     def f1(self):
         room_id = int(self.roomselect.currentText())
-        if (rooms[room_id].live_in_cus != int(move_select.user_id.currentText())):
+        user_id = int(move_select.user_id.currentText())
+        if (users[user_id-1].room_id!=room_id ):
             print("对不起，该房间您没有办理入住，您重新确认")
         else:
-            print("退房成功:顾客:%d->房间:%d" % (int(move_select.user_id.currentText()), room_id))
+            users[user_id-1].b_time=air_monitor.time#获取退房时间
+            print("退房成功:顾客%d->房间%d 时间:%d" % (user_id, room_id,air_monitor.systime))
         welcome.show()
         move_out.closewin()
 
     def f2(self):
-
         move_select.show()
         move_out.closewin()
 
@@ -458,17 +681,19 @@ class Enter_room(QMainWindow):#进入房间界面
         self.back.clicked.connect(self.f1)
 
     def room_choice(self):#选择不同的房间来做状态的查询
-          room_id=int(self.roomselect.currentText())
-          if(rooms[room_id].live_in_cus!=int(move_select.user_id.currentText())):
+        room_id = int(self.roomselect.currentText())
+        user_id = int(move_select.user_id.currentText())
+        if(users[user_id-1].room_id!=room_id):
               print("对不起，该房间您没有办理入住，您重新确认")
-          else:
+        else:
               print("进入房间：顾客:%d->房间:%d" % (int(move_select.user_id.currentText()), room_id))
+              air_monitor.lcd_roomtem.display(rooms[int(room_id)-1].tem)
               air_monitor.lcd_room_id.display(air_subs[int(room_id) - 1].room_id)
               air_monitor.lcd_if_on.display(air_subs[int(room_id) - 1].if_on)
               air_monitor.lcd_if_wind.display(air_subs[int(room_id) - 1].if_wind)
               air_monitor.change_tem.setValue(air_subs[int(room_id) - 1].tem)
               air_monitor.change_wind.setValue(air_subs[int(room_id) - 1].windmode)
-              air_monitor.cost_now.setText(str(air_subs[int(room_id) - 1].cost))
+              air_monitor.cost_now.setText(str(round(air_subs[int(room_id) - 1].cost,2)))
               air_monitor.show()
               enter_room.closewin()
 
@@ -523,6 +748,10 @@ class Air_monitor(QMainWindow):
         self.label_1.setObjectName("label_1")
         self.cost_now = QtWidgets.QTextBrowser(self.centralwidget)
         self.cost_now.setGeometry(QtCore.QRect(130, 400, 371, 91))
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(36)
+        self.cost_now.setFont(font)
         self.cost_now.setObjectName("cost_now")
         self.air_off = QtWidgets.QPushButton(self.centralwidget)
         self.air_off.setGeometry(QtCore.QRect(580, 230, 151, 61))
@@ -609,7 +838,9 @@ class Air_monitor(QMainWindow):
         self.statusbar = QtWidgets.QStatusBar(self)
         self.statusbar.setObjectName("statusbar")
         self.setStatusBar(self.statusbar)
-
+        self.systime = 0  # 系统时间,1s模拟1min,进行系统时间线的更新
+        self.timer = QBasicTimer()
+        self.timer.start(10000, self)#时间模拟，真实时间10s模拟系统时间1min
         self.retranslateUi(self)
         QtCore.QMetaObject.connectSlotsByName(self)
 
@@ -637,19 +868,67 @@ class Air_monitor(QMainWindow):
         self.change_wind.setValue(0)
         self.change_tem.valueChanged.connect(self.f3)
         self.change_wind.valueChanged.connect(self.f4)
-        self.back.clicked.connect(self.f5)
+        self.check_cost.clicked.connect(self.f5)
+        self.back.clicked.connect(self.f6)
+
+    def timerEvent(self, event):#时间线推进
+        if event.timerId() == self.timer.timerId():
+            self.systime = self.systime + 1
+            room_id=int(self.lcd_room_id.value())
+            #print(air_subs[room_id-1].if_on)
+            #print(air_subs[room_id-1].if_wind)
+            if(air_subs[room_id-1].if_on==1):#空调开机
+                if(air_subs[room_id-1].if_wind==1):#空调开机且送风
+                    if (air_subs[room_id - 1].windmode == 0):#低风模式
+                        tem_freq = 0.4
+                        money_freq = 0.33
+                    elif (air_subs[room_id - 1].windmode == 1):#中风模式
+                        tem_freq = 0.5
+                        money_freq = 0.5
+                    elif (air_subs[room_id - 1].windmode == 2):  #高风模式
+                        tem_freq = 0.6
+                        money_freq = 1
+                    if (int(rooms[room_id - 1].tem) > air_subs[room_id - 1].tem):#空调降低室内温度
+                        rooms[room_id - 1].tem -= tem_freq
+                        #print(rooms[room_id - 1].tem)
+                        #print(air_subs[room_id - 1].tem)
+                        self.lcd_roomtem.display(rooms[room_id - 1].tem)
+                        air_subs[room_id - 1].cost += money_freq
+                    elif (int(rooms[room_id - 1].tem) < air_subs[room_id - 1].tem):#空调升高室内温度
+                        rooms[room_id - 1].tem += tem_freq
+                        self.lcd_roomtem.display(rooms[room_id - 1].tem)
+                        air_subs[room_id - 1].cost += money_freq
+                    else:#室内温度达到空调设定值，关闭送风
+                        air_subs[room_id - 1].if_wind = 0
+                        self.lcd_if_wind.display(0)
+
+                else:#空调开机不送风
+                    if (rooms[room_id - 1].tem < 30):
+                        rooms[room_id - 1].tem += 0.5
+                        self.lcd_roomtem.display(rooms[room_id - 1].tem)
+                        if (rooms[room_id - 1].tem - air_subs[room_id - 1].tem > 1):#室温超过设定温度5度再次开启送风
+                            air_subs[room_id - 1].if_wind = 1
+                            self.lcd_if_wind.display(1)
+
+            else:#空调关机
+                if (rooms[room_id - 1].tem < 30):
+                    rooms[room_id - 1].tem += 0.5
+                    self.lcd_roomtem.display(rooms[room_id - 1].tem)
+
 
     def f1(self):#空调开启
-        user.air_on(services,air_subs,scheduler,int(self.lcd_room_id.value()))
-        print("房间%d空调开启"%int(self.lcd_room_id.value()))
+        room_id = int(self.lcd_room_id.value())
+        user.air_on(air_subs,services,scheduler,room_id)
+        print("房间%d空调开启"%room_id)
         self.lcd_if_on.display(1)
         self.lcd_if_wind.display(1)
         air_main.air_on_num+=1
         air_main.wind_on_num+=1
 
     def f2(self):#空调关闭
-        user.air_off(services,air_subs,int(self.lcd_room_id.value()))
-        print("房间%d空调关闭" % int(self.lcd_room_id.value()))
+        room_id = int(self.lcd_room_id.value())
+        user.air_off(services,air_subs,room_id)
+        print("房间%d空调关闭" %room_id)
         self.lcd_if_on.display(0)
         self.lcd_if_wind.display(0)
         air_main.air_on_num -= 1
@@ -657,17 +936,23 @@ class Air_monitor(QMainWindow):
 
     def f3(self):#调温度
         if(self.lcd_if_on.value()==1):
-            user.change_tem(self.change_tem.value(),air_subs,services,int(self.lcd_room_id.value()))
-            print("房间%d空调温度调节成功" % int(self.lcd_room_id.value()))
+            room_id = int(self.lcd_room_id.value())
+            user.change_tem(self.change_tem.value(),air_subs,services,room_id)
+            print("房间%d空调温度调节成功->%d度" %(room_id,self.change_tem.value()))
             print(air_subs[int(self.lcd_room_id.value())-1].tem)
 
     def f4(self):#调风速
         if(self.lcd_if_on.value()==1):
-            user.change_wind(self.change_wind.value(),air_subs,services,scheduler,int(self.lcd_room_id.value()))
-            print("房间%d空调风速调节成功" % int(self.lcd_room_id.value()))
-            print(air_subs[int(self.lcd_room_id.value())-1].windmode)
+            room_id = int(self.lcd_room_id.value())
+            user.change_wind(self.change_wind.value(),air_subs,services,scheduler,room_id)
+            print("房间%d空调风速调节成功->%d裆" %(room_id,self.change_wind.value()))
+            print(air_subs[room_id-1].windmode)
 
-    def f5(self):
+    def f5(self):#查询当前消费
+        room_id = int(self.lcd_room_id.value())
+        self.cost_now.setText(str(air_subs[room_id-1].cost))
+
+    def f6(self):
         move_select.show()
         air_monitor.close()
 
@@ -1002,7 +1287,7 @@ class Room_air_state(QMainWindow):#查询房间空调状态界面
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "查询房间空调状态"))
-        self.label1.setText(_translate("MainWindow", "房间空调信息查询"))
+        self.label1.setText(_translate("MainWindow", "房间空调信息"))
         self.roomselect.setItemText(0, _translate("MainWindow", "1"))
         self.roomselect.setItemText(1, _translate("MainWindow", "2"))
         self.roomselect.setItemText(2, _translate("MainWindow", "3"))
@@ -1755,32 +2040,13 @@ class Check_form(QMainWindow):#报表查询界面
     def closewin(self):
         self.close()
 
-'''
 
-
-class Air_admin:  #空调管理员的基类
-    def __init__(self, admin_id, if_login, status):
-        self.admin_id = admin_id#管理员编号
-        self.if_login = if_login#是否登录
-        self.status = status#身份标识
-
-    def login(self):  # 登录系统
-    def power_on(self):  #初始化空调系统
-        r = Register_admin()
-        air_main,scheduler = r.power_on()
-    def init_air(self):  # 初始化空调参数
-
-    def print_hotel(self):  # 查看酒店空调运行状态
-    def print_room(self):  # 查看房间空调运行状态
-    def logout(self):  # 退出系统
-
-class Cashier:  # 酒店前台的基类——设计架构不变
-     def __init__(self, cashier_id, if_login, status):
-         self.cashier_id = cashier_id#酒店前台编号
-         self.if_login = if_login#是否登录
-         self.status = status#身份标识
-
-     def login(self):#登录系统
+class Cashier:#酒店前台的基类
+     def __init__(self):
+         self.if_login =0#是否登录
+         self.pwd =20#酒店前台登录密码
+     '''
+          def login(self):#登录系统
          if self.if_login != 0:
              self.if_login = 1
              return 1
@@ -1806,15 +2072,15 @@ class Cashier:  # 酒店前台的基类——设计架构不变
              return 1
          else:
              return 0#error
-
+     '''
 
 class Manager:  # 酒店经理的基类
-    def __init__(self, manager_id, if_login, status):
-        self.manager_id = manager_id#经理编号
-        self.if_login = if_login#是否登录
-        self.status = status#身份标识
+    def __init__(self):
+        self.if_login = 0#是否登录
+        self.pwd=30#酒店经理登录密码
 
-    def login(self):  #登录系统
+    '''
+        def login(self):  #登录系统
         #后端写好再写
 
     def create_form(self): #创建报表
@@ -1833,20 +2099,29 @@ class Manager:  # 酒店经理的基类
 
     def logout(self):  #退出系统、
         #后端写好再写
+    
+    '''
 
-'''
+class Room:  # 房间的基类
+    def __init__(self, room_id):
+        self.room_id = room_id
+        self.tem = 30
+        self.user_id=0#入住的房客，为0表示闲置
+        self.rate_of_tem_change = -0.5  # 温度变化率
+
 class User:  # 客户的基类
-    def __init__(self, user_id):
+    def __init__(self, user_id,pwd):
         self.user_id = user_id  # 客户号
-        self.room_id = 0  # 入住房间号
+        self.pwd=pwd#客户登录密码，和客户号对应
+        self.room_id = 0  # 入住房间号,为0表示还没有入住
         self.b_time = 0  # 入住时间
         self.e_time = 0  # 退房时间
 
     def login(self):  # 入住，登录系统
         self.if_login=1
 
-    def air_on(self,services, air_subs, scheduler,room_id):#启动空调
-        register_user.air_on(air_subs, services,scheduler,room_id)#r0启动空调
+    def air_on(self,air_subs,services,scheduler,room_id):#启动空调
+        register_user.air_on(air_subs, services,scheduler,room_id)#启动空调
 
     def air_off(self, services, air_subs,room_id):#关闭空调
         register_user.air_off(air_subs, services,room_id)
@@ -1863,7 +2138,7 @@ class User:  # 客户的基类
 class Air_admin:  #空调管理员的基类
     def __init__(self):
         self.if_login = 0#初始登录状态为0
-        self.status = 1#1表示管理员身份
+        self.pwd = 10#管理员的密码
 
     def login(self):  #登录系统
         self.if_login=1
@@ -1878,39 +2153,6 @@ class Air_admin:  #空调管理员的基类
     def logout(self):  #退出系统
         self.if_login=0
 
-class Room:  # 房间的基类
-    def __init__(self, room_id):
-        self.room_id = room_id
-        self.tem = 30
-        self.live_in_cus=0#入住的房客，为0表示闲置
-        self.rate_of_tem_change = -0.5  # 温度变化率
-
-    def Change_tem(self, air_sub, outside_tem=40):  # 环境温度改变
-        if(air_sub.if_wind is True):#空调正在送风
-            if(self.tem > air_sub.tem):#设定温度小于环境温度，需要降温
-                self.tem -= 1
-            elif(self.tem < air_sub.tem):#设定温度大于环境温度，需要升温
-                self.tem += 1
-        else:  # 空调没有送风,
-            if(self.tem < outside_tem):
-                self.tem += 1  # 环境温度增加
-            elif(self.tem > outside_tem):
-                self.tem -= 1  # 环境温度减少
-
-    def sche_change_wind(self, air_sub):
-        change_frequency = 2  # 每分钟变化0.5度，也就是变化一度需要2min
-        while(True):
-            if(air_sub.if_wind is True):  # 正在送风
-                if(air_sub.wind_mode == 0):
-                    change_frequency /= 0.8  # 低风模式下，每分钟变化率减少0.2
-                elif(air_sub.wind_mode == 1):
-                    change_frequency = 2  # 中风模式下，每分钟变化0.5度
-                elif(air_sub.wind_mode == 2):
-                    change_frequency /= 1.2  # 高风模式下，每分钟变化率增加0.2
-                else:
-                    return False
-            else:  # 没有送风
-                change_frequency = 2  # 关机状态下，每分钟变化0.5度，直到变化到初始温度为止
 
 #设置一些全局变量并将系统初始化
 b_time=0
@@ -1924,11 +2166,13 @@ for i in range(1,6):
 print("房间实例创建成功...")
 
 for i in range(1,6):
-    user =User(i)
+    user =User(i,i)
     users.append(user)
 print("用户实例创建成功...")
 
 admin = Air_admin()
+cashier=Cashier()
+manager=Manager()
 register_user=ctrl.Register_user()
 register_admin = ctrl.Register_admin()
 print("空调管理员创建成功...")
@@ -1952,11 +2196,12 @@ for i in range(0,5):
 print("服务对象创建成功...")
 print("调度对象创建成功...")
 
-
 if __name__ == '__main__':#主函数，用来生成并且初始化各个界面
     #构造页面对象类的实例
     app = QApplication(sys.argv)
     welcome = Welcome()
+    user_confirm=User_confirm()
+    staff_confirm=Staff_confirm()
     move_select = Move_select()
     move_in=Move_in()
     move_out=Move_out()
@@ -1970,11 +2215,11 @@ if __name__ == '__main__':#主函数，用来生成并且初始化各个界面
     check_detail=Check_detail()
     manager_select=Manager_select()
     check_form=Check_form()
-
     #显示初始化登录界面
     welcome.show()
-    welcome.enter.clicked.connect(move_select.show)
+    welcome.enter.clicked.connect(user_confirm.show)
     welcome.enter.clicked.connect(welcome.closewin)
     sys.exit(app.exec_())
+
 
 

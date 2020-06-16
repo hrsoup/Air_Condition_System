@@ -17,9 +17,9 @@
    <widget class="QLabel" name="label_1">
     <property name="geometry">
      <rect>
-      <x>300</x>
-      <y>80</y>
-      <width>231</width>
+      <x>290</x>
+      <y>90</y>
+      <width>251</width>
       <height>91</height>
      </rect>
     </property>
@@ -30,10 +30,10 @@
      </font>
     </property>
     <property name="text">
-     <string>客户身份核验</string>
+     <string>酒店人员身份核验</string>
     </property>
    </widget>
-   <widget class="QComboBox" name="user_id">
+   <widget class="QComboBox" name="staff_role">
     <property name="geometry">
      <rect>
       <x>290</x>
@@ -50,34 +50,24 @@
     </property>
     <item>
      <property name="text">
-      <string>1</string>
+      <string>空调管理员</string>
      </property>
     </item>
     <item>
      <property name="text">
-      <string>2</string>
+      <string>酒店前台</string>
      </property>
     </item>
     <item>
      <property name="text">
-      <string>3</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>4</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>5</string>
+      <string>酒店经理</string>
      </property>
     </item>
    </widget>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>170</x>
+      <x>210</x>
       <y>220</y>
       <width>111</width>
       <height>31</height>
@@ -90,13 +80,13 @@
      </font>
     </property>
     <property name="text">
-     <string>客户号</string>
+     <string>身份</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>200</x>
+      <x>210</x>
       <y>290</y>
       <width>111</width>
       <height>31</height>
@@ -112,7 +102,7 @@
      <string>密码</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QLineEdit" name="pwd">
     <property name="geometry">
      <rect>
       <x>290</x>
@@ -120,6 +110,44 @@
       <width>251</width>
       <height>41</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="enter">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>370</y>
+      <width>131</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑 Light</family>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>登录</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="enter_2">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>370</y>
+      <width>131</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑 Light</family>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>返回</string>
     </property>
    </widget>
   </widget>

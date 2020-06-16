@@ -74,22 +74,12 @@
     </property>
     <item>
      <property name="text">
-      <string>客户</string>
+      <string>酒店客户</string>
      </property>
     </item>
     <item>
      <property name="text">
-      <string>空调管理员</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>酒店前台</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>酒店经理</string>
+      <string>酒店员工</string>
      </property>
     </item>
    </widget>
