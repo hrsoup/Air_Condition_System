@@ -1,0 +1,71 @@
+数据库名：hotel
+建数据库语句：create database hotel;
+建数据库表语句（顺序执行）：
+use hotel;
+
+create table `user`(
+  `user_id` varchar(20),
+  `password`  varchar(32) not null,
+  primary key (`user_id`)
+) engine=InnoDB default charset=utf8;
+
+create table `admin`(
+  `admin_id` varchar(20),
+  `password`  varchar(32) not null,
+  primary key (`admin_id`)
+) engine=InnoDB default charset=utf8;
+
+create table `manager`(
+  `manager_id` varchar(20),
+  `password`  varchar(32) not null,
+  primary key (`manager_id`)
+) engine=InnoDB default charset=utf8;
+
+create table `cashier`(
+  `cashier_id` varchar(10),
+  `password`  varchar(32) not null,
+  primary key (`cashier_id`)
+) engine=InnoDB default charset=utf8;
+
+create table `room`(
+  `room_id` varchar(20),
+  `password`  varchar(32) not null,
+  primary key (`room_id`)
+) engine=InnoDB default charset=utf8;
+
+create table `in`(
+  `user_id` varchar(20),
+  `room_temperatire`  float not null,
+  `switch`  int not null,
+  `air_temperatire`  float not null,
+  `wind`  int not null,
+  primary key (`user_id`),
+  foreign key (`user_id`) references `user`(`user_id`)
+) engine=InnoDB default charset=utf8;
+
+create table `switch_air`(
+  `user_id` varchar(20),
+  `now_time`  int not null,
+  `on`  int not null,
+  `off`  int not null,
+  primary key (`user_id`),
+  foreign key (`user_id`) references `user`(`user_id`)
+) engine=InnoDB default charset=utf8;
+
+create table `change_temperature`(
+  `user_id` varchar(20),
+  `now_time`  int not null,
+  `changeing`  int not null,
+  `stop`  int not null,
+  primary key (`user_id`),
+  foreign key (`user_id`) references `user`(`user_id`)
+) engine=InnoDB default charset=utf8;
+
+create table `change_wind`(
+  `user_id` varchar(20),
+  `now_time`  int not null,
+  `changeing`  int not null,
+  `stop`  int not null,
+  primary key (`user_id`),
+  foreign key (`user_id`) references `user`(`user_id`)
+) engine=InnoDB default charset=utf8;
