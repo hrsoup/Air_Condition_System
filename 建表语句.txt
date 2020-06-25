@@ -30,15 +30,18 @@ create table `cashier`(
 create table `room`(
   `room_id` varchar(20),
   `password`  varchar(32) not null,
+  `room_temperatire`  float not null,
+  `switch`  int not null,
+  `air_temperatire`  float not null,
+  `wind`  int not null,
   primary key (`room_id`)
 ) engine=InnoDB default charset=utf8;
 
 create table `in`(
   `user_id` varchar(20),
-  `room_temperatire`  float not null,
-  `switch`  int not null,
-  `air_temperatire`  float not null,
-  `wind`  int not null,
+  `b_time`  int not null,
+  `e_time`  int not null,
+  `cost_all`  int not null,
   primary key (`user_id`),
   foreign key (`user_id`) references `user`(`user_id`)
 ) engine=InnoDB default charset=utf8;
