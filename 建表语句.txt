@@ -68,7 +68,7 @@ create table `change_wind`(
   `user_id` varchar(20),
   `now_time`  int not null,
   `changeing`  int not null,
-  `stop`  int not null,
+  `schedule`  int not null,
   primary key (`user_id`),
   foreign key (`user_id`) references `user`(`user_id`)
 ) engine=InnoDB default charset=utf8;
