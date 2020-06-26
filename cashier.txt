@@ -1,0 +1,129 @@
+database.py:
+#####cashier功能方面，由于大部分都是查数据+汇总，查询账单仅需从user_in表中获取，查询详单有两步，①构建详单，插入到detail表中，②查询详单信息
+涉及查询和插入两种操作。
+
+
+        def insert_detail(self,id,room_id,b_time,e_time,wind_duration,wind,money_ratio,cost):        #插入detail表中的数据
+        try:
+            db = py.connect(
+                host="127.0.0.1",
+                port=3306,
+                user="root",
+                password="2017211648",
+                database="hotel",
+                charset="utf8"
+            )
+        except:
+            print("Database Connection failed.")
+        cursor = db.cursor()
+        sql = 'insert into detail (detail_id,room_id,b_time,e_time,wind_duration,wind,money_ratio,cost) value (%s,%s,%d,%d,%d,%d,%f,%d)' \
+              %(id,room_id,b_time,e_time,wind_duration,wind,money_ratio,cost)
+        isok = cursor.execute(sql)      # if isok==1 the insert succeed
+        return isok       #返回1说明插入成功
+
+    def query_detail(self,sql):     #根据sql查询详单内容
+        try:
+            db = py.connect(
+                host="127.0.0.1",
+                port=3306,
+                user="root",
+                password="2017211648",
+                database="hotel",
+                charset="utf8"
+            )
+        except:
+            print("Database Connection failed.")
+        cursor = db.cursor()
+        rows = cursor.execute(sql)
+        records = cursor.fetchall()
+        return rows,records        #返回数目和查询结果（列表格式）
+
+    def query_bill(self,user_id,room_id):#根据user_id,room_id查询账单数据
+        try:
+            db = py.connect(
+                host="127.0.0.1",
+                port=3306,
+                user="root",
+                password="2017211648",
+                database="hotel",
+                charset="utf8"
+            )
+        except:
+            print("Database Connection failed.")
+        cursor = db.cursor()
+        sql = 'select * from user_in where user_id=%s, room_id = %s' % (user_id,room_id)
+        cursor.execute(sql)
+        records = cursor.fetchall()      # query results
+        return records                #返回全部查询结果（列表格式）
+
+
+--------------------------------------------------
+main.py:无改动
+
+-----------------------------------------------
+application.py:修改了Bill类和Details类，账单中仅包含属性值user_id,room_id,含有类方法check(self),用于在user_in中查询账单信息。
+Details类包含属性值detail_id,room_id,b_time,e_time,wind_duration,wind,money_ratio,cost，包含类方法create(self),用于在detail表中插入详单数据，check(self,detail_id)用于获取detail信息。
+
+
+class Bill:  # 账单的基类
+    def __init__(self, user_id, room_id):
+        self.user_id = user_id  # 账单编号
+        self.room_id = room_id  # 空调送风房间数
+
+    def check_bill(self):
+        b_time,e_time,cost = DBMapper.query_bill(self.user_id,self.room_id)
+        return b_time,e_time,cost
+
+class Details:        #详单基类，只记录信息，考虑客户退房后才需要打印详单，所以默认查询表项都已插入到表中
+    #详单至少需要包含如下信息：房间号、开始送风时间、结束送风时间、送风时长、风速、费率、费用
+    def __init__(self,user_id,room_id):
+        self.user_id = user_id
+        self.room_id = room_id
+
+    def create(self):                #插入
+        sql = 'select min(now_time),max(now_time),changeing,count(now_time) from change_wind where schedule = 1 and room_id = %s group by changeing' % (self.room_id)
+#查询得到了开始送风时间、结束送风时间、送风总时长、送风模式——schedule的计数即为送风总时长
+        rows,records = DBMapper.query_detail(sql)
+        for row in range(rows):
+            start_time = records[row][0];
+            stop_time = records[row][1];
+            wind = records[row][2];
+            wind_duration = records[row][3];
+            if (wind == 0):                        #根据模式得到费率——0代表高风，1代表中风，2代表低风
+                ratio = 1
+            elif (wind == 1):
+                ratio = 0.5
+            else:
+                ratio = 1 / 3
+            cost = wind_duration * ratio             #计算费用
+            detail_id = user_id + '-' + str(wind)  #
+            DBMapper.insert_detail(detail_id,self.room_id,start_time,stop_time,wind_duration,wind,ratio,cost)
+
+    def check(self):
+        sql = 'select * from detail where user_id = %s and room_id = %s' %(self.user_id,self.room_id)        #详单信息针对某个风速模式设定而言，因此无法确定一个用户一个房间会有几种送风设置，采用user_id 和room_id 查
+        rows,records = DBMapper.query_detail(sql)
+        return rows,records
+
+
+------------------------------------------------
+contriller.py:   修改了Register_cashier的结构，类内属性为user_id 和room_id，和前端获取的数据相对应,类内方法改为3个,check_bill(self,user_id,room_id),create_detail(self,user_id,room_id),check_detail(self,user_id,room_id)
+
+class Register_cashier:#控制器2的基类
+    #账单至少包含如下信息：房间号、总费用、入住时间、离店时间。
+    def __init__(self, user_id, room_id):          #认为只需要从用户界面获取user_id,room_id即可定位到订单信息
+        self.user_id = user_id
+        self.room_id = room_id
+        self.detail_id = user_id+'-'+room_id
+        self.bill = app.Bill(self.user_id, self.room_id)
+        self.detail = app.Details(self.detail_id,room_id)
+
+    def check_bill(self,user_id,room_id):
+        b_time,e_time,cost = sefl.bill.check_bill()
+        return room_id,user_id,b_time,e_time,cost
+
+    def create_detail(self):
+        self.detail.create()
+
+    def check_detail(self,detail_id):
+        records = self.detail.check(self.detail.id)
+        return records              #可能多项
