@@ -14,43 +14,11 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QSpinBox" name="change_tem">
-    <property name="geometry">
-     <rect>
-      <x>130</x>
-      <y>130</y>
-      <width>381</width>
-      <height>91</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>黑体</family>
-      <pointsize>32</pointsize>
-     </font>
-    </property>
-   </widget>
-   <widget class="QSpinBox" name="change_wind">
-    <property name="geometry">
-     <rect>
-      <x>130</x>
-      <y>270</y>
-      <width>381</width>
-      <height>91</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>黑体</family>
-      <pointsize>32</pointsize>
-     </font>
-    </property>
-   </widget>
    <widget class="QPushButton" name="air_on">
     <property name="geometry">
      <rect>
       <x>580</x>
-      <y>130</y>
+      <y>120</y>
       <width>151</width>
       <height>61</height>
      </rect>
@@ -68,8 +36,8 @@
    <widget class="QLabel" name="label_1">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>150</y>
+      <x>40</x>
+      <y>170</y>
       <width>81</width>
       <height>41</height>
      </rect>
@@ -84,34 +52,11 @@
      <string>温度</string>
     </property>
    </widget>
-   <widget class="QTextBrowser" name="cost_now">
-    <property name="geometry">
-     <rect>
-      <x>130</x>
-      <y>400</y>
-      <width>371</width>
-      <height>91</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Arial</family>
-      <pointsize>28</pointsize>
-     </font>
-    </property>
-    <property name="html">
-     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Arial'; font-size:28pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:36pt;&quot;&gt;0&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="air_off">
     <property name="geometry">
      <rect>
       <x>580</x>
-      <y>230</y>
+      <y>190</y>
       <width>151</width>
       <height>61</height>
      </rect>
@@ -130,7 +75,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>580</x>
-      <y>430</y>
+      <y>470</y>
       <width>151</width>
       <height>61</height>
      </rect>
@@ -148,8 +93,8 @@ p, li { white-space: pre-wrap; }
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>290</y>
+      <x>40</x>
+      <y>300</y>
       <width>81</width>
       <height>41</height>
      </rect>
@@ -167,7 +112,7 @@ p, li { white-space: pre-wrap; }
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>40</x>
       <y>420</y>
       <width>81</width>
       <height>41</height>
@@ -187,7 +132,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>580</x>
-      <y>330</y>
+      <y>400</y>
       <width>151</width>
       <height>61</height>
      </rect>
@@ -316,6 +261,92 @@ p, li { white-space: pre-wrap; }
       <width>101</width>
       <height>41</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="change_tem">
+    <property name="geometry">
+     <rect>
+      <x>580</x>
+      <y>260</y>
+      <width>151</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑 Light</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>调温</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="change_wind">
+    <property name="geometry">
+     <rect>
+      <x>580</x>
+      <y>330</y>
+      <width>151</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑 Light</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>调风</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="tem_set">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>160</y>
+      <width>331</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>36</pointsize>
+     </font>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="wind_set">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>280</y>
+      <width>331</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>36</pointsize>
+     </font>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="cost_now">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>410</y>
+      <width>331</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>36</pointsize>
+     </font>
     </property>
    </widget>
   </widget>

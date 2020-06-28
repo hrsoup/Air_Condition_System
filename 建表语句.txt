@@ -1,0 +1,123 @@
+数据库名：hotel
+建数据库语句：create database hotel;
+建数据库表语句（顺序执行）：
+use hotel;
+
+create table `user`(
+  `user_id` varchar(20),
+  `password`  varchar(32) not null,
+  primary key (`user_id`)
+) engine=InnoDB default charset=utf8;
+
+create table `admin`(
+  `admin_id` varchar(20),
+  `password`  varchar(32) not null,
+  primary key (`admin_id`)
+) engine=InnoDB default charset=utf8;
+
+create table `manager`(
+  `manager_id` varchar(20),
+  `password`  varchar(32) not null,
+  primary key (`manager_id`)
+) engine=InnoDB default charset=utf8;
+
+create table `cashier`(
+  `cashier_id` varchar(10),
+  `password`  varchar(32) not null,
+  primary key (`cashier_id`)
+) engine=InnoDB default charset=utf8;
+
+create table `room`(
+  `room_id` varchar(20),
+  `room_temperatire`  float not null,
+  `switch`  int not null,
+  `air_temperatire`  float not null,
+  `wind`  int not null,
+  primary key (`room_id`)
+) engine=InnoDB default charset=utf8;
+
+create table `user_in`(
+  `user_id` varchar(20),
+  `room_id` varchar(20),
+  `b_time`  int not null,
+  `e_time`  int not null,
+  `cost_all`  int not null,
+  primary key (`user_id`,`room_id`),
+  foreign key (`user_id`) references `user`(`user_id`),
+  foreign key (`room_id`) references `room`(`room_id`)
+) engine=InnoDB default charset=utf8;
+
+create table `switch_air`(
+  `user_id` varchar(20),
+  `now_time`  int not null,
+  `air_on`  int not null,
+  `air_off`  int not null,
+  primary key (`user_id`, `now_time`),
+  foreign key (`user_id`) references `user`(`user_id`)
+) engine=InnoDB default charset=utf8;
+
+create table `change_temperature`(
+  `user_id` varchar(20),
+  `now_time`  int not null,
+  `changeing`  int not null,
+  `stop`  int not null,
+  primary key (`user_id`, `now_time`),
+  foreign key (`user_id`) references `user`(`user_id`)
+) engine=InnoDB default charset=utf8;
+
+create table `change_wind`(
+  `user_id` varchar(20),
+  `now_time`  int not null,
+  `changeing`  int not null,
+  `schedule`  int not null,
+  primary key (`user_id`, `now_time`),
+  foreign key (`user_id`) references `user`(`user_id`)
+) engine=InnoDB default charset=utf8;
+
+#新增报表
+create table `form`(
+  `form_id` varchar(20),
+  `room_id` varchar(20),
+  `b_time`  int not null,
+  `e_time`  int not null,
+  `air_on_times`  int not null,
+  `air_off_times`  int not null,
+  `tem_reach_times`  int not null,
+  `schedule_times`  int not null,
+  `change_tem_times`  int not null,
+  `change_wind_times`  int not null,
+  `details_number`  int not null,
+  `cost_all`  int not null,
+  primary key (`form_id`),
+  foreign key (`room_id`) references `room`(`room_id`)
+) engine=InnoDB default charset=utf8;
+
+#新增详单
+create table `detail`(
+  `detail_id` varchar(20),
+  `room_id` varchar(20),
+  `b_time`  int not null,
+  `e_time`  int not null,
+  `wind_duration`  int not null,
+  `wind`  int not null,
+  `money_ratio`  float not null,
+  `cost`  int not null,
+  primary key (`detail_id`),
+  foreign key (`room_id`) references `room`(`room_id`)
+) engine=InnoDB default charset=utf8;
+
+
+##例子
+insert into user values('1','1');
+insert into room values('1',0,0,0,0);
+insert into user_in values('1','1',0,0,0);
+insert into switch_air values('1',2,1,0);
+insert into switch_air values('1',3,0,1);
+insert into switch_air values('1',4,1,0);
+insert into change_temperature values('1',2,1,0);
+insert into change_temperature values('1',3,0,1);
+insert into change_temperature values('1',4,1,0);
+insert into change_wind values('1',2,1,0);
+insert into change_wind values('1',3,0,1);
+insert into change_wind values('1',4,1,0);
+insert into detail values('1','1',0,3,2,1,0.5,10)；
