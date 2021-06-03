@@ -1,0 +1,67 @@
+use hotel;
+create table `change_temperature`(
+  `room_id` varchar(20),
+  `now_time`  int not null,
+  `tem_change`  int not null,
+  `if_reach` int not null,
+  primary key (`room_id`, `now_time`,`tem_change`)
+) engine=InnoDB default charset=utf8;
+
+create table `change_windmode`(
+  `room_id` varchar(20),
+  `now_time`  int not null,
+  `wind_change`  int not null,
+  primary key (`room_id`, `now_time`,`wind_change`)
+) engine=InnoDB default charset=utf8;
+
+create table `schedule`(
+  `room_id` varchar(20),
+  `now_time`  int not null,
+  `if_schedule`  int not null,
+  `wind_mode` int not null,
+  primary key (`room_id`, `now_time`)
+) engine=InnoDB default charset=utf8;
+
+create table `switch_air`(
+  `room_id` varchar(20),
+  `now_time`  int not null,
+  `on_off`  int not null,
+  primary key (`room_id`, `now_time`)
+) engine=InnoDB default charset=utf8;
+
+create table `user_in`(
+  `user_id` varchar(20),
+  `room_id` varchar(20),
+  `b_time`  int not null,
+  `e_time`  int not null,
+  `cost_all`  int not null,
+  primary key (`user_id`, `b_time`)
+) engine=InnoDB default charset=utf8;
+
+create table `form`(
+  `form_id` varchar(20),
+  `room_id` varchar(20),
+  `b_time`  int not null,
+  `e_time`  int not null,
+  `air_on_times`  int not null,
+  `air_off_times`  int not null,
+  `use_time`  int not null,
+  `schedule_times`  int not null,
+  `change_tem_times`  int not null,
+  `change_wind_times`  int not null,
+  `details_number`  int not null,
+  `cost_all`  int not null,
+  primary key (`form_id`)
+) engine=InnoDB default charset=utf8;
+
+create table `detail`(
+  `detail_id` varchar(20),
+  `room_id` varchar(20),
+  `b_time`  int not null,
+  `e_time`  int not null,
+  `wind_duration`  int not null,
+  `wind`  int not null,
+  `money_ratio`  float not null,
+  `cost`  int not null,
+  primary key (`detail_id`)
+) engine=InnoDB default charset=utf8;
